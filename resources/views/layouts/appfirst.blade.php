@@ -7,8 +7,8 @@
     <title>Allo Manège</title>
 </head>
 <body>
-<header class="hidden sm:block">
-    <nav class="flex items-center justify-between px-8 py-4">
+<header class="">
+    <nav class="flex items-center justify-between px-8 py-4 my-8">
         <div class="flex">
             <div class="facebook mr-4"><a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path></svg>
             </a>
@@ -25,14 +25,14 @@
         </div>
     </nav>
     
-    <nav class=" bg-blue-900 flex items-center xl:justify-between px-8 py-4 justify-around">
+    <nav class="bg-blue-950 flex items-center xl:justify-between px-8 py-4 justify-around">
         
-        <div class="navlinks navlinks h-24 text-white flex items-center gap-8">
+        <div class="navlinks navlinks h-24 text-white flex items-center gap-8 my-6">
             <ul class="flex items-center gap-4">
                 <li>
                 <details class="relative inline-block text-left">
-                <summary class="w-full bg-blue-900 border border-transparent rounded-md shadow-sm py-4 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ">
-                    Manèges
+                <summary class="w-full bg-blue-950 border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-600 focus:ring-2 focus:ring-orange-700">
+                    MANÈGES
                 </summary>
                 <div class="absolute left-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-blue-500 shadow-lg ring-1 ring-white ring-opacity-5 hover:bg-blue-600 focus:outline-none">
                 <ul class="list-none p-2 flex flex-col  justify-center">
@@ -41,18 +41,18 @@
                
                 </details>
                 </li>
-                <li ><a class="w-full bg-blue-900 border border-transparent rounded-md shadow-sm py-4 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 " href="/personaliser">Personnaliser</a></li>
-                <li><a class="w-full bg-blue-900 border border-transparent rounded-md shadow-sm py-4 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 " href="/a_propos">A propos</a></li>
-                <li><a class="w-full bg-blue-900 border border-transparent rounded-md shadow-sm py-4 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 " href="/contact">Contact</a></li>
+                <li ><a class="w-full bg-blue-950 border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-600 focus:ring-2 focus:ring-orange-700" href="/Réservation">RÉSERVATION</a></li>
+                <li><a class="w-full bg-blue-950 border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-600 focus:ring-2 focus:ring-orange-700" href="/a_propos">A PROPOS</a></li>
+                <li><a class="w-full bg-blue-950 border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-600 focus:ring-2 focus:ring-orange-700" href="/contact">CONTACT</a></li>
             </ul>
         </div>
         <div class="buttons flex gap-4">
             <div class="rounded-lg border border-gray-300 bg-white shadow-md p-4 flex flex-col">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAQNJREFUSEvNlbEVwjAMRH96FmELGAM2oIAGemAAGuhYgDFgCxahh4gX5SmJEwuH8HCVF9t3ujvZzhh4ZAPj81OCp1Gzz79331BnFVgCwZ4Ct74kIYsmwLUAF5Jeoy0DVdNbRRuBKBAlqaPMsI1AbUolkH1v7K42VRWf2CSdt81xowqEPCVsza4sPHbQPgm7UX3MIplXm+Q8xFo2icCG7VVbWRfbZFV0hR2s3mORDdvTso07zKNAgLXCLpJgTl6CMXAHRsCjxqL/dE1l2ktwBJbABZgbBAE/AzPgBKzqEr0E9iqv7+mac71oUqVksA5UKbYsCnWH3L5NqgJPBwXXeC36X4IXzvoyGb3oUXcAAAAASUVORK5CYII="/>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path></svg>
             </div>
             <details class="rounded-lg border border-gray-300 bg-white shadow-md p-4 flex flex-col">
                 <summary class="flex items-center gap-2 cursor-pointer">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAATxJREFUSEu1VVsSwiAMpCdTT6aeTD2Zdjsss4QNrR/li2mTfSQQlnLyWk7GL0cIrqWUexWCPda7lPKp+8dM5IyAwASd4TzXn5YoI0AwVQMYAFBN9QSLMQOJI1BwgN52+qTxg5NIkAXHckUgzYMguh2a/K1qIwC/RzMK9lqBIaRzrQ5UhfuupIyNJaSQRrwHBMVMiuV03wdiTaLFrDxHCFAi4DRnmpQpdcRUGsWQAM43bEfQnYLaOJC45Y55J9SVKBIQON4PvXwxxpYo6wGSOS50bACknXeZS7jdrXTqYGhQTSKxK1F2ICwBAKILBdcJiljOIZbD3qPYJD0FSGRJsr6woRrbudobdpyk2cxXQTb233HNptIZysS9fRNmD46b+a7RIHVHdos98mSS6CJq6SQFppIjBDvvzfz36QQ/Wk1mGaOBMWUAAAAASUVORK5CYII="/>
+                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"></path></svg>
                 </summary>
                 <div class="absolute right-0 z-10 mt-6 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-white ring-opacity-5 hover:bg-white focus:outline-none">
                 <ul class="list-none p-2 flex flex-col  justify-center">
