@@ -10,6 +10,8 @@ export default {
       colors: {
         primary: 'bg-red-300',
         secondary: 'bg-orange-500',
+        'custom-blue': '#3f4874',
+        'custom-orange':'#ff8d00',
       },
     },
   },
