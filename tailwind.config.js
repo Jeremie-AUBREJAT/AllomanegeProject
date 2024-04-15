@@ -12,6 +12,7 @@ export default {
         secondary: 'bg-orange-500',
         'custom-blue': '#3f4874',
         'custom-orange':'#ff8d00',
+        'custom-font-blue' :'#353858',
       },
     },
   },

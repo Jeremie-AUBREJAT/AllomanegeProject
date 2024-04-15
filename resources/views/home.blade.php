@@ -2,7 +2,7 @@
 
 @section('content')
 <body>
-    <section class="flex flex-wrap bg-custom-blue z-0">
+    <section class="Formulaire flex flex-wrap bg-custom-blue z-0">
         <!-- Container formulaire recherche -->
         <div class="w-full md:w-1/2">
             <div class="container1 mx-auto p-8 bg-custom-orange">
@@ -59,6 +59,37 @@
         <!-- Triangle sous container1 -->
             <div class="bg-white z-10">
                 <div class="hidden lg:block border-l-[24.5vw] border-l-white border-r-[25vw] border-r-white border-t-[150px] border-t-custom-orange">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- section Services -->
+    <section class="Services container mx-auto p-4 mt-36">
+        
+        <h2 class="text-6xl font-bold text-center mb-8 text-custom-font-blue">SERVICES</h2>
+
+        
+        <div class="flex flex-wrap justify-center -mx-4 mt-52">
+            <div class="w-full md:w-1/3 px-4 mb-8 mt-16">
+                <div class="bg-white shadow-md rounded-full p-4">
+                    <h3 class="text-xl font-bold text-center mb-4">Service 2</h3>
+                    <p class="text-gray-700 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae efficitur neque.</p>
+                </div>
+            </div>
+
+      
+            <div class="w-full md:w-1/3 px-4 mb-8">
+                <div class="bg-white shadow-md rounded-full p-4">
+                    <h3 class="text-xl font-bold text-center mb-4">Service 1</h3>
+                    <p class="text-gray-700 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae efficitur neque.</p>
+                </div>
+            </div>
+
+           
+            <div class="w-full md:w-1/3 px-4 mb-8 mt-16">
+                <div class="bg-white shadow-md rounded-full p-4">
+                    <h3 class="text-xl font-bold text-center mb-4">Service 3</h3>
+                    <p class="text-gray-700 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus vitae efficitur neque.</p>
                 </div>
             </div>
         </div>

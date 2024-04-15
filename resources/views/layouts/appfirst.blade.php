@@ -70,6 +70,8 @@
     </main>
 
     
-    <footer>&copy; </footer>
+    <footer>
+        <div class="mt-8 mx-8">&copy;2024 Allo Manège </div>
+    </footer>
 </body>
 </html>
