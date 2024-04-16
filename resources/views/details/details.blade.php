@@ -25,10 +25,8 @@
         
     </div>
 </section>
-
+    {{-- section de Gauche --}}
 <section class="flex flex-wrap justify-between mt-16 text-custom-blue-header">
-
-    <!-- Div de gauche -->
     <div class="w-full lg:w-2/3 p-4 relative">
         <h2 class="text-4xl font-bold mb-4">Nom du manège</h2>
         <p class="text-custom-blue-header text-xl mb-2 flex items-center">
@@ -59,12 +57,7 @@
                     </svg>
                 </span>
             </div>
-        </div>
-        
-        
-        
-        
-        
+        </div>   
         <div id="carousel" class="relative">
             <img src="{{ asset('images/1.webp') }}" alt="Image Principale" class="w-full mb-4 rounded-md">
         </div>
@@ -74,13 +67,13 @@
             <img src="{{ asset('images/4.webp') }}" alt="Image Miniature 3" class="w-1/4 h-28 cursor-pointer rounded-md">
             <img src="{{ asset('images/5.webp') }}" alt="Image Miniature 4" class="w-1/4 h-28 cursor-pointer rounded-md">
         </div>
-        <div class="w-full lg:w-2/3 py-4">
+        <div class="w-full lg:w-2/3 py-4 mt-16">
             <h3 class="text-2xl font-bold mb-4">Description:</h3>
             <p class="text-gray-700 mb-4">Description du produit ou de la section.</p>
         
-            <!-- Rectangles -->
+            <!-- Rectangle 1 -->
             <div class="flex justify-between">
-                <!-- Rectangle 1 -->
+            
                 <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mr-2">
                     <p class="text-lg font-bold mb-2">Dimensions</p>
                     <p>10x20 m</p>
@@ -101,23 +94,6 @@
         </div>
         
     </div>
-    
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-            // Récupérer les éléments DOM
-            const thumbnails = document.querySelectorAll('#thumbnails img');
-            const mainImage = document.querySelector('#carousel img');
-
-            // Ajouter un écouteur d'événement à chaque miniature pour changer l'image principale
-            thumbnails.forEach(thumbnail => {
-                thumbnail.addEventListener('click', () => {
-                    mainImage.src = thumbnail.src;
-                    mainImage.alt = thumbnail.alt;
-                    });
-                    });
-                });
-            </script>    
-
     <!-- Div de droite -->
     <div class="w-full lg:w-1/3 p-4">
         <p class="text-gray-700 mb-2">Prix : xxx €</p>

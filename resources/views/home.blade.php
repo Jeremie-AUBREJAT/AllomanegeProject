@@ -27,20 +27,6 @@
                         <input class="slider" id="prix" type="range" min="0" max="15000" step="10">
                         <p class="text-black mt-2" id="prix-value">0 €</p>
                     </div>
-                    
-                    <!-- A virer une fois que les liens entre ressources/js et vite seront résolus -->
-                    <script>document.addEventListener("DOMContentLoaded", function() {
-                        // Sélectionner le slider
-                        const slider = document.getElementById("prix");
-                        // Sélectionner l'élément du texte du prix
-                        const prixValue = document.getElementById("prix-value");
-                    
-                        // Mettre à jour le texte du prix à chaque changement de valeur du slider
-                        slider.addEventListener("input", function() {
-                            prixValue.textContent = `${this.value} €`;
-                        });
-                    });
-                    </script>
                     <div class="flex items-center justify-between">
                         <button class="bg-white hover:bg-blue-950 hover:text-white text-black font-bold py-2 px-4 mx-auto rounded-full focus:outline-none focus:shadow-outline" type="button">
                             Rechercher
