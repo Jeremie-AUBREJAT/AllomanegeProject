@@ -37,7 +37,7 @@
                 <ul class="flex items-center gap-4">
                     <li>
                         <details class="relative inline-block text-left">
-                            <summary class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-600 focus:ring-2 focus:ring-orange-700">
+                            <summary class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700">
                                 MANÈGES
                             </summary>
                             <div class="absolute left-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-blue-500 shadow-lg ring-1 ring-white ring-opacity-5 hover:bg-blue-600 focus:outline-none">
@@ -46,9 +46,9 @@
                             </div>
                         </details>
                     </li>
-                    <li ><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-600 focus:ring-2 focus:ring-orange-700" href="/Réservation">RÉSERVATION</a></li>
-                    <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-600 focus:ring-2 focus:ring-orange-700" href="/a_propos">A PROPOS</a></li>
-                    <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-600 focus:ring-2 focus:ring-orange-700" href="/contact">CONTACT</a></li>
+                    <li ><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700" href="/Réservation">RÉSERVATION</a></li>
+                    <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700" href="/a_propos">A PROPOS</a></li>
+                    <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700" href="/contact">CONTACT</a></li>
                 </ul>
             </div>
             <div class="buttons flex gap-4">

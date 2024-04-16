@@ -16,3 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
+    use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+    $app->withExceptions(function ($exceptions) {
+        $exceptions->renderable(function (NotFoundHttpException $e) {
+            return response()->view('errors.404', [], 404);
+        });
+    });
