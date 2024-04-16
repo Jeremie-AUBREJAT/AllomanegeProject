@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/sliderPrice.js'])
-    {{-- @vite(['resources/js/sliderPrice.js']) --}}
+   
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allo Manège</title>

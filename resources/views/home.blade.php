@@ -94,5 +94,38 @@
             </div>
         </div>
     </section>
+    <!--section manèges -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Div 1 -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-2">Titre 1</h3>
+                <img src="{{ asset('images/2.webp') }}" alt="Image 1" class="w-full h-40 object-cover mb-2">
+                <p class="text-gray-700 mb-2">Prix: 10€</p>
+                <a href="/details" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
+            </div>
+    
+            <!-- Div 2 -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-2">Titre 2</h3>
+                <img src="{{ asset('images/2.webp') }}" alt="Image 2" class="w-full h-40 object-cover mb-2">
+                <p class="text-gray-700 mb-2">Prix: 20€</p>
+                <a href="/details" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
+            </div>
+    
+            <!-- Div 3 -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-2">Titre 3</h3>
+                <img src="{{ asset('images/2.webp') }}" alt="Image 3" class="w-full h-40 object-cover mb-2">
+                <p class="text-gray-700 mb-2">Prix: 30€</p>
+                <a href="/details" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
+            </div>
+    
+            <!-- Div 4 -->
+            <!-- Ajoutez plus de divs selon vos besoins -->
+        </div>
+    </div>
+    
+    
 </body>
 @endsection
