@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="flex items-center justify-between px-8 py-4 my-8">
+        <nav class="flex items-center justify-between px-8 py-4">
             <div class="flex items-center">
                 <div class="facebook mr-4">
                     <a href="">
@@ -28,12 +28,13 @@
                     </a>
                 </div>          
             </div>
-            <div class="logo mx-auto">
-                <a href="/"><svg class="w-1/2"
+            <div class="logo mx-auto pr-28">
+                <a href="/" class="flex items-center">
+                    <svg class="w-4/3"
                     version="1.1"
                     id="svg1"
-                    width="256"
-                    height="100"
+                    width="128"
+                    height="50"
                     viewBox="0 0 512 406"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:svg="http://www.w3.org/2000/svg">
@@ -55,7 +56,7 @@
                      </g>
                    </g>
                  </svg>
-                 <h1>ALLO MANÈGE</h1>
+                 <h1 class="flex items-center text-custom-blue-header text-4xl font-bold">ALLO MANÈGE</h1>
                  </a>
             </div>
             
