@@ -64,7 +64,7 @@
         </div>
     </section>
     <!-- section Services -->
-    <section class="Services container mx-auto p-4 mt-36">
+    <section class="Services container mx-auto p-4 my-36">
         
         <h2 class="text-6xl font-bold text-center mb-8 text-custom-font-blue">SERVICES</h2>
 
@@ -95,36 +95,53 @@
         </div>
     </section>
     <!--section manèges -->
-    <div class="container mx-auto px-4 py-8">
+    <section class="container mx-auto px-4 py-8 mt-16">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             <!-- Div 1 -->
             <div class="bg-white rounded-lg shadow-md p-4">
-                <h3 class="text-lg font-semibold mb-2">Titre 1</h3>
-                <img src="{{ asset('images/2.webp') }}" alt="Image 1" class="w-full h-40 object-cover mb-2">
-                <p class="text-gray-700 mb-2">Prix: 10€</p>
-                <a href="/details" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
+                <img src="{{ asset('images/2.webp') }}" alt="Image 1" class="w-full h-48 object-cover mb-2">
+                <h3 class="text-custom-blue-header text-2xl font-semibold mb-2">Titre 1</h3>
+                <div class="flex items-center mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4 0 24 24" style="fill: rgba(1, 16, 90, 1);transform: ;msFilter:;">
+                    <path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
+                </svg><p class="text-custom-blue-header font-semibold text-lg">Localisation</p></div>
+                <p class="text-custom-blue-header font-semibold text-lg mb-2 mt-4">Prix: 10€</p>
+                <a href="/détails" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
             </div>
     
             <!-- Div 2 -->
             <div class="bg-white rounded-lg shadow-md p-4">
-                <h3 class="text-lg font-semibold mb-2">Titre 2</h3>
-                <img src="{{ asset('images/2.webp') }}" alt="Image 2" class="w-full h-40 object-cover mb-2">
-                <p class="text-gray-700 mb-2">Prix: 20€</p>
-                <a href="/details" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
+                <img src="{{ asset('images/2.webp') }}" alt="Image 1" class="w-full h-48 object-cover mb-2">
+                <h3 class="text-custom-blue-header text-2xl font-semibold mb-2">Titre 1</h3>
+                <div class="flex items-center mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4 0 24 24" style="fill: rgba(1, 16, 90, 1);transform: ;msFilter:;">
+                    <path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
+                </svg><p class="text-custom-blue-header font-semibold text-lg">Localisation</p></div>
+                <p class="text-custom-blue-header font-semibold text-lg mb-2 mt-4">Prix: 10€</p>
+                <a href="/détails" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
+            </div>f="/détails" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
             </div>
     
             <!-- Div 3 -->
             <div class="bg-white rounded-lg shadow-md p-4">
-                <h3 class="text-lg font-semibold mb-2">Titre 3</h3>
-                <img src="{{ asset('images/2.webp') }}" alt="Image 3" class="w-full h-40 object-cover mb-2">
-                <p class="text-gray-700 mb-2">Prix: 30€</p>
-                <a href="/details" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
+                <img src="{{ asset('images/2.webp') }}" alt="Image 1" class="w-full h-48 object-cover mb-2">
+                <h3 class="text-custom-blue-header text-2xl font-semibold mb-2">Titre 1</h3>
+                <div class="flex items-center mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4 0 24 24" style="fill: rgba(1, 16, 90, 1);transform: ;msFilter:;">
+                    <path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
+                </svg><p class="text-custom-blue-header font-semibold text-lg">Localisation</p></div>
+                <p class="text-custom-blue-header font-semibold text-lg mb-2 mt-4">Prix: 10€</p>
+                <a href="/détails" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
             </div>
     
             <!-- Div 4 -->
             <!-- Ajoutez plus de divs selon vos besoins -->
+            
         </div>
-    </div>
+        <div class="flex justify-center mt-16">
+            <a href="manèges" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Voir plus</a>
+        </div>
+    </section>
     
     
 </body>
