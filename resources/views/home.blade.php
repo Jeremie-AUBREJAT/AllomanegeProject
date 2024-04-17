@@ -119,7 +119,6 @@
                 </svg><p class="text-custom-blue-header font-semibold text-lg">Localisation</p></div>
                 <p class="text-custom-blue-header font-semibold text-lg mb-2 mt-4">Prix: 10€</p>
                 <a href="/détails" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
-            </div>f="/détails" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
             </div>
     
             <!-- Div 3 -->
