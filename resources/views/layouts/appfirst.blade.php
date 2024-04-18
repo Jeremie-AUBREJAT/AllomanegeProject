@@ -89,8 +89,8 @@
                     </summary>
                     <div class="absolute right-0 z-10 mt-6 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-white ring-opacity-5 hover:bg-white focus:outline-none">
                         <ul class="list-none p-2 flex flex-col justify-center">
-                            <li><a class="block p-4 text-gray-800 hover:bg-gray-50 hover:text-black" href="">S'inscrire</a></li>
-                            <li><a class="block p-4 text-gray-800 hover:bg-gray-50 hover:text-black" href="">Se connecter</a></li>
+                            <li><a class="block p-4 text-gray-800 hover:bg-gray-50 hover:text-black" href="{{ route('register') }}">S'inscrire</a></li>
+                            <li><a class="block p-4 text-gray-800 hover:bg-gray-50 hover:text-black" href="{{ route('login') }}">Se connecter</a></li>
                         </ul>
                     </div>
                 </details>
