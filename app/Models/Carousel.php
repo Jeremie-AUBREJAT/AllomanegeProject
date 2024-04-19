@@ -16,6 +16,8 @@ class Carousel extends Model
         'install_time',
         'description',
         'localization',
+        'price',
+
     ];
     public function carouselCategoryMany()
     {
@@ -28,5 +30,9 @@ class Carousel extends Model
     public function carouselUserMany()
     {
         return $this->hasMany(User::class);
+    }
+    public function carouselQuoteMany()
+    {
+        return $this->hasMany(Quote::class);
     }
 }

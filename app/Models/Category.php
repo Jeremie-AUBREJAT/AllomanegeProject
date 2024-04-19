@@ -9,11 +9,7 @@ class Category extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'stand_game',
-        'stand_food',
-        'carousel_child',
-        'carousel_familly',
-        'carousel_extreme',
+        'name',
     ];
     public function categoryCarouselMany()
     {

@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Picture extends Model
+class Quote extends Model
 {
     use HasFactory;
+    use HasFactory;
     protected $fillable = [
-        'images',
+        'message',       
     ];
-    public function pictureCarouselMany()
+    public function quoteCarouselMany()
     {
         return $this->hasMany(Carousel::class);
     }
