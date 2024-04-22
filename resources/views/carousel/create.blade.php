@@ -81,8 +81,8 @@
 
             {{-- Champ image --}}
             <div class="mb-4">
-                <label for="images" class="block mb-2">Image :</label>
-                <input type="file" name="images" id="images" accept="image/*" class="border rounded-md px-3 py-2 w-full">
+                <label for="imageCreate" class="block mb-2">Image :</label>
+                <input type="file" name="imageCreate" id="image" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full">
                 <p>Image actuelle :</p>
                 <img src="/images/{{ old('images') }}">
             </div>
@@ -120,7 +120,7 @@
         </form> 
         <a href="/category/edit" class="block mt-4 bg-green-900 hover:bg-green-800 active:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer une catégorie</a>
         {{-- Lien retour catalogue produit --}}
-        <a href="/product/view" class="block mt-4 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Retour catalogue produit</a>
+        <a href="/carousel/view" class="block mt-4 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Retour catalogue produit</a>
     </div>
 </div>
 @endsection

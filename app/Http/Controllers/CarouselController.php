@@ -10,33 +10,34 @@ use Illuminate\Http\Request;
 
 class CarouselController extends Controller
 {
-    public function home(){
-        $carousels = Carousel::all();
+    public function home()
+    {
+        $carousels = Carousel::with('category')->get();
         $categories = Category::all();
-        return view('view')->with(["carousels" => $carousels, "categories"=>$categories]);
+        return view('carousel.view', compact('carousels', 'categories'));
     }
-
-    //Fonction pour afficher les produits
-    public function viewProduct(){
+    
+    //Fonction pour afficher les carousels
+    public function viewCarousel(){
         $carousels = Carousel::all();
         return view('view')->with("carousels", $carousels);
     }
 
-    //Fonction pour afficher le formulaire de création d'un nouveau produit
+    //Fonction pour afficher le formulaire de création d'un nouveau carousel
     public function viewCreateCarousel(){
         $categories = Category::all();
         return view('carousel.create')->with("categories", $categories);
     }
 
-    //Fonction pour afficher le formulaire de modification d'un produit
+    //Fonction pour afficher le formulaire de modification d'un carousel
     public function viewUpdateForm($id)
     {
         $carousel = Carousel::find($id);
         $categories = Category::all();
-        return view('update')->with(["carousel" => $carousel, "categories"=>$categories]);
+        return view('carousel.update')->with(["carousel" => $carousel, "categories"=>$categories]);
     }
 
-    //Fonction pour ajouter un nouveau produit
+    //Fonction pour ajouter un nouveau carousel
     public function createCarousel(CarouselRequest $request)
 {
     // Créer une instance de Carousel
@@ -50,26 +51,25 @@ class CarouselController extends Controller
     $carousel->localization = $request->input('localization');
     $carousel->price = $request->input('price');
 
-    // Sauvegarder l'image
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
+    // ajout d une image 
+    if ($request->hasFile('imageCreate')) {
+        $image = $request->file('imageCreate');
         $imageName = $image->getClientOriginalName();
-        $image->move(public_path('images'), $imageName);
-        $carousel->image = $imageName;
+        $image->move(public_path('imageCreate'), $imageName); // Déplacer l'image vers le répertoire public/images
+        $carousel->carouselPictureMany()->create(['images' => 'imageCreate/' . $imageName]);
     }
-
     // Enregistrer le carrousel
     $carousel->category_id = $request->input('category');
     $carousel->save();
 
     // Créer une instance de Picture associée au Carousel
-    $picture = new Picture();
-    $picture->images = $carousel->image; // Utiliser le nom de l'image du Carousel
-    $picture->carousel_id = $carousel->id; // Associer l'image au Carousel créé
-    $picture->save();
+    // $picture = new Picture();
+    // $picture->images = $carousel->image; // Utiliser le nom de l'image du Carousel
+    // $picture->carousel_id = $carousel->id; // Associer l'image au Carousel créé
+    // $picture->save();
    
 
-    return redirect("create/view");
+    return redirect("/carousel/view");
 }
 
     //Fonction pour modifier un produit
@@ -81,18 +81,8 @@ class CarouselController extends Controller
         $carousel->watt_power = $request->input('watt_power');
         $carousel->install_time = $request->input('install_time');
         $carousel->description = $request->input('description');
-        $carousel->localization = $request->input('localisation');
+        $carousel->localization = $request->input('localization');
         $carousel->price = $request->input('price');
-        
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = $image->getClientOriginalName();
-            $request->file('image')->move(public_path('images'),$imageName);
-            $carousel->image = $imageName;
-        } else {
-            $carousel->image = ""; // ou la valeur par défaut que vous avez définie
-        }
-    
       
         $carousel->category_id = $request->input('category');
         $carousel->save();
@@ -101,9 +91,9 @@ class CarouselController extends Controller
     }
 
     //Fonction pour supprimer un produit
-    public function deleteCarousel($id){
-        $delete = carousel::find($id);
-        $delete->delete();
-        return redirect("carousel/view");
+    public function destroyCarousel($id){
+        $delete = Carousel::find($id);
+        $delete->delete($id);
+        return redirect("/carousel/view");
     }
 }

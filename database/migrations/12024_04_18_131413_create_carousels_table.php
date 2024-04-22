@@ -31,7 +31,7 @@ return new class extends Migration
             $table->decimal('price', 15, 2);
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->unsignedBigInteger('picture_id');
+            $table->unsignedBigInteger('picture_id')->nullable();
             $table->foreign('picture_id')->references('id')->on('pictures');
             $table->unsignedBigInteger('quote_id');
             $table->foreign('quote_id')->references('id')->on('quotes');

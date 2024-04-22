@@ -9,10 +9,10 @@ class Picture extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'images',
+        ['images','carousel_id'],
     ];
-    public function pictureCarouselMany()
+    public function pictureCarouselBelongsto()
     {
-        return $this->hasMany(Carousel::class);
+        return $this->belongsTo(Carousel::class);
     }
 }

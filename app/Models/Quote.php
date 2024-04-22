@@ -12,8 +12,8 @@ class Quote extends Model
     protected $fillable = [
         'message',       
     ];
-    public function quoteCarouselMany()
+    public function quoteCarouselBelongsto()
     {
-        return $this->hasMany(Carousel::class);
+        return $this->belongsTo(Carousel::class);
     }
 }

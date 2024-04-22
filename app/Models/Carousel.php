@@ -17,11 +17,12 @@ class Carousel extends Model
         'description',
         'localization',
         'price',
+    
 
     ];
-    public function carouselCategoryMany()
+    public function category()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
     public function carouselPictureMany()
     {

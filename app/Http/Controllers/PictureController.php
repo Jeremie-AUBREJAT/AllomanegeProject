@@ -11,32 +11,50 @@ class PictureController extends Controller
         $pictures = Picture::all();
         return view("picture/edit")->with("pictures",$pictures);
     }
-    // ajout de la methode
-    public function create(){
-        $pictures = Picture::all();
-        return view("picture/create")->with("pictures",$pictures);
+
+    public function update($id){
+        $picture = Picture::find($id);
+        return view("picture/update")->with("picture",$picture);
     }
-    public function createPicture(Request $request)
-{
-    // Créer une nouvelle instance de Picture avec les données de la requête
-    $picture = new Picture($request->all());
+    public function updatePicture( $request, $id)
+    {
+        $update = Picture::find($id);
+        $update->images = $request->input('images');
+        $update->save();
 
-    // Gérer le téléchargement de l'image si elle est présente dans la requête
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = $image->getClientOriginalName();
-        $image->move(public_path('images'), $imageName);
-        $picture->images = $imageName; // Utiliser le bon nom de colonne
-    } else {
-        $picture->images = ""; // ou la valeur par défaut que vous avez définie
+        return redirect("carousel/view");
     }
+//     public function editPicture()
+//     {
+//         $pictures = Picture::all();
+//         return view("picture/edit")->with("pictures",$pictures);
+//     }
+//     // ajout de la methode
+//     public function create(){
+//         $pictures = Picture::all();
+//         return view("picture/create")->with("pictures",$pictures);
+//     }
+//     public function createPicture(Request $request)
+// {
+//     // Créer une nouvelle instance de Picture avec les données de la requête
+//     $picture = new Picture($request->all());
 
-    // Enregistrer l'enregistrement Picture dans la base de données
-    $picture->save();
+//     // Gérer le téléchargement de l'image si elle est présente dans la requête
+//     if ($request->hasFile('image')) {
+//         $image = $request->file('image');
+//         $imageName = $image->getClientOriginalName();
+//         $image->move(public_path('images'), $imageName);
+//         $picture->images = $imageName; // Utiliser le bon nom de colonne
+//     } else {
+//         $picture->images = ""; // ou la valeur par défaut que vous avez définie
+//     }
 
-    // Rediriger l'utilisateur vers une autre page
-    return redirect("picture/edit");
-}
+//     // Enregistrer l'enregistrement Picture dans la base de données
+//     $picture->save();
+
+//     // Rediriger l'utilisateur vers une autre page
+//     return redirect("picture/edit");
+// }
 
 
     // public function update($id){

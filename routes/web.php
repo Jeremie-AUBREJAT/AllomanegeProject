@@ -25,12 +25,12 @@ Route::get('/category/update/{id}', [CategoryController::class, 'update']);
 Route::put('/category/update/{id}', [CategoryController::class, 'updateCategory']);
 Route::delete('/category/{id}', [CategoryController::class, 'destroyCategory']);
 // Route Carousel
-Route::get('/carousel/view', [CarouselController::class, 'viewCarousel']);
+Route::get('/carousel/view', [CarouselController::class, 'home']);
 Route::get('/carousel/create', [CarouselController::class, 'viewCreateCarousel']);
 Route::post('/carousel/create', [CarouselController::class, 'createCarousel']);
 Route::get('/carousel/update/{id}', [CarouselController::class, 'viewUpdateForm']);
-Route::put('/update/{id}', [CarouselController::class, 'updateProduct']);
-Route::delete('/delete/{id}', [CarouselController::class, 'deleteCarousel']);
+Route::put('/update/{id}', [CarouselController::class, 'updateCarousel']);
+Route::delete('/carousel/{id}', [CarouselController::class, 'destroyCarousel']);
 
 Route::get('/', function () {return view('home');});
 Route::get('/manèges', function () {return view('carousels');});
