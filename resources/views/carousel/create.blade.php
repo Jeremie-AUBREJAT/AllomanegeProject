@@ -82,7 +82,31 @@
             {{-- Champ image --}}
             <div class="mb-4">
                 <label for="imageCreate" class="block mb-2">Image :</label>
-                <input type="file" name="imageCreate" id="image" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full">
+                <input type="file" name="imageCreate[]" id="image1" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
+                <p>Image actuelle :</p>
+                <img src="/images/{{ old('images') }}">
+            </div>
+            <div class="mb-4">
+                <label for="imageCreate" class="block mb-2">Image :</label>
+                <input type="file" name="imageCreate[]" id="image2" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
+                <p>Image actuelle :</p>
+                <img src="/images/{{ old('images') }}">
+            </div>
+            <div class="mb-4">
+                <label for="imageCreate" class="block mb-2">Image :</label>
+                <input type="file" name="imageCreate[]" id="image3" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
+                <p>Image actuelle :</p>
+                <img src="/images/{{ old('images') }}">
+            </div>
+            <div class="mb-4">
+                <label for="imageCreate" class="block mb-2">Image :</label>
+                <input type="file" name="imageCreate[]" id="image4" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
+                <p>Image actuelle :</p>
+                <img src="/images/{{ old('images') }}">
+            </div>
+            <div class="mb-4">
+                <label for="imageCreate" class="block mb-2">Image :</label>
+                <input type="file" name="imageCreate[]" id="image5" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
                 <p>Image actuelle :</p>
                 <img src="/images/{{ old('images') }}">
             </div>

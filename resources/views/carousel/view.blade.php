@@ -17,11 +17,16 @@
             <p class="mb-2">Prix : {{$carousel->price}}</p>
             @if ($carousel->category)
             <p class="mb-2">Catégorie : {{$carousel->category->name}}</p>
-        @else
-            <p class="mb-2">Catégorie non définie</p>
-        @endif
-            <img src="/images/{{$carousel->picture_id}}" class="mb-2">
-            <a href="/carousel/update/{{$carousel->id}}" class="text-blue-500 hover:text-blue-700">Modifier</a>
+            @else
+                <p class="mb-2">Catégorie non définie</p>
+            @endif
+            @if ($carousel->carouselPictureMany->isNotEmpty())
+    @foreach ($carousel->carouselPictureMany as $picture)
+        <img src="{{ asset($picture->images) }}" alt="Image du carousel">
+    @endforeach
+@endif
+
+            <a href="/carousel/update/{{$carousel->id}}" class="mt-12 bg-green-500 hover:bg-green-700 active:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Modifier</a>
         </div>
         
         @endforeach

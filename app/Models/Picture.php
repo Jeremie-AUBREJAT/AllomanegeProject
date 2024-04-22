@@ -9,7 +9,8 @@ class Picture extends Model
 {
     use HasFactory;
     protected $fillable = [
-        ['images','carousel_id'],
+        'images',
+        'carousel_id',
     ];
     public function pictureCarouselBelongsto()
     {
