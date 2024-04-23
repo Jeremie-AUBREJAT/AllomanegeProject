@@ -82,8 +82,8 @@
             @error('price')
                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
             @enderror
-
-            @foreach ($carousel->carouselPictureMany as $picture)
+<!-- Pour chaque image du carrousel -->
+@foreach ($carousel->carouselPictureMany as $picture)
     <div class="w-full md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-4">
         <div class="mb-4">
             <!-- Champ de fichier pour modifier l'image -->
@@ -106,6 +106,13 @@
         </div>
     </div>
 @endforeach
+
+<!-- Champ pour ajouter de nouvelles images -->
+<div class="mb-4">
+    <label for="newImages" class="block mb-2">Ajouter de nouvelles images :</label>
+    <input type="file" name="newImages[]" id="newImages" accept="image/*" multiple class="border rounded-md px-3 py-2 w-full">
+</div>
+
             
 
             {{-- Champ pour la description --}}
