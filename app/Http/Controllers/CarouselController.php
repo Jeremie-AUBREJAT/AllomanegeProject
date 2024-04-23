@@ -186,11 +186,27 @@ class CarouselController extends Controller
 
 
     public function destroyCarousel($id){
-        // Utilisez find() pour récupérer un seul objet Carousel par son ID
-        $carousel = Carousel::find($id);
-        if ($carousel) {
-            $carousel->delete(); // Utilisez delete() sur l'instance de Carousel
+        // Utilisez findOrFail() pour récupérer un seul objet Carousel par son ID
+        $carousel = Carousel::findOrFail($id);
+    
+        // Récupérer toutes les images associées au carousel
+        $carouselPictures = $carousel->carouselPictureMany;
+    
+        // Parcourir et supprimer les images associées
+        foreach ($carouselPictures as $picture) {
+            // Supprimer l'image de la base de données
+            $picture->delete();
+    
+            // Supprimer le fichier physique de l'image
+            if (file_exists(public_path($picture->images))) {
+                unlink(public_path($picture->images));
+            }
         }
+    
+        // Supprimer le carousel lui-même
+        $carousel->delete();
+    
         return redirect("/carousel/view");
     }
+    
 }
