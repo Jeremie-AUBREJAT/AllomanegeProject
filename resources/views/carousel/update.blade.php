@@ -82,36 +82,41 @@
             @error('price')
                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
             @enderror
-<!-- Pour chaque image du carrousel -->
-@foreach ($carousel->carouselPictureMany as $picture)
-    <div class="w-full md:w-1/3 lg:w-1/4 xl:w-1/5 px-2 mb-4">
-        <div class="mb-4">
-            <!-- Champ de fichier pour modifier l'image -->
-            <label for="imageUpdate{{$picture->id}}" class="block mb-2">Modifier Image {{$loop->index + 1}} :</label>
-            <input type="file" name="imageUpdate[]" id="imageUpdate{{$picture->id}}" accept="image/*" class="border rounded-md px-3 py-2 w-full">
-            <!-- Image actuelle -->
-            <p class="mt-2">Image actuelle :</p>
-            @if (!empty($picture->images))
-                <img src="{{ asset($picture->images) }}" alt="Image du carrousel" class="mt-2 w-full h-auto">
-                <!-- Champ caché pour conserver le nom de l'image actuelle -->
-                <input type="hidden" name="current_image[]" value="{{$picture->images}}">
-            @else
-                <p>Aucune image disponible</p>
-            @endif
-            <!-- Case à cocher pour supprimer l'image -->
-            <div class="mt-2">
-                <input type="checkbox" name="delete_image_id[]" value="{{$picture->id}}" id="deleteImage{{$picture->id}}">
-                <label for="deleteImage{{$picture->id}}">Supprimer cette image</label>
+            <div class="flex flex-wrap -mx-2">
+                <!-- Pour chaque image du carrousel -->
+                @foreach ($carousel->carouselPictureMany as $picture)
+                    <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 px-2 mb-4">
+                        <div class="mb-4">
+                            <!-- Champ de fichier pour modifier l'image -->
+                            <label for="imageUpdate{{$picture->id}}" class="block mb-2">Modifier Image {{$loop->index + 1}} :</label>
+                            <input type="file" name="imageUpdate[]" id="imageUpdate{{$picture->id}}" accept="image/*" class="border rounded-md px-3 py-2 w-full">
+                            <!-- Image actuelle -->
+                            <p class="mt-2">Image actuelle :</p>
+                            @if (!empty($picture->images))
+                                <img src="{{ asset($picture->images) }}" alt="Image du carrousel" class="mt-2 w-full h-auto">
+                                <!-- Champ caché pour conserver le nom de l'image actuelle -->
+                                <input type="hidden" name="current_image[]" value="{{$picture->images}}">
+                            @else
+                                <p>Aucune image disponible</p>
+                            @endif
+                            <!-- Case à cocher pour supprimer l'image -->
+                            <div class="mt-2">
+                                <input type="checkbox" name="delete_image_id[]" value="{{$picture->id}}" id="deleteImage{{$picture->id}}">
+                                <label for="deleteImage{{$picture->id}}">Supprimer cette image</label>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-        </div>
-    </div>
-@endforeach
+            
+            <!-- Champ pour ajouter de nouvelles images -->
+            <div class="mb-4">
+                <label for="newImages" class="block mb-2">Ajouter de nouvelles images :</label>
+                <input type="file" name="newImages[]" id="newImages" accept="image/*" multiple class="border rounded-md px-3 py-2 w-full">
+            </div>
+            
 
-<!-- Champ pour ajouter de nouvelles images -->
-<div class="mb-4">
-    <label for="newImages" class="block mb-2">Ajouter de nouvelles images :</label>
-    <input type="file" name="newImages[]" id="newImages" accept="image/*" multiple class="border rounded-md px-3 py-2 w-full">
-</div>
+
 
             
 

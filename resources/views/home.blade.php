@@ -100,12 +100,12 @@
             <!-- Div 1 -->
             <div class="bg-white rounded-lg shadow-md p-4">
                 <img src="{{ asset('images/2.webp') }}" alt="Image 1" class="w-full h-48 object-cover mb-2">
-                <h3 class="text-custom-blue-header text-2xl font-semibold mb-2">Titre 1</h3>
+                <h3 class="text-custom-blue-header text-2xl font-semibold mb-2" name="name">Titre 1</h3>
                 <div class="flex items-center mt-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4 0 24 24" style="fill: rgba(1, 16, 90, 1);transform: ;msFilter:;">
                     <path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
-                </svg><p class="text-custom-blue-header font-semibold text-lg">Localisation</p></div>
-                <p class="text-custom-blue-header font-semibold text-lg mb-2 mt-4">Prix: 10€</p>
+                </svg><p class="text-custom-blue-header font-semibold text-lg" name="localization">Localisation</p></div>
+                <p class="text-custom-blue-header font-semibold text-lg mb-2 mt-4"name="price">Prix: 10€</p>
                 <a href="/détails" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded text-center w-1/3 mt-8">Détails</a>
             </div>
     
