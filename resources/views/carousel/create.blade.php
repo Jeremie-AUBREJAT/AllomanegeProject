@@ -79,40 +79,14 @@
                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
             @enderror
 
-            {{-- Champ image --}}
-            <div class="mb-4">
-                <label for="imageCreate" class="block mb-2">Image :</label>
-                <input type="file" name="imageCreate[]" id="image1" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
-                <p>Image actuelle :</p>
-                <img src="/images/{{ old('images') }}">
+            <div id="imageFields">
+                <div class="mb-4">
+                    <label for="imageCreate" class="block mb-2">Image :</label>
+                    <input type="file" name="imageCreate[]" class="border rounded-md px-3 py-2 w-full" multiple>
+                </div>
             </div>
-            <div class="mb-4">
-                <label for="imageCreate" class="block mb-2">Image :</label>
-                <input type="file" name="imageCreate[]" id="image2" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
-                <p>Image actuelle :</p>
-                <img src="/images/{{ old('images') }}">
-            </div>
-            <div class="mb-4">
-                <label for="imageCreate" class="block mb-2">Image :</label>
-                <input type="file" name="imageCreate[]" id="image3" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
-                <p>Image actuelle :</p>
-                <img src="/images/{{ old('images') }}">
-            </div>
-            <div class="mb-4">
-                <label for="imageCreate" class="block mb-2">Image :</label>
-                <input type="file" name="imageCreate[]" id="image4" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
-                <p>Image actuelle :</p>
-                <img src="/images/{{ old('images') }}">
-            </div>
-            <div class="mb-4">
-                <label for="imageCreate" class="block mb-2">Image :</label>
-                <input type="file" name="imageCreate[]" id="image5" value="{{ old('image') }}" class="border rounded-md px-3 py-2 w-full" multiple>
-                <p>Image actuelle :</p>
-                <img src="/images/{{ old('images') }}">
-            </div>
-            
-
-
+            <button id="addImageField" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Ajouter une autre image</button>
+                        
             {{-- Champ pour la description --}}
             <div class="mb-4">
                 <label for="description" class="block mb-2">Description :</label>
@@ -140,11 +114,11 @@
             @enderror
 
             {{-- Bouton créer produit --}}
-            <button type="submit" name="submit" class="bg-blue-500 hover:bg-blue-700 active:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer un produit</button>
+            <button type="submit" name="submit" class="bg-blue-500 hover:bg-blue-700 active:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer un manège</button>
         </form> 
         <a href="/category/edit" class="block mt-4 bg-green-900 hover:bg-green-800 active:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer une catégorie</a>
         {{-- Lien retour catalogue produit --}}
-        <a href="/carousel/view" class="block mt-4 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Retour catalogue produit</a>
+        <a href="/carousel/view" class="block mt-4 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Retour catalogue manèges</a>
     </div>
 </div>
 @endsection

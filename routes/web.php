@@ -32,7 +32,8 @@ Route::get('/carousel/update/{id}', [CarouselController::class, 'viewUpdateForm'
 Route::put('/update/{id}', [CarouselController::class, 'updateCarousel']);
 Route::delete('/carousel/{id}', [CarouselController::class, 'destroyCarousel']);
 
-Route::get('/', function () {return view('home');});
+// Route::get('/', function () {return view('home');});
+Route::get('/', [CarouselController::class, 'homeFront']);
 Route::get('/manèges', function () {return view('carousels');});
 Route::get('/détails', function () {return view('details/details');});
 Route::get('/contact', function () {return view('contact');});

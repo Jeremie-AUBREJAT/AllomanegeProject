@@ -16,6 +16,12 @@ class CarouselController extends Controller
         $categories = Category::all();
         return view('carousel.view', compact('carousels', 'categories'));
     }
+    public function homeFront()
+    {
+        $carousels = Carousel::with('category')->get();
+        $categories = Category::all();
+        return view('home', compact('carousels', 'categories'));
+    }
     
     //Fonction pour afficher les carousels
     public function viewCarousel(){
