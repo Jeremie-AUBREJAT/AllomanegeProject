@@ -117,6 +117,8 @@ class CarouselController extends Controller
     $carousel->localization = $request->input('localization');
     $carousel->price = $request->input('price');
     $carousel->category_id = $request->input('category');
+
+    // Sauvegarder les modifications du carousel
     $carousel->save();
 
     // Supprimer une image spécifique si nécessaire
@@ -126,7 +128,7 @@ class CarouselController extends Controller
             $pictureToDelete = Picture::find($imageId);
             if ($pictureToDelete) {
                 // Supprimer l'image de la base de données
-                $pictureToDelete->delete(); // Suppression de chaque objet Picture individuellement
+                $pictureToDelete->delete();
                 // Supprimer le fichier physique de l'image
                 if (file_exists(public_path($pictureToDelete->images))) {
                     unlink(public_path($pictureToDelete->images));
@@ -136,31 +138,29 @@ class CarouselController extends Controller
     }
 
     // Remplacer une image existante par une nouvelle si une est fournie
-    if ($request->hasFile('new_image')) {
-        $newImage = $request->file('new_image');
-        $imageName = $newImage->getClientOriginalName();
-        $newImage->move(public_path('imageCreate'), $imageName); // Déplacer l'image vers le répertoire public/images
-
-        // Si le carousel a déjà une image associée, la remplacer
-        if ($carousel->picture) {
-            // Supprimer le fichier physique de l'image existante
-            if (file_exists(public_path($carousel->picture->images))) {
-                unlink(public_path($carousel->picture->images));
+    if ($request->hasFile('imageUpdate')) {
+        $imagesToUpdate = $request->file('imageUpdate');
+        foreach ($imagesToUpdate as $key => $newImage) {
+            // Vérifier si une image a été fournie
+            if ($newImage !== null) {
+                // Supprimer le fichier physique de l'image existante
+                if (file_exists(public_path($request->input('current_image')[$key]))) {
+                    unlink(public_path($request->input('current_image')[$key]));
+                }
+                // Déplacer la nouvelle image vers le répertoire public/images
+                $imageName = $newImage->getClientOriginalName();
+                $newImage->move(public_path('imageCreate'), $imageName);
+                // Mettre à jour le chemin de l'image dans la base de données
+                $carousel->carouselPictureMany[$key]->images = 'imageCreate/' . $imageName;
+                $carousel->carouselPictureMany[$key]->save();
             }
-            // Mettre à jour le chemin de l'image existante
-            $carousel->picture->images = 'imageCreate/' . $imageName;
-            $carousel->picture->save();
-        } else {
-            // Créer une nouvelle Picture associée au Carousel pour la nouvelle image
-            $picture = new Picture();
-            $picture->images = 'imageCreate/' . $imageName;
-            $picture->carousel_id = $carousel->id; // Associer l'image au Carousel
-            $picture->save();
         }
     }
 
-    return redirect("carousel/view");
+    // Rediriger vers la page de visualisation du carrousel après la mise à jour
+    return redirect("/carousel/view");
 }
+
 
 
     public function destroyCarousel($id){
