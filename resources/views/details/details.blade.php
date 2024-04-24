@@ -26,16 +26,16 @@
 
     <!-- Div de Gauche -->
     <div class="w-full lg:w-2/3 p-4 relative">
-        <h2 class="text-4xl font-bold mb-4">Nom du manège</h2>
+        <h2 class="text-4xl font-bold mb-4">{{$carousel->name}}</h2>
         <p class="text-custom-blue-header text-xl mb-2 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4 0 24 24" style="fill: rgba(1, 16, 90, 1);transform: ;msFilter:;">
                 <path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
             </svg>
-            Localisation : Ville
+            {{$carousel->localization}}
         </p>        
         <div class="flex items-center bg-gray-100 p-6 my-8 w-10/12">
             <label for="prix" class="text-custom-blue-header text-xl mr-4">Prix : </label>
-            <p class="mr-4 text-custom-orange">XXX €</p>
+            <p class="mr-4 text-custom-orange">{{$carousel->price}}</p>
             <div class="flex ml-auto items-center">
                 <span class="stars-container flex ml-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
@@ -55,38 +55,48 @@
                     </svg>
                 </span>
             </div>
-        </div>   
+        </div>  
+     
         <div id="carousel" class="relative">
-            <img src="{{ asset('images/1.webp') }}" alt="Image Principale" class="w-10/12 mb-4 rounded-md">
+            @foreach ($carousel->carouselPictureMany as $picture)
+                @if ($loop->first)
+                    <img src="{{ asset($picture->images) }}" alt="Image Principale" class="w-10/12 mb-4 rounded-md">
+                @endif
+            @endforeach
         </div>
+        
         <div id="thumbnails" class="flex space-x-2 ml-1">
-            <img src="{{ asset('images/2.webp') }}" alt="Image Miniature 1" class="w-1/5 h-28 cursor-pointer rounded-md">
-            <img src="{{ asset('images/3.webp') }}" alt="Image Miniature 2" class="w-1/5 h-28 cursor-pointer rounded-md">
-            <img src="{{ asset('images/4.webp') }}" alt="Image Miniature 3" class="w-1/5 h-28 cursor-pointer rounded-md">
-            <img src="{{ asset('images/5.webp') }}" alt="Image Miniature 4" class="w-1/5 h-28 cursor-pointer rounded-md">
+            @foreach ($carousel->carouselPictureMany as $picture)
+                @unless ($loop->first)
+                    <img src="{{ asset($picture->images) }}" alt="Image Miniature" class="w-1/5 h-28 cursor-pointer rounded-md">
+                @endunless
+            @endforeach
         </div>
+        
+        
+        
         <div class="w-full lg:w-2/3 py-4 mt-16">
-            <h3 class="text-2xl font-bold mb-4">Description:</h3>
-            <p class="text-gray-700 mb-4">Description du produit ou de la section.</p>
+            <h3 class="text-2xl font-bold mb-4">Description: </h3>
+            <p class="text-gray-700 mb-4">{{$carousel->description}}</p>
         
             <!-- Rectangle 1 -->
             <div class="flex justify-between">
             
                 <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mr-2">
                     <p class="text-lg font-bold mb-2">Dimensions</p>
-                    <p>10x20 m</p>
+                    <p>{{$carousel->size}}m²</p>
                 </div>
         
                 <!-- Rectangle 2 -->
                 <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mx-2">
                     <p class="text-lg font-bold mb-2">Puissance (kWatt)</p>
-                    <p>10 kW</p>
+                    <p>{{$carousel->watt_power}}</p>
                 </div>
         
                 <!-- Rectangle 3 -->
                 <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 ml-2">
                     <p class="text-lg font-bold mb-2">Temps de montage</p>
-                    <p>20 heures</p>
+                    <p>{{$carousel->install_time}} Heure(s)</p>
                 </div>
             </div>
         </div>
@@ -108,5 +118,8 @@
     </div>
 
 </section>
-
+<div class="flex justify-center my-16">
+    <a href="/manèges" class="block bg-custom-blue-header hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Retour aux manèges</a>
+</div>
+</section>
 @endsection

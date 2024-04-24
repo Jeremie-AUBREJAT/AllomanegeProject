@@ -34,8 +34,10 @@ Route::delete('/carousel/{id}', [CarouselController::class, 'destroyCarousel']);
 
 // Route::get('/', function () {return view('home');});
 Route::get('/', [CarouselController::class, 'homeFront']);
-Route::get('/manèges', function () {return view('carousels');});
-Route::get('/détails', function () {return view('details/details');});
+// Route::get('/manèges', function () {return view('carousels');});
+Route::get('/manèges', [CarouselController::class, 'carouselsFront']);
+// Route::get('/détails', function () {return view('details/details');});
+Route::get('manège/détails/{id}',[CarouselController::class, 'detailsFront']);
 Route::get('/contact', function () {return view('contact');});
 Route::get('/mentionslégales', function () {return view('mentionslegales');});
 Route::get('/cgv', function () {return view('cgv');});

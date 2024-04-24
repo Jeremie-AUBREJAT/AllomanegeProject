@@ -9,19 +9,40 @@ use App\Models\Quote;
 use Illuminate\Http\Request;
 
 class CarouselController extends Controller
-{
-    public function home()
-    {
-        $carousels = Carousel::with('category')->get();
-        $categories = Category::all();
-        return view('carousel.view', compact('carousels', 'categories'));
-    }
+{   
+    // methodes Front
     public function homeFront()
     {
         $carousels = Carousel::with('category')->get();
         $categories = Category::all();
         return view('home', compact('carousels', 'categories'));
     }
+    public function carouselsFront()
+    {
+        $carousels = Carousel::with('category')->get();
+        $categories = Category::all();
+        return view('carousels', compact('carousels', 'categories'));
+    }
+    public function detailsFront($carouselId)
+{
+    // Récupérer le carrousel par son ID avec sa catégorie associée
+    $carousel = Carousel::with('category')->find($carouselId);
+    
+    // Récupérer toutes les catégories
+    $categories = Category::all();
+    
+    // Retourner la vue avec le carrousel et les catégories
+    return view('/details/details', compact('carousel', 'categories'));
+}
+
+    // methodes Back
+    public function home()
+    {
+        $carousels = Carousel::with('category')->get();
+        $categories = Category::all();
+        return view('carousel.view', compact('carousels', 'categories'));
+    }
+    
     
     //Fonction pour afficher les carousels
     public function viewCarousel(){
@@ -79,35 +100,6 @@ class CarouselController extends Controller
         return redirect("/carousel/view");
     }
 
-    //Fonction pour modifier un carousel sans modif des images
-    // public function updateCarousel(CarouselRequest $request, $id){
-    //     $carousel = new Carousel;
-    //     $carousel->name = $request->input('name');
-    //     $carousel->size = $request->input('size');
-    //     $carousel->weight = $request->input('weight');
-    //     $carousel->watt_power = $request->input('watt_power');
-    //     $carousel->install_time = $request->input('install_time');
-    //     $carousel->description = $request->input('description');
-    //     $carousel->localization = $request->input('localization');
-    //     $carousel->price = $request->input('price');
-      
-    //     $carousel->category_id = $request->input('category');
-    //     $carousel->save();
-
-        
-        
-    //     return redirect("carousel/view");
-    // }
-
-    // public function destroyCarousel($id){
-    //     $carousel = Carousel::find($id);
-    
-    //     if ($carousel) {
-    //         $carousel->delete();
-    //     }
-    
-    //     return redirect("/carousel/view");
-    // }
     public function updateCarousel(CarouselRequest $request, $id)
     {
         // Récupérer le carousel à mettre à jour

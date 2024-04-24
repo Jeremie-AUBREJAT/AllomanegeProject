@@ -138,13 +138,13 @@
                         </div>
                         <p class="text-custom-blue-header font-semibold text-lg mb-2 mt-4"name="price">
                             {{ $carousel->price }} €</p>
-                        <a href="/carousel/update/{{ $carousel->id }}"
-                            class="mt-12 bg-green-500 hover:bg-green-700 active:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Modifier</a>
+                        <a href="/manège/détails/{{ $carousel->id }}"
+                            class="mt-12 bg-custom-blue-header hover:bg-blue-600 active:bg-custom-blue-header text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Détails</a>
                     </div>
                 @endforeach
             </div>
             <div class="flex justify-center mt-16">
-                <a href="manèges" class="block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Voir
+                <a href="manèges" class="block bg-custom-blue-header hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Voir
                     plus</a>
             </div>
         </section>
