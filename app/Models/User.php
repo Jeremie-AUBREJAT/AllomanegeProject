@@ -16,10 +16,20 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    // Définir les constantes de rôle
+    const ROLE_SUPER_ADMIN = 'super_admin';
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
     protected $fillable = [
         'name',
+        'surname',
+        'compagny',
         'email',
         'password',
+        'address',
+        'zipcode',
+        'phone_number',
+        'role',
     ];
 
     /**
@@ -43,6 +53,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    // Méthode pour vérifier si l'utilisateur a un rôle donné
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
     }
     public function userCarouselMany()
     {

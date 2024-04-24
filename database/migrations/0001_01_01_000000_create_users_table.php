@@ -14,9 +14,15 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('surname'); // Ajouter le prénom avec la possibilité d'être nul
+            $table->string('compagny')->nullable(); // Ajouter le nom de la compagnie avec la possibilité d'être nul
+            $table->string('email');
+            $table->timestamp('email_verified_at');
             $table->string('password');
+            $table->string('address'); // Ajouter l'adresse avec la possibilité d'être nul
+            $table->string('zipcode'); // Ajouter le code postal avec la possibilité d'être nul
+            $table->string('phone_number'); // Ajouter le numéro de téléphone avec la possibilité d'être nul
+            $table->string('role')->default('user'); // Ajouter le rôle par default
             $table->rememberToken();
             $table->timestamps();
         });

@@ -28,9 +28,9 @@ class Carousel extends Model
     {
         return $this->hasMany(Picture::class);
     }
-    public function carouselUserMany()
+    public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function carouselQuoteMany()
     {
