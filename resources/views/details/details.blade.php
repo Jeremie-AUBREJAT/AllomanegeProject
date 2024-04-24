@@ -35,7 +35,7 @@
         </p>        
         <div class="flex items-center bg-gray-100 p-6 my-8 w-10/12">
             <label for="prix" class="text-custom-blue-header text-xl mr-4">Prix : </label>
-            <p class="mr-4 text-custom-orange">{{$carousel->price}}</p>
+            <p class="mr-4 text-custom-orange">{{$carousel->price}}€</p>
             <div class="flex ml-auto items-center">
                 <span class="stars-container flex ml-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
@@ -72,6 +72,9 @@
                 @endunless
             @endforeach
         </div>
+        <div id="fullScreenImage" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
+            <img src="image1.jpg" alt="Image en plein écran" class="max-w-3xl max-h-3xl">
+        </div>
         
         
         
@@ -104,7 +107,7 @@
     </div>
     <!-- Div de droite -->
     <div class="w-full lg:w-1/3 p-4">
-        <p class="text-gray-700 mb-2">Prix : xxx €</p>
+        <p class="text-gray-700 mb-2">{{$carousel->price}}€</p>
         
         <!-- Calendrier google calendar???-->
         <div class="mb-4">
