@@ -116,9 +116,17 @@
             {{-- Bouton créer produit --}}
             <button type="submit" name="submit" class="bg-blue-500 hover:bg-blue-700 active:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer un manège</button>
         </form> 
-        <a href="/category/edit" class="block mt-4 bg-green-900 hover:bg-green-800 active:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer une catégorie</a>
+        @if (Auth::check())
+    <p>Votre rôle est : {{ Auth::user()->role }}</p>
+@else
+    <p>Vous n'êtes pas connecté.</p>
+@endif
+        @if (Auth::check() && Auth::user()->role === 'Super_admin')
+        <a href="/category/edit" class="block mt-4 bg-green-900 hover:bg-green-800 active:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer une catégorie</a>   
+        @endif
         {{-- Lien retour catalogue produit --}}
         <a href="/carousel/view" class="block mt-4 bg-blue-900 hover:bg-blue-800 active:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Retour catalogue manèges</a>
+       
     </div>
 </div>
 @endsection

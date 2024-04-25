@@ -4,33 +4,15 @@ use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PictureController;
+use App\Http\Middleware\UserMiddleware;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\Super_adminMiddleware;
 
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// route pour creer carousel et picture en meme temps
-Route::post('/carousel/create', [CarouselController::class, 'createCarouselAndPicture']);
 
-// Route Picture
-Route::get('/picture/edit', [PictureController::class, 'editPicture']);
-Route::get('/picture/create', [PictureController::class, 'create']);
-Route::post('/picture/create', [PictureController::class, 'createPicture']);
-// Route Category
-Route::get('/category/edit', [CategoryController::class, 'editCategory']);
-Route::get('/category/create', [CategoryController::class, 'create']);
-Route::post('/category/create', [CategoryController::class, 'createCategory']);
-Route::get('/category/update/{id}', [CategoryController::class, 'update']);
-Route::put('/category/update/{id}', [CategoryController::class, 'updateCategory']);
-Route::delete('/category/{id}', [CategoryController::class, 'destroyCategory']);
-// Route Carousel
-Route::get('/carousel/view', [CarouselController::class, 'home']);
-Route::get('/carousel/create', [CarouselController::class, 'viewCreateCarousel']);
-Route::post('/carousel/create', [CarouselController::class, 'createCarousel']);
-Route::get('/carousel/update/{id}', [CarouselController::class, 'viewUpdateForm']);
-Route::put('/update/{id}', [CarouselController::class, 'updateCarousel']);
-Route::delete('/carousel/{id}', [CarouselController::class, 'destroyCarousel']);
+
+
 
 // Route::get('/', function () {return view('home');});
 Route::get('/', [CarouselController::class, 'homeFront']);
@@ -49,6 +31,33 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
 require __DIR__.'/auth.php';
+// Middleware role= User
+Route::middleware([UserMiddleware::class])->group(function () {
+    
+});
+//  Middleware role= Admin
+Route::middleware([AdminMiddleware::class])->group(function () {
+    Route::get('/carousel/view', [CarouselController::class, 'home']);
+    Route::get('/carousel/create', [CarouselController::class, 'viewCreateCarousel']);
+    Route::post('/carousel/create', [CarouselController::class, 'createCarousel']);
+    Route::get('/carousel/update/{id}', [CarouselController::class, 'viewUpdateForm']);
+    Route::put('/update/{id}', [CarouselController::class, 'updateCarousel']);
+    Route::delete('/carousel/{id}', [CarouselController::class, 'destroyCarousel']);
+    // Route Picture a voir pour les supprimer
+    Route::get('/picture/edit', [PictureController::class, 'editPicture']);
+    Route::get('/picture/create', [PictureController::class, 'create']);
+    Route::post('/picture/create', [PictureController::class, 'createPicture']);
+});
+//  Middleware role= Super_admin
+Route::middleware([Super_adminMiddleware::class])->group(function () {
+    Route::get('/category/edit', [CategoryController::class, 'editCategory']);
+    Route::get('/category/create', [CategoryController::class, 'create']);
+    Route::post('/category/create', [CategoryController::class, 'createCategory']);
+    Route::get('/category/update/{id}', [CategoryController::class, 'update']);
+    Route::put('/category/update/{id}', [CategoryController::class, 'updateCategory']);
+    Route::delete('/category/{id}', [CategoryController::class, 'destroyCategory']);
+});

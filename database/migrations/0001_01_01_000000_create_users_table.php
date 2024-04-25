@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('address'); // Ajouter l'adresse avec la possibilité d'être nul
             $table->string('zipcode'); // Ajouter le code postal avec la possibilité d'être nul
             $table->string('phone_number'); // Ajouter le numéro de téléphone avec la possibilité d'être nul
-            $table->string('role')->default('user'); // Ajouter le rôle par default
+            $table->enum('role', ['user', 'admin', 'super_admin'])->default('user'); // Ajouter le rôle par default
             $table->rememberToken();
             $table->timestamps();
         });

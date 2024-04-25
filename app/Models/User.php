@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -14,12 +13,8 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
-    // Définir les constantes de rôle
-    const ROLE_SUPER_ADMIN = 'super_admin';
-    const ROLE_ADMIN = 'admin';
-    const ROLE_USER = 'user';
     protected $fillable = [
         'name',
         'surname',
@@ -35,7 +30,7 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -43,23 +38,53 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * Get the user's role.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getRoleAttribute($value)
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return ucfirst($value);
     }
-    // Méthode pour vérifier si l'utilisateur a un rôle donné
+
+    /**
+     * Set the user's role.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setRoleAttribute($value)
+    {
+        $this->attributes['role'] = strtolower($value);
+    }
+
+    /**
+     * Check if the user has a given role.
+     *
+     * @param  string  $role
+     * @return bool
+     */
     public function hasRole(string $role): bool
     {
         return $this->role === $role;
     }
-    public function userCarouselMany()
+
+    /**
+     * Define a relationship with Carousel.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function carousels()
     {
         return $this->hasMany(Carousel::class);
     }

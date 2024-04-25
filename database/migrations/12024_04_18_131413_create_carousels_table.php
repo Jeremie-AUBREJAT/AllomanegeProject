@@ -33,8 +33,10 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->unsignedBigInteger('picture_id')->nullable();
             $table->foreign('picture_id')->references('id')->on('pictures');
-            $table->unsignedBigInteger('quote_id');
+            $table->unsignedBigInteger('quote_id')->nullable()->default(null);
             $table->foreign('quote_id')->references('id')->on('quotes');
+            $table->unsignedBigInteger('user_id')->nullable()->default(null);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
    // Réactiver les contraintes de clé étrangère
    DB::statement('SET FOREIGN_KEY_CHECKS=1');
