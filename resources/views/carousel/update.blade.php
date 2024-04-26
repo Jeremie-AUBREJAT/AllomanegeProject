@@ -158,7 +158,7 @@
         @csrf
         @method('DELETE')
         {{-- Bouton supprimer produit --}}
-        <button type="submit" class="bg-red-500 hover:bg-red-700 active:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Supprimer</button>
+        <button type="submit" class="bg-red-500 hover:bg-red-700 active:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-8">Supprimer</button>
     </form>
 </div>
 @endsection
