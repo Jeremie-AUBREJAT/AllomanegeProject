@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PictureController;
 use App\Http\Middleware\UserMiddleware;
-use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AdminSuper_adminMiddleware;
 use App\Http\Middleware\Super_adminMiddleware;
 
 use Illuminate\Support\Facades\Route;
@@ -40,7 +40,7 @@ Route::middleware([UserMiddleware::class])->group(function () {
     
 });
 //  Middleware role= Admin
-Route::middleware([AdminMiddleware::class])->group(function () {
+Route::middleware([AdminSuper_adminMiddleware::class])->group(function () {
     Route::get('/carousel/view', [CarouselController::class, 'home']);
     Route::get('/carousel/create', [CarouselController::class, 'viewCreateCarousel']);
     Route::post('/carousel/create', [CarouselController::class, 'createCarousel']);
