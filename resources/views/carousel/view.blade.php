@@ -37,7 +37,7 @@
 <div class="flex justify-center">
     <a href="/carousel/create" class="block mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Créer un Manège</a>
 </div> --}}
-{{-- test --}}
+
 <section class="container mx-auto px-4 py-8 mt-16">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         @foreach ($carousels as $carousel)  
@@ -55,6 +55,20 @@
             </svg><p class="text-custom-blue-header font-semibold text-lg" name="localization">{{$carousel->localization}}</p></div>
             <p class="text-custom-blue-header font-semibold text-lg mb-2 mt-4"name="price">{{$carousel->price}} €</p>
             <a href="/carousel/update/{{$carousel->id}}" class="mt-12 bg-green-500 hover:bg-green-700 active:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Modifier</a>
+            <a href="/carousel/update/{{$carousel->id}}" class="mt-12 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline 
+                @if($carousel->status == 'pending') 
+                    bg-orange-500 hover:bg-orange-700 active:bg-orange-900 text-white 
+                @elseif($carousel->status == 'approved') 
+                    bg-blue-500 hover:bg-blue-700 active:bg-blue-900 text-white 
+                @endif">
+                @if($carousel->status == 'pending')
+                    En attente
+                @elseif($carousel->status == 'approved')
+                    En ligne
+                @endif
+            </a>
+            
+                
         </div>
         @endforeach
     </div>
@@ -65,5 +79,5 @@
 
 
 
-{{-- fin test --}}
+
 @endsection

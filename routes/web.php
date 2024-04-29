@@ -7,13 +7,13 @@ use App\Http\Controllers\PictureController;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminSuper_adminMiddleware;
 use App\Http\Middleware\Super_adminMiddleware;
-
+use App\Http\Middleware\PendingCountMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
-
-
-
+//middleware Notif Super_admin
+Route::middleware([PendingCountMiddleware::class])->group(function () {
+// Route Front
 // Route::get('/', function () {return view('home');});
 Route::get('/', [CarouselController::class, 'homeFront']);
 // Route::get('/manèges', function () {return view('carousels');});
@@ -23,6 +23,7 @@ Route::get('manège/détails/{id}',[CarouselController::class, 'detailsFront']);
 Route::get('/contact', function () {return view('contact');});
 Route::get('/mentionslégales', function () {return view('mentionslegales');});
 Route::get('/cgv', function () {return view('cgv');});
+//Route Dashbord
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -60,4 +61,5 @@ Route::middleware([Super_adminMiddleware::class])->group(function () {
     Route::get('/category/update/{id}', [CategoryController::class, 'update']);
     Route::put('/category/update/{id}', [CategoryController::class, 'updateCategory']);
     Route::delete('/category/{id}', [CategoryController::class, 'destroyCategory']);
+});
 });

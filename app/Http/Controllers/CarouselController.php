@@ -58,7 +58,9 @@ class CarouselController extends Controller
             $carousels = Carousel::where('user_id', $userId)->with('category')->get();
         } elseif ($userRole === 'Super_admin') {
             // Si l'utilisateur est un super administrateur, récupérer tous les carrousels
-            $carousels = Carousel::with('category')->get();
+            $carousels = Carousel::with('category')
+            ->orderByRaw("CASE WHEN status = 'pending' THEN 0 ELSE 1 END, name")
+            ->get();
         } else {
             // Pour tout autre type d'utilisateur, rediriger ou retourner une vue d'erreur
             return redirect()->route('home')->with('error', 'Accès non autorisé');
@@ -86,27 +88,28 @@ class CarouselController extends Controller
 
     //Fonction pour afficher le formulaire de modification d'un carousel
     public function viewUpdateForm($id)
-{
-    // Récupérer le carousel à mettre à jour
-    $carousel = Carousel::find($id);
+    {   
+        $statusValues = config('enums.status');
+        // Récupérer le carousel à mettre à jour
+        $carousel = Carousel::find($id);
 
-    // Vérifier si le carousel existe
-    if (!$carousel) {
-        abort(404); // Retourner une erreur 404 si le carousel n'existe pas
-    }
-
-    // Vérifier si l'utilisateur est un administrateur
-    if (Auth::user()->role === 'Admin') {
-        // Vérifier si l'utilisateur est autorisé à accéder à ce carousel
-        if ($carousel->user_id != Auth::id()) {
-            abort(404);
+        // Vérifier si le carousel existe
+        if (!$carousel) {
+            abort(404); // Retourner une erreur 404 si le carousel n'existe pas
         }
-    }
+
+        // Vérifier si l'utilisateur est un administrateur
+        if (Auth::user()->role === 'Admin') {
+            // Vérifier si l'utilisateur est autorisé à accéder à ce carousel
+            if ($carousel->user_id != Auth::id()) {
+                abort(404);
+            }
+        }
 
     // Récupérer toutes les catégories
     $categories = Category::all();
 
-    return view('carousel.update')->with(["carousel" => $carousel, "categories" => $categories]);
+    return view('carousel.update')->with(["carousel" => $carousel, "categories" => $categories, $statusValues]);
 }
 
 
@@ -184,8 +187,15 @@ public function updateCarousel(CarouselRequest $request, $id)
         'localization' => $request->input('localization'),
         'price' => $request->input('price'),
         'category_id' => $request->input('category'),
-    ]);
+        // 'status' => $request->input('status'),
 
+    ]);
+    if (Auth::user()->role === 'Super_admin') {
+        $carousel->update([
+            'status' => $request->input('status')
+        ]);
+    }
+    
     // Supprimer une image spécifique si nécessaire
     if ($request->has('delete_image_id')) {
         $deleteImageIds = $request->input('delete_image_id');

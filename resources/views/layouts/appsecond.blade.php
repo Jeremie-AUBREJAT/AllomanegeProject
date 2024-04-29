@@ -80,6 +80,16 @@
                     <a href="/carousel/view" class="text-white font-semibold text-2xl">
                         Tableau de bord
                     </a>
+                    @if(Auth::user()->role === 'Super_admin')
+                            <div class="relative inline-block mx-2">
+                                <span class="text-white bg-red-500 rounded-full px-4 py-2">
+                                    {{$pendingCount}}
+                                </span>
+                                <span class="absolute bottom-4 left-6 bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-xs text-white">
+                                    !
+                                </span>
+                            </div>
+                            @endif
                     @endif
                 </div>
                 
