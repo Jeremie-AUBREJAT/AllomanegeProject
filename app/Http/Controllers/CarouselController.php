@@ -13,28 +13,35 @@ class CarouselController extends Controller
 {   
     // methodes Front
     public function homeFront()
-    {
-        $carousels = Carousel::with('category')->get();
+    {   
+        $carousels = Carousel::with('category')->where('status', 'approved')->get();
         $categories = Category::all();
         return view('home', compact('carousels', 'categories'));
     }
     public function carouselsFront()
     {
-        $carousels = Carousel::with('category')->get();
+        $carousels = Carousel::with('category')->where('status', 'approved')->get();
         $categories = Category::all();
         return view('carousels', compact('carousels', 'categories'));
     }
     public function detailsFront($carouselId)
-    {
-        // Récupérer le carrousel par son ID avec sa catégorie associée
-        $carousel = Carousel::with('category')->find($carouselId);
-        
-        // Récupérer toutes les catégories
-        $categories = Category::all();
-        
-        // Retourner la vue avec le carrousel et les catégories
-        return view('/details/details', compact('carousel', 'categories'));
+{
+    // Récupérer le carrousel par son ID avec sa catégorie associée
+    $carousel = Carousel::with('category')->where('status', 'approved')->find($carouselId);
+    
+    // Vérifier si le carousel a été trouvé
+    if (!$carousel) {
+        // Rediriger ou gérer le cas où le carousel n'est pas trouvé
+        abort(404);
     }
+
+    // Récupérer toutes les catégories
+    $categories = Category::all();
+    
+    // Retourner la vue avec le carrousel et les catégories
+    return view('/details/details', compact('carousel', 'categories'));
+}
+
 
     // methodes Back
     public function home()
@@ -105,8 +112,8 @@ class CarouselController extends Controller
 
     //Fonction pour ajouter un nouveau carousel
     public function createCarousel(CarouselRequest $request)
-    {
-         // Récupérer l'utilisateur actuellement authentifié
+{
+    // Récupérer l'utilisateur actuellement authentifié
     $user = Auth::user();
 
     // Créer une instance de Carousel
@@ -122,6 +129,14 @@ class CarouselController extends Controller
     
     // Associer le carousel à l'utilisateur actuellement authentifié
     $carousel->user()->associate($user);
+
+    // Définir le statut du Carousel sur "pending" par défaut
+    $carousel->status = 'pending';
+
+    // Si l'utilisateur est un Super_admin, définir le statut sur "approved" par défaut
+    if (Auth::user()->role === 'Super_admin') {
+        $carousel->status = 'approved';
+    }
     
     // Enregistrer le Carousel
     $carousel->category_id = $request->input('category');
@@ -143,6 +158,7 @@ class CarouselController extends Controller
     
     return redirect("/carousel/view");
 }
+
 
 public function updateCarousel(CarouselRequest $request, $id)
 {

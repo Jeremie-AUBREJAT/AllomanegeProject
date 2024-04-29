@@ -37,6 +37,7 @@ return new class extends Migration
             $table->foreign('quote_id')->references('id')->on('quotes');
             $table->unsignedBigInteger('user_id')->nullable()->default(null);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
         });
    // Réactiver les contraintes de clé étrangère
    DB::statement('SET FOREIGN_KEY_CHECKS=1');

@@ -17,6 +17,7 @@ class Carousel extends Model
         'description',
         'localization',
         'price',
+        'status',
     
 
     ];
