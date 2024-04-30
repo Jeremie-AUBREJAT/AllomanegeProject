@@ -5,7 +5,7 @@
         <div class="w-1/2 bg-white p-8 rounded-lg shadow-md">
             <h1 class="text-2xl mb-4">Modification de {{ $carousel->name }}</h1>
 
-            <form method="POST" action="{{ url('/update/' . $carousel->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ url('carousel/update/'.$carousel->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -178,7 +178,6 @@
                 catalogue manèges</a>
         </div>
     </div>
-
     {{-- Formulaire de suppression --}}
     <div class="flex justify-center">
         <form method="post" action="{{ url('/carousel/' . $carousel->id) }}" enctype="multipart/form-data">

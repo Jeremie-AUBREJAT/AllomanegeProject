@@ -9,6 +9,7 @@ use App\Http\Middleware\AdminSuper_adminMiddleware;
 use App\Http\Middleware\Super_adminMiddleware;
 use App\Http\Middleware\PendingCountMiddleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 
 //middleware Notif Super_admin
@@ -46,7 +47,7 @@ Route::middleware([AdminSuper_adminMiddleware::class])->group(function () {
     Route::get('/carousel/create', [CarouselController::class, 'viewCreateCarousel']);
     Route::post('/carousel/create', [CarouselController::class, 'createCarousel']);
     Route::get('/carousel/update/{id}', [CarouselController::class, 'viewUpdateForm']);
-    Route::put('/update/{id}', [CarouselController::class, 'updateCarousel']);
+    Route::put('/carousel/update/{id}', [CarouselController::class, 'updateCarousel']);
     Route::delete('/carousel/{id}', [CarouselController::class, 'destroyCarousel']);
     // Route Picture a voir pour les supprimer
     Route::get('/picture/edit', [PictureController::class, 'editPicture']);
@@ -61,5 +62,10 @@ Route::middleware([Super_adminMiddleware::class])->group(function () {
     Route::get('/category/update/{id}', [CategoryController::class, 'update']);
     Route::put('/category/update/{id}', [CategoryController::class, 'updateCategory']);
     Route::delete('/category/{id}', [CategoryController::class, 'destroyCategory']);
+    //Route AllUsers
+    Route::get('/allusers', [RegisteredUserController::class, 'viewAllUsers']);
+    Route::get('/users/update/{id}', [RegisteredUserController::class, 'viewUserUpdateForm']);
+    Route::put('/update/{id}', [RegisteredUserController::class, 'userUpdate']);
+
 });
 });

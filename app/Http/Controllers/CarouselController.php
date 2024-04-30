@@ -166,7 +166,7 @@ class CarouselController extends Controller
 public function updateCarousel(CarouselRequest $request, $id)
 {
     // Récupérer le carousel à mettre à jour
-    $carousel = Carousel::find($id);
+    $carousel = Carousel::findOrFail($id);
     
     // Vérifier si l'utilisateur est un administrateur
     if (Auth::user()->role === 'Admin') {
@@ -252,6 +252,8 @@ public function updateCarousel(CarouselRequest $request, $id)
     // Rediriger vers la page de visualisation du carrousel après la mise à jour
     return redirect("/carousel/view");
 }
+
+
 
     
 

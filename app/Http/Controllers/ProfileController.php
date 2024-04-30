@@ -41,20 +41,44 @@ class ProfileController extends Controller
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+{
+    $request->validateWithBag('userDeletion', [
+        'password' => ['required', 'current_password'],
+    ]);
 
-        $user = $request->user();
+    $user = $request->user();
 
-        Auth::logout();
+    // Récupérer tous les carousels de l'utilisateur
+    $carousels = $user->carousels;
 
-        $user->delete();
+    // Supprimer chaque carousel et ses images associées
+    foreach ($carousels as $carousel) {
+        // Récupérer toutes les images associées au carousel
+        $carouselPictures = $carousel->carouselPictureMany;
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // Parcourir et supprimer les images associées
+        foreach ($carouselPictures as $picture) {
+            // Supprimer l'image de la base de données
+            $picture->delete();
 
-        return Redirect::to('/');
+            // Supprimer le fichier physique de l'image
+            if (file_exists(public_path($picture->images))) {
+                unlink(public_path($picture->images));
+            }
+        }
+
+        // Supprimer le carousel lui-même
+        $carousel->delete();
     }
+
+    Auth::logout();
+
+    $user->delete();
+
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+
+    return Redirect::to('/');
+}
+
 }
