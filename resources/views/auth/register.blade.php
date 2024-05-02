@@ -18,7 +18,7 @@
 
         <!-- Compagny -->
         <div class="mt-4">
-            <x-input-label for="compagny" :value="__('Compagnie')" />
+            <x-input-label for="compagny" :value="__('Entreprise')" />
             <x-text-input id="compagny" class="block mt-1 w-full" type="text" name="compagny" :value="old('compagny')" autocomplete="compagny" />
             <x-input-error :messages="$errors->get('compagny')" class="mt-2" />
         </div>
@@ -64,7 +64,12 @@
             <x-text-input id="phone_number" class="block mt-1 w-full" type="text" name="phone_number" :value="old('phone_number')" autocomplete="phone_number" />
             <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
         </div>
-
+        <div class="mt-4">
+        <label for="professional" class="flex items-center mb-2">
+            <input type="checkbox" id="professional" name="professional" class="form-checkbox h-5 w-5 text-blue-600 rounded-md">
+            <span class="ml-2 text-md text-gray-700">Cochez la case si vous êtes professionnel et que vous souhaitez louer votre ou vos manèges </span>
+        </label>
+        </div>
         <!-- Role -->
         {{-- <div class="mt-4">
             <x-input-label for="role" :value="__('Rôle')" />
@@ -73,7 +78,7 @@
         </div> --}}
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
+            <a class="underline text-sm font-semibold text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
                 {{ __('Déjà un compte ?') }}
             </a>
 

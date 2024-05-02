@@ -10,7 +10,7 @@ use App\Http\Middleware\Super_adminMiddleware;
 use App\Http\Middleware\PendingCountMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
-
+use App\Http\Controllers\MailController;
 
 //middleware Notif Super_admin
 Route::middleware([PendingCountMiddleware::class])->group(function () {
@@ -24,6 +24,7 @@ Route::get('manège/détails/{id}',[CarouselController::class, 'detailsFront']);
 Route::get('/contact', function () {return view('contact');});
 Route::get('/mentionslégales', function () {return view('mentionslegales');});
 Route::get('/cgv', function () {return view('cgv');});
+Route::post('/contact/send',[MailController::class,'sendForm']);
 //Route Dashbord
 Route::get('/dashboard', function () {
     return view('dashboard');

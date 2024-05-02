@@ -25,7 +25,7 @@
         
     </div>
 </section>
-<form action="" method="POST" class="max-w-xl mx-auto mt-32 px-4 lg:flex lg:justify-between lg:items-start">
+<form action="/contact/send" method="POST" class="max-w-xl mx-auto mt-32 px-4 lg:flex lg:justify-between lg:items-start">
     @csrf
     <div class="lg:w-1/2 lg:pr-4 mb-4">
         <label for="nom" class="block mb-2">Nom :</label>
@@ -39,9 +39,9 @@
         
     </div>
     <div class="lg:w-1/2 lg:pl-4 mb-4">
-        <label for="manege" class="block mb-2">Manège :</label>
+        {{-- <label for="manege" class="block mb-2">Manège :</label>
         <select id="manege" name="manege" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
-            <option value="" disabled selected>Choisissez un manège</option>
+            <option value="" disabled selected>Choisissez un manège</option> --}}
             <!-- Boucle pour afficher les options des manèges -->
             {{-- @foreach($maneges as $manege)
             <option value="{{ $manege->id }}">{{ $manege->nom }}</option>

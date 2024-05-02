@@ -1,11 +1,11 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+        <h2 class="text-xl font-medium text-gray-900">
+            {{ __('Informations du compte') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+        <p class="mt-1 text-lg text-gray-600">
+            {{ __("Mettez à jour les informations de votre profil") }}
         </p>
     </header>
 
@@ -18,13 +18,37 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label class="font-semibold" for="name" :value="__('Nom')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
-
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label class="font-semibold" for="surname" :value="__('Prénom')" />
+            <x-text-input id="surname" name="surname" type="text" class="mt-1 block w-full" :value="old('surname', $user->surname)" required autofocus autocomplete="surname" />
+            <x-input-error class="mt-2" :messages="$errors->get('surname')" />
+        </div>
+        <div>
+            <x-input-label class="font-semibold" for="compagny" :value="__('Entreprise')" />
+            <x-text-input id="compagny" name="compagny" type="text" class="mt-1 block w-full" :value="old('compagny', $user->compagny)" required autofocus autocomplete="compagny" />
+            <x-input-error class="mt-2" :messages="$errors->get('compagny')" />
+        </div>
+        <div>
+            <x-input-label class="font-semibold" for="address" :value="__('Adresse')" />
+            <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address', $user->address)" required autofocus autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('address')" />
+        </div>
+        <div>
+            <x-input-label class="font-semibold" for="zipcode" :value="__('code postal')" />
+            <x-text-input id="zipcode" name="zipcode" type="text" class="mt-1 block w-full" :value="old('zipcode', $user->zipcode)" required autofocus autocomplete="zipcode" />
+            <x-input-error class="mt-2" :messages="$errors->get('zipcode')" />
+        </div>
+        <div>
+            <x-input-label class="font-semibold" for="phone_number" :value="__('Numéro de téléphone')" />
+            <x-text-input id="phone_number" name="phone_number" type="text" class="mt-1 block w-full" :value="old('phone_number', $user->phone_number)" required autofocus autocomplete="phone_number" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
+        </div>
+        <div>
+            <x-input-label class="font-semibold" for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
@@ -48,7 +72,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Enregister') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendRegistrationEmail;
 
 class RegisteredUserController extends Controller
 {
@@ -52,7 +54,10 @@ class RegisteredUserController extends Controller
             'phone_number' => $request->phone_number,
             // 'role' => $request->role
         ]);
-
+        if ($request->has('professional')) {
+            // Envoyer un e-mail
+            Mail::to(env('CONTACT_EMAIL'))->send(new SendRegistrationEmail($user));
+        }
         event(new Registered($user));
 
         Auth::login($user);
