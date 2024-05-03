@@ -206,6 +206,7 @@
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12" />
                                 </svg>
+                                
                             </button>
                         </div>
                     </div>
@@ -246,6 +247,7 @@
                             class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
                             <a href="mentionsLégales">MENTIONS LÉGALES</a>
                         </li>
+                        
                     </ul>
                 </div>
             </div>

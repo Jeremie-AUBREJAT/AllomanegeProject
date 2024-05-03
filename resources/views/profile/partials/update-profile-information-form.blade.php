@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-lg text-gray-600">
-            {{ __("Mettez à jour les informations de votre profil") }}
+            {{ __("Mettre à jour les informations de votre profil") }}
         </p>
     </header>
 
@@ -16,7 +16,25 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
-
+            
+            @if (session('status') === 'password-updated')
+            <p
+                x-data="{ show: true }"
+                x-show="show"
+                x-transition
+                x-init="setTimeout(() => show = false, 2000)"
+                class="text-xl font-semibold text-green-600"
+            >{{ __('Mot de passe mis à jour') }}</p>
+        @endif
+        @if (session('status') === 'profile-updated')
+                <p
+                    x-data="{ show: true }"
+                    x-show="show"
+                    x-transition
+                    x-init="setTimeout(() => show = false, 2000)"
+                    class="text-xl font-semibold text-green-600"
+                >{{ __('Profil mis à jour') }}</p>
+            @endif
         <div>
             <x-input-label class="font-semibold" for="name" :value="__('Nom')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
@@ -74,15 +92,7 @@
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Enregister') }}</x-primary-button>
 
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
+            
         </div>
     </form>
 </section>

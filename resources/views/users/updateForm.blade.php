@@ -60,6 +60,15 @@
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Mettre à jour</button>
     </form>
     <div class="flex justify-center">
+        <form method="post" action="{{ url('/user/'.$user->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('DELETE')
+            {{-- Bouton supprimer produit --}}
+            <button type="submit"
+                class="bg-red-500 hover:bg-red-700 active:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-8">Supprimer</button>
+        </form>
+    </div>
+    <div class="flex justify-center">
         <a href="/allusers" class="mx-auto mt-12 bg-custom-blue-header hover:bg-blue-600 active:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Retour aux utilisateurs</a>
     </div>
 </div>

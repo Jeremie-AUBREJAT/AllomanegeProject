@@ -64,9 +64,10 @@ Route::middleware([Super_adminMiddleware::class])->group(function () {
     Route::put('/category/update/{id}', [CategoryController::class, 'updateCategory']);
     Route::delete('/category/{id}', [CategoryController::class, 'destroyCategory']);
     //Route AllUsers
-    Route::get('/allusers', [RegisteredUserController::class, 'viewAllUsers']);
-    Route::get('/users/update/{id}', [RegisteredUserController::class, 'viewUserUpdateForm']);
-    Route::put('/update/{id}', [RegisteredUserController::class, 'userUpdate']);
+    Route::get('/allusers', [ProfileController::class, 'viewAllUsers'])->name('profile.viewAllUsers');
+    Route::get('/users/update/{id}', [ProfileController::class, 'viewUserUpdateForm']);
+    Route::put('/update/{id}', [ProfileController::class, 'userUpdate']);
+    Route::delete('/user/{id}', [ProfileController::class, 'destroyUser']);
 
 });
 });
