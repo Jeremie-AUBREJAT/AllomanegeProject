@@ -107,11 +107,11 @@
     </div>
     <!-- Div de droite -->
     <div class="w-full lg:w-1/3 p-4">
-        <p class="text-gray-700 mb-2">{{$carousel->price}}€</p>
+        {{-- <p class="text-gray-700 mb-2">{{$carousel->price}}€</p> --}}
         
         <!-- Calendrier google calendar???-->
-        <div class="mb-4">
-            GOOGLE CALENDAR ????
+        <div class="lg:mt-24 pt-4">
+            <div class="" id="calendar"></div>
         </div>
         
         <!-- Google Maps??? -->

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/carouseldetails.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js', 'resources/js/fullscreenimage.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/carouseldetails.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js', 'resources/js/fullscreenimage.js', 'resources/js/fullcalendar.js'])
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allo Manège</title>
 </head>
