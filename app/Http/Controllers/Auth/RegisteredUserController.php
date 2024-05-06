@@ -65,84 +65,84 @@ class RegisteredUserController extends Controller
         return redirect(route('dashboard', absolute: false));
     }
 
-    public function viewAllUsers()
-{
-    // Vérifiez si l'utilisateur actuellement authentifié est un Super_admin
-    if (Auth::user()->role === 'Super_admin') {
-        // Si oui, récupérez tous les utilisateurs
-        $users = User::all();
+//     public function viewAllUsers()
+// {
+//     // Vérifiez si l'utilisateur actuellement authentifié est un Super_admin
+//     if (Auth::user()->role === 'Super_admin') {
+//         // Si oui, récupérez tous les utilisateurs
+//         $users = User::all();
 
-        // Vous pouvez maintenant utiliser la variable $users dans votre vue pour afficher la liste des utilisateurs
-        return view('users/view', compact('users'));
-    } else {
-        // Si l'utilisateur actuel n'est pas un Super_admin, redirigez-le vers une autre vue ou affichez un message d'erreur
-        abort(404);
-    }
-}
-public function viewUserUpdateForm($id)
-{   
-    // Récupérer l'utilisateur à mettre à jour
-    $user = User::find($id);
+//         // Vous pouvez maintenant utiliser la variable $users dans votre vue pour afficher la liste des utilisateurs
+//         return view('users/view', compact('users'));
+//     } else {
+//         // Si l'utilisateur actuel n'est pas un Super_admin, redirigez-le vers une autre vue ou affichez un message d'erreur
+//         abort(404);
+//     }
+// }
+// public function viewUserUpdateForm($id)
+// {   
+//     // Récupérer l'utilisateur à mettre à jour
+//     $user = User::find($id);
 
-    // Vérifier si l'utilisateur existe
-    if (!$user) {
-        abort(404); // Retourner une erreur 404 si l'utilisateur n'existe pas
-    }
+//     // Vérifier si l'utilisateur existe
+//     if (!$user) {
+//         abort(404); // Retourner une erreur 404 si l'utilisateur n'existe pas
+//     }
 
-    // Vérifier si l'utilisateur est un super administrateur
-    if (Auth::user()->role === 'Super_admin') {
-        return view('users.updateForm')->with(["user" => $user]);
+//     // Vérifier si l'utilisateur est un super administrateur
+//     if (Auth::user()->role === 'Super_admin') {
+//         return view('users.updateForm')->with(["user" => $user]);
        
-    }
-    abort(404); // Retourner une erreur 403 (Accès refusé) si l'utilisateur n'est pas autorisé
+//     }
+//     abort(404); // Retourner une erreur 403 (Accès refusé) si l'utilisateur n'est pas autorisé
     
-}
-public function userUpdate(Request $request, $id)
-    {
-        // Récupérer l'utilisateur à mettre à jour
-        $user = User::find($id);
+// }
+// public function userUpdate(Request $request, $id)
+//     {
+//         // Récupérer l'utilisateur à mettre à jour
+//         $user = User::find($id);
 
-        // Vérifier si l'utilisateur existe
-        if (!$user) {
-            abort(404); // Retourner une erreur 404 si l'utilisateur n'existe pas
-        }
+//         // Vérifier si l'utilisateur existe
+//         if (!$user) {
+//             abort(404); // Retourner une erreur 404 si l'utilisateur n'existe pas
+//         }
 
-        // Vérifier si l'utilisateur est un Super_admin
-        if (Auth::user()->role !== 'Super_admin') {
-            abort(404); // Retourner une erreur 403 (Accès refusé) si l'utilisateur n'est pas autorisé
-        }
+//         // Vérifier si l'utilisateur est un Super_admin
+//         if (Auth::user()->role !== 'Super_admin') {
+//             abort(404); // Retourner une erreur 403 (Accès refusé) si l'utilisateur n'est pas autorisé
+//         }
 
-        // Valider les données du formulaire
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'surname' => ['required', 'string', 'max:255'],
-        //     'compagny' => ['nullable', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $id],
-        //     'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-        //     'address' => ['nullable', 'string', 'max:255'],
-        //     'zipcode' => ['nullable', 'string', 'max:255'],
-        //     'phone_number' => ['nullable', 'string', 'max:255'],
-        //     'role' => ['required', 'string', 'in:user,admin,super_admin'],
-        // ]);
+//         // Valider les données du formulaire
+//         // $request->validate([
+//         //     'name' => ['required', 'string', 'max:255'],
+//         //     'surname' => ['required', 'string', 'max:255'],
+//         //     'compagny' => ['nullable', 'string', 'max:255'],
+//         //     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $id],
+//         //     'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+//         //     'address' => ['nullable', 'string', 'max:255'],
+//         //     'zipcode' => ['nullable', 'string', 'max:255'],
+//         //     'phone_number' => ['nullable', 'string', 'max:255'],
+//         //     'role' => ['required', 'string', 'in:user,admin,super_admin'],
+//         // ]);
 
-        // Mettre à jour les données de l'utilisateur
-        $user->update([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'compagny' => $request->compagny,
-            'email' => $request->email,
-            // 'password' => $request->password ? Hash::make($request->password) : $user->password,
-            'address' => $request->address,
-            'zipcode' => $request->zipcode,
-            'phone_number' => $request->phone_number,
-            // 'role' => $request->role,
-        ]);
-        if (Auth::user()->role === 'Super_admin') {
-            $user->update([
-                'role' => $request->input('role')
-            ]);
-        }
-        return view('users.updateForm')->with(["user" => $user]);
-    }
+//         // Mettre à jour les données de l'utilisateur
+//         $user->update([
+//             'name' => $request->name,
+//             'surname' => $request->surname,
+//             'compagny' => $request->compagny,
+//             'email' => $request->email,
+//             // 'password' => $request->password ? Hash::make($request->password) : $user->password,
+//             'address' => $request->address,
+//             'zipcode' => $request->zipcode,
+//             'phone_number' => $request->phone_number,
+//             // 'role' => $request->role,
+//         ]);
+//         if (Auth::user()->role === 'Super_admin') {
+//             $user->update([
+//                 'role' => $request->input('role')
+//             ]);
+//         }
+//         return view('users.updateForm')->with(["user" => $user]);
+//     }
 
 }

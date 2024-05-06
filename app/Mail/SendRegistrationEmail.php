@@ -36,13 +36,13 @@ class SendRegistrationEmail extends Mailable
      */
     public function build()
     {
-        // Ajoutez des instructions dump pour le débogage
-        dump($this->userName); // Vérifiez le nom de l'utilisateur
-        dump($this->userId); // Vérifiez l'identifiant de l'utilisateur
+        // // Ajoutez des instructions dump pour le débogage
+        // dump($this->userName); // Vérifiez le nom de l'utilisateur
+        // dump($this->userId); // Vérifiez l'identifiant de l'utilisateur
 
-        // Vérifiez les valeurs des adresses e-mail de l'expéditeur et du destinataire
-        dump(config('mail.from.address'));
-        dump(config('mail.from.name'));
+        // // Vérifiez les valeurs des adresses e-mail de l'expéditeur et du destinataire
+        // dump(config('mail.from.address'));
+        // dump(config('mail.from.name'));
 
         // Retournez la vue du courrier électronique
         return $this->from(config('mail.from.address'), config('mail.from.name'))
