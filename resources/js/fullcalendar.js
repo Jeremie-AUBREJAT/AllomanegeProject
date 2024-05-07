@@ -13,14 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
     initialView: 'dayGridMonth',
     selectable: true,
     select: function(info) {
-      if (!debutDate) {
-        // Premier clic : assigner à l'input avec l'ID 'debut'
-        document.getElementById('debut').value = info.startStr;
-        debutDate = info.startStr;
+      var debutInput = document.getElementById('debut');
+      var finInput = document.getElementById('fin');
+      
+      if (!debutInput.value) {
+        debutInput.value = info.startStr;
+        debutInput.dispatchEvent(new Event('input'));
       } else {
-        // Deuxième clic : assigner à l'input avec l'ID 'fin'
-        document.getElementById('fin').value = info.startStr;
-        debutDate = null; // Réinitialiser la première date
+        finInput.value = info.startStr;
+        finInput.dispatchEvent(new Event('input'));
       }
     },
     fixedWeekCount: false, // Ajouté pour supprimer la barre de défilement

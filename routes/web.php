@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\MailController;
 
+
 //middleware Notif Super_admin
 Route::middleware([PendingCountMiddleware::class])->group(function () {
 // Route Front calendar livewire

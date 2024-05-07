@@ -110,7 +110,7 @@
         {{-- <p class="text-gray-700 mb-2">{{$carousel->price}}€</p> --}}
         
         <!-- Calendrier google calendar???-->
-        <div class="max-w-md mx-auto bg-white rounded-md p-6 shadow-md mt-28 lg:mr-6">
+        {{-- <div class="max-w-md mx-auto bg-white rounded-md p-6 shadow-md mt-28 lg:mr-6">
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label for="debut" class="block text-md  font-semibold text-custom-blue-header">Date de début</label>
@@ -121,14 +121,15 @@
                     <input type="date" id="fin" name="fin" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                 </div>
             </div>
-        </div>
+        </div> --}}
         
         <div class="lg:mt-2 pt-4 lg:mr-4">
-            <div>
+            {{-- <div>
                 @livewire('reserve-calendar')
-            </div>
+            </div> --}}
+            <livewire:reserve-calendar />
         </div>
-        
+       
         <!-- Google Maps??? -->
         <div class="mb-4">
             API GOOGLE ????
