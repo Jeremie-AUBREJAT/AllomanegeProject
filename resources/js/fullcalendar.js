@@ -1,7 +1,7 @@
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction'; // pour les interactions comme le clic
-import timeGridPlugin from '@fullcalendar/timegrid'; // pour la vue semaine et jour
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import frLocale from '@fullcalendar/core/locales/fr';
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
         finInput.dispatchEvent(new Event('input'));
       }
     },
-    fixedWeekCount: false, // Ajouté pour supprimer la barre de défilement
-    height: 'auto', // Ajuste la hauteur pour afficher tous les jours
+    fixedWeekCount: false,
+    height: 'auto',
     headerToolbar: {
       start: 'title',
       center: '',
@@ -34,4 +34,21 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   calendar.render();
+
+  // Écoutez l'événement Livewire pour les dates réservées
+Livewire.on('reservedDates', function(data) {
+    var reservedDates = data[0].dates; // Correction ici
+    console.log('Données reçues de Livewire :', data);
+    // Parcourez les dates réservées et ajoutez les événements au calendrier
+    reservedDates.forEach(function(dateRange) {
+        calendar.addEvent({
+            start: dateRange.start,
+            end: dateRange.end,
+            classNames: ['reservedDates']
+        });
+    });
+    
+    calendar.render(); // Assurez-vous de rendre à nouveau le calendrier pour afficher les événements
+});
+
 });

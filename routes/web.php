@@ -16,7 +16,8 @@ use App\Http\Controllers\MailController;
 //middleware Notif Super_admin
 Route::middleware([PendingCountMiddleware::class])->group(function () {
 // Route Front calendar livewire
-Route::get('manège/détails/{id}', \App\livewire\ReserveCalendar::class);
+Route::get('/manège/details/{id}', \App\Livewire\ReserveCalendar::class);
+
 // Route::get('/', function () {return view('home');});
 Route::get('/', [CarouselController::class, 'homeFront']);
 // Route::get('/manèges', function () {return view('carousels');});
