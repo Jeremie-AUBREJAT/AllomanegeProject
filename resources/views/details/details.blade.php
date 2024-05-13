@@ -72,7 +72,7 @@
                 @endunless
             @endforeach
         </div>
-        <div id="fullScreenImage" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
+        <div id="fullScreenImage" class="fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
             <img src="image1.jpg" alt="Image en plein écran" class="max-w-3xl max-h-3xl">
         </div>
         
@@ -106,27 +106,8 @@
         
     </div>
     <!-- Div de droite -->
-    <div class="w-full lg:w-1/3 p-4">
-        {{-- <p class="text-gray-700 mb-2">{{$carousel->price}}€</p> --}}
-        
-        <!-- Calendrier google calendar???-->
-        {{-- <div class="max-w-md mx-auto bg-white rounded-md p-6 shadow-md mt-28 lg:mr-6">
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label for="debut" class="block text-md  font-semibold text-custom-blue-header">Date de début</label>
-                    <input type="date" id="debut" name="debut" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                </div>
-                <div>
-                    <label for="fin" class="block text-md  font-semibold text-custom-blue-header">Date de fin</label>
-                    <input type="date" id="fin" name="fin" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                </div>
-            </div>
-        </div> --}}
-        
-        <div class="lg:mt-2 pt-4 lg:mr-4">
-            {{-- <div>
-                @livewire('reserve-calendar')
-            </div> --}}
+    <div class="w-full lg:w-1/3 p-4">   
+        <div class="z-0 lg:mt-2 pt-4 lg:mr-4">
             <livewire:reserve-calendar />
         </div>
        
