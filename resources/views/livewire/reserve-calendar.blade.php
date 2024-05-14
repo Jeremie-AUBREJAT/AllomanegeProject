@@ -1,6 +1,6 @@
 <div>
 
-    <div class="max-w-md mx-auto bg-white rounded-md p-6 shadow-md mt-28 lg:mr-6">
+    
         <form wire:submit.prevent="submitReservation">
             <div class="grid grid-cols-2 gap-4">
                 <div>
@@ -20,7 +20,7 @@
             @if (!$this->reservationEnregistree)
                 <!-- Bouton pour réserver -->
                 <button type="submit"
-                    class="mt-4 bg-custom-blue2 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400">Réserver</button>
+                    class="my-4 bg-custom-blue2 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400">Réserver</button>
                 @error('debut_date')
                     <div class="text-red-500">{{ 'Veuillez entrer une date de début' }}</div>
                 @enderror
@@ -31,13 +31,13 @@
                 <!-- Message de confirmation -->
                 <div class="mt-4 text-green-500 font-semibold">Votre réservation a été enregistrée.</div>
             @endif
-            @if(!empty($erreurReservation))
-    <div class="text-red-500">
-        {{ $erreurReservation }}
-    </div>
-@endif
+            @if (!empty($erreurReservation))
+                <div class="text-red-500">
+                    {{ $erreurReservation }}
+                </div>
+            @endif
         </form>
-    </div>
+    
 
     <div wire:init="getReservedDates" id="calendar" wire:ignore></div>
 

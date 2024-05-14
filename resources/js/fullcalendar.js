@@ -5,7 +5,9 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import frLocale from '@fullcalendar/core/locales/fr';
 
 document.addEventListener('DOMContentLoaded', function() {
-  var debutDate = null;
+  var debutInput = document.getElementById('debut');
+  var finInput = document.getElementById('fin');
+  var currentInput = debutInput; // Commencer avec le champ debutInput
   var calendarEl = document.getElementById('calendar');
   var calendar = new Calendar(calendarEl, {
     plugins: [ dayGridPlugin, interactionPlugin, timeGridPlugin ],
@@ -13,15 +15,14 @@ document.addEventListener('DOMContentLoaded', function() {
     initialView: 'dayGridMonth',
     selectable: true,
     select: function(info) {
-      var debutInput = document.getElementById('debut');
-      var finInput = document.getElementById('fin');
+      currentInput.value = info.startStr; // Remplir le champ d'entrée actuel
+      currentInput.dispatchEvent(new Event('input')); // Déclencher l'événement input
       
-      if (!debutInput.value) {
-        debutInput.value = info.startStr;
-        debutInput.dispatchEvent(new Event('input'));
+      // Changer le champ d'entrée actuel pour le prochain clic
+      if (currentInput === debutInput) {
+        currentInput = finInput;
       } else {
-        finInput.value = info.startStr;
-        finInput.dispatchEvent(new Event('input'));
+        currentInput = debutInput;
       }
     },
     fixedWeekCount: false,
@@ -31,19 +32,28 @@ document.addEventListener('DOMContentLoaded', function() {
       center: '',
       end: 'today prev,next'
     },
+    eventContent: function(arg) {
+      var eventTitle = document.createElement('div');
+      eventTitle.classList.add('fc-event-title');
+      eventTitle.innerHTML = 'Réservé';
+      return { domNodes: [eventTitle] };
+    }
   });
 
   calendar.render();
 
+
   // Écoutez l'événement Livewire pour les dates réservées
-Livewire.on('reservedDates', function(data) {
-    var reservedDates = data[0].dates; // Correction ici
+  Livewire.on('reservedDates', function(data) {
+    var reservedDates = data[0].dates;
     console.log('Données reçues de Livewire :', data);
     // Parcourez les dates réservées et ajoutez les événements au calendrier
     reservedDates.forEach(function(dateRange) {
+        var endDate = new Date(dateRange.end);
+        endDate.setDate(endDate.getDate() + 1); // Ajoute un jour à la date de fin
         calendar.addEvent({
             start: dateRange.start,
-            end: dateRange.end,
+            end: endDate, // Utilisez la nouvelle date de fin avec un jour ajouté
             classNames: ['reservedDates']
         });
     });

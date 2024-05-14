@@ -13,10 +13,15 @@ class CarouselController extends Controller
 {   
     // methodes Front
     public function homeFront()
-    {   
-        $carousels = Carousel::with('category')->where('status', 'approved')->get();
-        $categories = Category::all();
-        return view('home', compact('carousels', 'categories'));
+{   
+    $carousels = Carousel::with('category')
+                    ->where('status', 'approved')
+                    ->orderBy('id', 'desc')
+                    ->take(3)
+                    ->get();
+    $categories = Category::all();
+    return view('home', compact('carousels', 'categories'));
+
     }
     public function carouselsFront()
     {
