@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('carousel_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->foreign('carousel_id')->references('id')->on('carousels')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

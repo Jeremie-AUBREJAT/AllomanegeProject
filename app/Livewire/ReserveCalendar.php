@@ -37,7 +37,7 @@ class ReserveCalendar extends Component
         'debut_date' => 'required|date',
         'fin_date' => 'required|date|after_or_equal:debut_date',
     ]);
-    // dd($this->debut_date, $this->fin_date);
+
     $existingReservation = Calendar::where('carousel_id', $this->carousel_id)
         ->where(function ($query) {
             $query->where('debut_date', '<=', $this->fin_date)
@@ -55,13 +55,13 @@ class ReserveCalendar extends Component
             'fin_date' => $this->fin_date,
             'carousel_id' => $this->carousel_id,
             'user_id' => $user->id,
+            'status' => 'pending',  // Statut de réservation en attente
         ]);
+
         Mail::to(env('CONTACT_EMAIL'))->send(new ReservationMail($this->debut_date, $this->fin_date, $carousel->name, $user->name));
         $this->reservationEnregistree = true;
         $this->reset(['debut_date', 'fin_date']);
         $this->erreurReservation = '';
-        
-        
     }
 }
 
@@ -74,6 +74,7 @@ class ReserveCalendar extends Component
             return [
                 'start' => $reservation->debut_date,
                 'end' => $reservation->fin_date,
+                'status' => $reservation->status,
             ];
         });
        

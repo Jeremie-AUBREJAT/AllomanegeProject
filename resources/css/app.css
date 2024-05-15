@@ -53,13 +53,23 @@
     border-radius: 0 0 8px 8px !important; 
 }
 
-/* Styles pour les événements réservés */
-.fc-day .fc-event.reservedDates, .fc-day .fc-event[style*="background-color: red"] {
-  background-color: red !important;
-  color: white !important;
-  border-color: red !important;
+/* Styles pour les réservations approuvées */
+.reservedDates-approved {
+    background-color: red;
+    color: white;
+    font-size: 16px; 
+    font-weight: 600;
+    padding-left: 5px;
 }
 
+/* Styles pour les réservations en attente */
+.reservedDates-pending {
+    background-color: #f97316;
+    color: white;
+    font-size: 16px; 
+    font-weight: 600;
+    padding-left: 5px;
+}
 /* Styles pour les boutons d'interaction (ajouter, éditer, supprimer) */
 .fc-button-primary {
     background-color: #28a745;
