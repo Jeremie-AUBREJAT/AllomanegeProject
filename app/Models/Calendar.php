@@ -10,7 +10,12 @@ class Calendar extends Model
 {
     protected $table = 'calendar';
 
-    protected $fillable = ['debut_date', 'fin_date', 'carousel_id', 'user_id'];
+    protected $fillable = [
+        'debut_date', 
+        'fin_date', 
+        'carousel_id', 
+        'user_id', 
+        'status'];
 
     public function carousel()
     {

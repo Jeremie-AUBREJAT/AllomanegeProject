@@ -8,6 +8,7 @@ use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminSuper_adminMiddleware;
 use App\Http\Middleware\Super_adminMiddleware;
 use App\Http\Middleware\PendingCountMiddleware;
+use App\Http\Controllers\CalendarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\MailController;
@@ -71,6 +72,9 @@ Route::middleware([Super_adminMiddleware::class])->group(function () {
     Route::get('/users/update/{id}', [ProfileController::class, 'viewUserUpdateForm']);
     Route::put('/update/{id}', [ProfileController::class, 'userUpdate']);
     Route::delete('/user/{id}', [ProfileController::class, 'destroyUser']);
+    Route::get('/carousel/{id}/reservations', [CalendarController::class, 'reservationsForCarousel']);
+    Route::get('/reservation/update/{id}', [CalendarController::class, 'showReservationEditForm']);
+    Route::put('/reservation/update/{id}', [CalendarController::class, 'updateReservation']);
 
 });
 });

@@ -5,6 +5,8 @@ use App\Models\Carousel;
 use App\Http\Requests\CarouselRequest;
 use App\Models\Picture;
 use App\Models\Category;
+use App\Models\Calendar;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Quote;
 use Illuminate\Http\Request;
@@ -113,8 +115,8 @@ class CarouselController extends Controller
 
     // Récupérer toutes les catégories
     $categories = Category::all();
-
-    return view('carousel.update')->with(["carousel" => $carousel, "categories" => $categories, $statusValues]);
+    $reservations = Calendar::where('carousel_id', $id)->get();
+    return view('carousel.update')->with(["carousel" => $carousel, "categories" => $categories, $statusValues, "statusValues" => $statusValues, "reservations" => $reservations,]);
 }
 
 
@@ -294,6 +296,4 @@ public function destroyCarousel($id)
 
     return redirect("/carousel/view");
 }
-
-    
 }
