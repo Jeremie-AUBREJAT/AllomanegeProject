@@ -8,6 +8,7 @@ use App\Models\Calendar;
 use App\Models\Carousel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReservationMail;
+use App\Mail\UserReservationMail;
 use Illuminate\Http\Request;
 
 class ReserveCalendar extends Component
@@ -59,6 +60,9 @@ class ReserveCalendar extends Component
         ]);
 
         Mail::to(env('CONTACT_EMAIL'))->send(new ReservationMail($this->debut_date, $this->fin_date, $carousel->name, $user->name));
+        Mail::to($user->email)->send(new UserReservationMail($this->debut_date, $this->fin_date, $carousel->name, $user->name, $user->email));
+
+
         $this->reservationEnregistree = true;
         $this->reset(['debut_date', 'fin_date']);
         $this->erreurReservation = '';

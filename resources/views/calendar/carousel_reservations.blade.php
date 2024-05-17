@@ -35,22 +35,25 @@
                         </p>
                     </div>
                     <!-- Boutons -->
-                    @if(Auth::check() && Auth::user()->role === 'Super_admin')
-    <div class="w-full my-auto flex justify">
-        <a href='/reservation/update/{{ $reservation->id }}'
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">Modifier</a>
-        <form method="POST" action="{{ url('reservation/delete/' . $reservation->id) }}">
-            @csrf
-            @method('DELETE')
+                    @if (Auth::check() && Auth::user()->role === 'Super_admin')
+                        <div class="w-full my-auto flex justify">
+                            <a href='/reservation/update/{{ $reservation->id }}'
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">Modifier</a>
+                            <form method="POST" action="{{ url('reservation/delete/' . $reservation->id) }}">
+                                @csrf
+                                @method('DELETE')
 
-            <button type="submit"
-                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')"
-                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2">Supprimer</button>
-        </form>
-    </div>
-@endif
+                                <button type="submit"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')"
+                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2">Supprimer</button>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             @endforeach
+        </div>
+        <div class="z-0 lg:mt-2 pt-4 lg:mr-4">
+            <livewire:reserve-calendar />
         </div>
     </div>
 @endsection
