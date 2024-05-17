@@ -1,7 +1,37 @@
 @extends('layouts.appsecond')
 
 @section('content')
+{{-- test reservation --}}
+<h2 class="text-xl mb-4">Réservations associées</h2>
+<div class="bg-white p-4 rounded-lg shadow-md mb-8">
+    @foreach ($reservations as $reservation)
+        <div class="p-4 mb-4 bg-gray-100 rounded-lg shadow-md flex justify-between items-center">
+            <div>
+                <p><strong>Date de début:</strong>
+                    {{ \Carbon\Carbon::parse($reservation->debut_date)->format('d/m/Y') }}</p>
+                <p><strong>Date de fin:</strong> {{ \Carbon\Carbon::parse($reservation->fin_date)->format('d/m/Y') }}
+                </p>
+                <p><strong>Statut:</strong> {{ $reservation->status }}</p>
+            </div>
+            @if(Auth::check() && Auth::user()->role === 'Super_admin')
+    <div class="w-full my-auto flex justify">
+        <a href='/reservation/update/{{ $reservation->id }}'
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">Modifier</a>
+        <form method="POST" action="{{ url('reservation/delete/' . $reservation->id) }}">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit"
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette réservation ?')"
+                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2">Supprimer</button>
+        </form>
+    </div>
+@endif
+        </div>
+    @endforeach
+</div>
 <div class="flex justify-center">
+    
     <a href="/carousel/{{$carousel->id}}/reservations" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Voir les réservations
     </a>
@@ -153,29 +183,5 @@
         <button type="submit" class="bg-red-500 hover:bg-red-700 active:bg-red-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Supprimer</button>
     </form>
 </div>
-    {{-- test reservation --}}
-    <h2 class="text-xl mb-4">Réservations associées</h2>
-    <div class="bg-white p-4 rounded-lg shadow-md mb-8">
-        @foreach ($reservations as $reservation)
-            <div class="p-4 mb-4 bg-gray-100 rounded-lg shadow-md flex justify-between items-center">
-                <div>
-                    <p><strong>Date de début:</strong>
-                        {{ \Carbon\Carbon::parse($reservation->debut_date)->format('d/m/Y') }}</p>
-                    <p><strong>Date de fin:</strong> {{ \Carbon\Carbon::parse($reservation->fin_date)->format('d/m/Y') }}
-                    </p>
-                    <p><strong>Statut:</strong> {{ $reservation->status }}</p>
-                </div>
-                <div class="flex space-x-4">
-                    <a href="{{ url('reservation/edit/' . $reservation->id) }}"
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</a>
-                    <form method="POST" action="{{ url('/carousel/update/' . $carousel->id) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Supprimer</button>
-                    </form>
-                </div>
-            </div>
-        @endforeach
-    </div>
+    
 @endsection

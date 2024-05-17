@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Calendar;
 use App\Models\User;
-use App\Models\Carousel; // Ajout de la référence au modèle Carousel
+use App\Models\Carousel;
+use Illuminate\Support\Facades\Session; 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class CalendarController extends Controller
 {
     public function viewAll()
-    {
-        // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur
-        if (Auth::check() && Auth::user()->role === 'Super_admin') {
-            // Récupère toutes les réservations
-            $reservations = Calendar::all();
+{
+    // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur
+    if (Auth::check() && Auth::user()->role === 'Super_admin') {
+        // Récupère toutes les réservations et tous les carrousels
+        $reservations = Calendar::all();
+        $carousels = Carousel::all();
 
-            // Retourne la vue avec les réservations
-            return view('calendar.index', ['reservations' => $reservations]);
-        } else {
-            // Si l'utilisateur n'est pas un super administrateur ou n'est pas authentifié, redirigez-le avec un message d'erreur
-            return redirect()->route('home')->with('error', 'Accès non autorisé.');
-        }
+        // Retourne la vue avec les réservations et les carrousels
+        return view('calendar.all_reservations', ['reservations' => $reservations, 'carousels' => $carousels]);
+    } else {
+        // Si l'utilisateur n'est pas un super administrateur ou n'est pas authentifié, redirigez-le avec un message d'erreur
+        return redirect()->route('home')->with('error', 'Accès non autorisé.');
     }
+}
     public function create(Request $request)
     {
         // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur
@@ -59,7 +62,7 @@ class CalendarController extends Controller
     public function reservationsForCarousel($carouselId)
     {
         // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur
-        if (Auth::check() && Auth::user()->role === 'Super_admin') {
+        if (Auth::check() && Auth::user()->role === 'Super_admin' || 'Admin') {
             // Récupère le carrousel correspondant à l'ID spécifié
             $carousel = Carousel::findOrFail($carouselId);
             // Récupère toutes les réservations associées à l'ID du carrousel spécifié
@@ -74,26 +77,33 @@ class CalendarController extends Controller
     }
     //afficher le formulaire update
     public function showReservationEditForm($reservationId)
-    {
-        // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur
-        if (Auth::check() && Auth::user()->role === 'Super_admin') {
-            // Récupère la réservation spécifique à modifier
-            $reservation = Calendar::findOrFail($reservationId);
+{
+    // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur
+    if (Auth::check() && Auth::user()->role === 'Super_admin') {
+        // Récupère la réservation spécifique à modifier
+        $reservation = Calendar::findOrFail($reservationId);
 
-            // Retourne la vue avec la réservation à modifier
-            return view('calendar.update_carousel_reservation', ['reservation' => $reservation]);
-        } else {
-            // Si l'utilisateur n'est pas un super administrateur ou n'est pas authentifié, redirigez-le avec un message d'erreur
-            return redirect()->route('home')->with('error', 'Accès non autorisé.');
-        }
+        // Récupère l'ID du carrousel associé à la réservation
+        $carouselId = $reservation->carousel_id;
+        Session::put('previous_url', url()->previous());
+        // Récupère le carrousel associé à la réservation
+        $carousel = Carousel::findOrFail($carouselId);
+
+        // Retourne la vue avec la réservation à modifier et le carrousel associé
+        return view('calendar.update_carousel_reservation', ['reservation' => $reservation, 'carousel' => $carousel]);
+    } else {
+        // Si l'utilisateur n'est pas un super administrateur ou n'est pas authentifié, redirigez-le avec un message d'erreur
+        return redirect()->route('home')->with('error', 'Accès non autorisé.');
     }
+}
+
     public function updateReservation(Request $request, $id)
     {
         // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur
         if (Auth::check() && Auth::user()->role === 'Super_admin') {
             // Recherche la réservation par son ID
             $reservation = Calendar::findOrFail($id);
-
+            $carousel = $reservation->carousel;
             // Met à jour les champs de la réservation avec les nouvelles valeurs fournies dans la requête
         $reservation->update([
             'debut_date' => $request->input('debut_date'),
@@ -102,8 +112,12 @@ class CalendarController extends Controller
         ]);
             
             // Redirige l'utilisateur vers une page de confirmation ou une autre vue
+            $carousel = $reservation->carousel;
+            $previousUrl = Session::get('previous_url');
+            // return redirect('/carousel/' . $carousel->id . '/reservations');
+            return redirect($previousUrl ?? '/dashboard_SA/allreservations');
             
-            return view('calendar.update_carousel_reservation', ['reservation' => $reservation]);
+
         } else {
             // Si l'utilisateur n'est pas un super administrateur ou n'est pas authentifié, redirigez-le avec un message d'erreur
             return redirect()->route('home')->with('error', 'Accès non autorisé.');

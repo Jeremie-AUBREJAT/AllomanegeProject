@@ -58,6 +58,8 @@ Route::middleware([AdminSuper_adminMiddleware::class])->group(function () {
     Route::get('/picture/edit', [PictureController::class, 'editPicture']);
     Route::get('/picture/create', [PictureController::class, 'create']);
     Route::post('/picture/create', [PictureController::class, 'createPicture']);
+    
+    Route::get('/carousel/{id}/reservations', [CalendarController::class, 'reservationsForCarousel']);
 });
 //  Middleware role= Super_admin
 Route::middleware([Super_adminMiddleware::class])->group(function () {
@@ -72,9 +74,10 @@ Route::middleware([Super_adminMiddleware::class])->group(function () {
     Route::get('/users/update/{id}', [ProfileController::class, 'viewUserUpdateForm']);
     Route::put('/update/{id}', [ProfileController::class, 'userUpdate']);
     Route::delete('/user/{id}', [ProfileController::class, 'destroyUser']);
-    Route::get('/carousel/{id}/reservations', [CalendarController::class, 'reservationsForCarousel']);
+    
     Route::get('/reservation/update/{id}', [CalendarController::class, 'showReservationEditForm']);
     Route::put('/reservation/update/{id}', [CalendarController::class, 'updateReservation']);
-
+    Route::get('/dashboard_SA/allreservations', [CalendarController::class, 'viewAll']);
+    Route::view('/dashboard_SA', 'dashboard_SA.dashboard')->name('dashboard_SA');
 });
 });
