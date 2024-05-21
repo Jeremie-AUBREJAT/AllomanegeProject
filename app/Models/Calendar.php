@@ -19,11 +19,11 @@ class Calendar extends Model
 
     public function carousel()
     {
-        return $this->belongsTo(Carousel::class, 'carousel_id');
+        return $this->belongsTo(Carousel::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 }

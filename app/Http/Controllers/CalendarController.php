@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Calendar;
 use App\Models\User;
 use App\Models\Carousel;
-use Illuminate\Support\Facades\Session; 
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserDeleteReservationMail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -123,6 +125,8 @@ class CalendarController extends Controller
             return redirect()->route('home')->with('error', 'Accès non autorisé.');
         }
     }
+    
+
     public function deleteReservation($id)
     {
         // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur
@@ -130,14 +134,31 @@ class CalendarController extends Controller
             // Recherche la réservation par son ID
             $reservation = Calendar::findOrFail($id);
 
+            // Obtenir les détails de l'utilisateur et de la réservation
+            $debut_date = $reservation->debut_date;
+            $fin_date = $reservation->fin_date;
+            $carousel_id = $reservation->carousel_id; // Assurez-vous que cela correspond à votre modèle
+            $carousel_name = Carousel::find($carousel_id)->name;
+            // Obtenir l'utilisateur associé à la réservation
+            $user = $reservation->user;
+
             // Supprime la réservation
             $reservation->delete();
 
+            // Envoyer l'email
+            Mail::to($user->email)->send(new UserDeleteReservationMail($debut_date, $fin_date, $carousel_name, $user->name));
+
+            // Récupérer les réservations et les carousels après la suppression
+            $reservations = Calendar::all(); // ou la logique que vous utilisez pour récupérer les réservations
+            $carousels = Carousel::all(); // ou la logique que vous utilisez pour récupérer les carousels
+
             // Redirige l'utilisateur vers une page de confirmation ou une autre vue
-            return redirect()->route('calendar.index')->with('success', 'La réservation a été supprimée avec succès.');
+            return view('calendar.all_reservations', ['reservations' => $reservations, 'carousels' => $carousels])
+                   ->with('success', 'La réservation a été supprimée avec succès.');
         } else {
             // Si l'utilisateur n'est pas un super administrateur ou n'est pas authentifié, redirigez-le avec un message d'erreur
             return redirect()->route('home')->with('error', 'Accès non autorisé.');
         }
     }
+
 }

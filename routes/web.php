@@ -77,6 +77,7 @@ Route::middleware([Super_adminMiddleware::class])->group(function () {
     
     Route::get('/reservation/update/{id}', [CalendarController::class, 'showReservationEditForm']);
     Route::put('/reservation/update/{id}', [CalendarController::class, 'updateReservation']);
+    Route::delete('/reservation/delete/{id}', [CalendarController::class, 'deleteReservation']);
     Route::get('/dashboard_SA/allreservations', [CalendarController::class, 'viewAll']);
     Route::view('/dashboard_SA', 'dashboard_SA.dashboard')->name('dashboard_SA');
 });
