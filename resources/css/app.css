@@ -1,3 +1,116 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Styles pour le conteneur du calendrier */
+#calendar {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 15px !important; /* Arrondi en bas à gauche */
+    border-bottom-right-radius: 15px !important; /* Arrondi en bas à droite */
+}
+
+/* Styles pour les en-têtes de mois et de semaine */
+.fc-header-toolbar {
+    background-color: #2f396d;
+    color: #fff;
+    border-radius: 8px 8px 0 0; 
+    padding: 10px;
+}
+
+.fc-header-title {
+    font-size: 1.5rem;
+}
+
+/* Styles pour les boutons de navigation */
+.fc-prev-button,
+.fc-next-button,
+.fc-today-button {
+    background-color: #01105a !important;
+    color: white !important;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Styles pour les jours de la semaine */
+.fc-day-header {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+/* Styles pour les jours du mois */
+.fc-day {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.fc-daygrid-body {
+    border-radius: 0 0 8px 8px !important; 
+}
+
+/* Styles pour les réservations approuvées */
+.reservedDates-approved {
+    background-color: red;
+    color: white;
+    font-size: 16px; 
+    font-weight: 600;
+    padding-left: 5px;
+}
+
+/* Styles pour les réservations en attente */
+.reservedDates-pending {
+    background-color: #f97316;
+    color: white;
+    font-size: 16px; 
+    font-weight: 600;
+    padding-left: 5px;
+}
+/* Styles pour les boutons d'interaction (ajouter, éditer, supprimer) */
+.fc-button-primary {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+/* Styles pour les popups d'événements */
+.fc-popover {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    font-size: 0.9rem;
+}
+
+/* Styles pour les boutons de fermeture des popups */
+.fc-popover .fc-close {
+    color: #999;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Styles pour les liens dans les popups */
+.fc-popover a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Styles pour les heures et minutes dans les popups */
+.fc-popover .fc-time {
+    font-weight: bold;
+}
+
+/* Styles pour les icônes (facultatif) */
+.fc-icon {
+    font-size: 1rem;
+    margin-right: 4px;
+}

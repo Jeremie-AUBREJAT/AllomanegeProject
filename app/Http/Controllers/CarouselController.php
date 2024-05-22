@@ -5,6 +5,8 @@ use App\Models\Carousel;
 use App\Http\Requests\CarouselRequest;
 use App\Models\Picture;
 use App\Models\Category;
+use App\Models\Calendar;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Quote;
 use Illuminate\Http\Request;
@@ -13,10 +15,15 @@ class CarouselController extends Controller
 {   
     // methodes Front
     public function homeFront()
-    {   
-        $carousels = Carousel::with('category')->where('status', 'approved')->get();
-        $categories = Category::all();
-        return view('home', compact('carousels', 'categories'));
+{   
+    $carousels = Carousel::with('category')
+                    ->where('status', 'approved')
+                    ->orderBy('id', 'desc')
+                    ->take(3)
+                    ->get();
+    $categories = Category::all();
+    return view('home', compact('carousels', 'categories'));
+
     }
     public function carouselsFront()
     {
@@ -108,8 +115,8 @@ class CarouselController extends Controller
 
     // Récupérer toutes les catégories
     $categories = Category::all();
-
-    return view('carousel.update')->with(["carousel" => $carousel, "categories" => $categories, $statusValues]);
+    $reservations = Calendar::where('carousel_id', $id)->get();
+    return view('carousel.update')->with(["carousel" => $carousel, "categories" => $categories, $statusValues, "statusValues" => $statusValues, "reservations" => $reservations,]);
 }
 
 
@@ -289,6 +296,4 @@ public function destroyCarousel($id)
 
     return redirect("/carousel/view");
 }
-
-    
 }

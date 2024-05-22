@@ -8,13 +8,17 @@ use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AdminSuper_adminMiddleware;
 use App\Http\Middleware\Super_adminMiddleware;
 use App\Http\Middleware\PendingCountMiddleware;
+use App\Http\Controllers\CalendarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\MailController;
 
+
 //middleware Notif Super_admin
 Route::middleware([PendingCountMiddleware::class])->group(function () {
-// Route Front
+// Route Front calendar livewire
+Route::get('/manège/details/{id}', \App\Livewire\ReserveCalendar::class);
+
 // Route::get('/', function () {return view('home');});
 Route::get('/', [CarouselController::class, 'homeFront']);
 // Route::get('/manèges', function () {return view('carousels');});
@@ -54,6 +58,8 @@ Route::middleware([AdminSuper_adminMiddleware::class])->group(function () {
     Route::get('/picture/edit', [PictureController::class, 'editPicture']);
     Route::get('/picture/create', [PictureController::class, 'create']);
     Route::post('/picture/create', [PictureController::class, 'createPicture']);
+    
+    Route::get('/carousel/{id}/reservations', [CalendarController::class, 'reservationsForCarousel']);
 });
 //  Middleware role= Super_admin
 Route::middleware([Super_adminMiddleware::class])->group(function () {
@@ -68,6 +74,11 @@ Route::middleware([Super_adminMiddleware::class])->group(function () {
     Route::get('/users/update/{id}', [ProfileController::class, 'viewUserUpdateForm']);
     Route::put('/update/{id}', [ProfileController::class, 'userUpdate']);
     Route::delete('/user/{id}', [ProfileController::class, 'destroyUser']);
-
+    
+    Route::get('/reservation/update/{id}', [CalendarController::class, 'showReservationEditForm']);
+    Route::put('/reservation/update/{id}', [CalendarController::class, 'updateReservation']);
+    Route::delete('/reservation/delete/{id}', [CalendarController::class, 'deleteReservation']);
+    Route::get('/dashboard_SA/allreservations', [CalendarController::class, 'viewAll']);
+    Route::view('/dashboard_SA', 'dashboard_SA.dashboard')->name('dashboard_SA');
 });
 });

@@ -72,7 +72,7 @@
                 @endunless
             @endforeach
         </div>
-        <div id="fullScreenImage" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
+        <div id="fullScreenImage" class="fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
             <img src="image1.jpg" alt="Image en plein écran" class="max-w-3xl max-h-3xl">
         </div>
         
@@ -106,17 +106,15 @@
         
     </div>
     <!-- Div de droite -->
-    <div class="w-full lg:w-1/3 p-4">
-        <p class="text-gray-700 mb-2">{{$carousel->price}}€</p>
-        
-        <!-- Calendrier google calendar???-->
-        <div class="mb-4">
-            GOOGLE CALENDAR ????
+    <div class="w-full lg:w-1/3 p-4">   
+        <div class="z-0 lg:mt-2 pt-4 lg:mr-4">
+            <livewire:reserve-calendar />
         </div>
-        
+       
         <!-- Google Maps??? -->
         <div class="mb-4">
             API GOOGLE ????
+            
         </div>
     </div>
 

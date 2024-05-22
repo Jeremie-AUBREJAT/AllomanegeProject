@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/carouseldetails.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js', 'resources/js/fullscreenimage.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/carouseldetails.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js', 'resources/js/fullscreenimage.js', 'resources/js/fullcalendar.js'])
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allo Manège</title>
 </head>
@@ -97,12 +97,13 @@
                         <div class="flex items-center">
                             @if (Auth::user()->role === 'Super_admin')
                                 <div class="relative inline-block mx-2">
-                                    <select onchange="location = this.value"
+                                    {{-- <select onchange="location = this.value"
                                         class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer">
                                         <option value="/tableau-de-bord">Tableau de bord</option>
                                         <option value="/carousel/view">Tous les manèges</option>
                                         <option value="/allusers">Tous les utilisateurs</option>
-                                    </select>
+                                    </select> --}}
+                                    <a class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer" href="/dashboard_SA">Tableau de bord</a>
                                     <div class="relative inline-block mx-2">
                                         <span class="text-white bg-red-500 rounded-full px-4 py-2">
                                             {{ $pendingCount }}
