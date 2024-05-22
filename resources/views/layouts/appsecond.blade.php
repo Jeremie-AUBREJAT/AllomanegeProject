@@ -3,9 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/carouseldetails.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js', 'resources/js/fullscreenimage.js', 'resources/js/fullcalendar.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/carouseldetails.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js', 'resources/js/fullscreenimage.js', 'resources/js/fullcalendar.js','resources/js/map.js'])
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allo Manège</title>
+    {{-- map --}}
+    {{-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha384-xodZBntM7LyVXkS2N2lL0lGXTfKk27sylINn6QpWLEs5zUOsmDixV30B7RoYqCTM" crossorigin=""/>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style> --}}
+    <style>#map-container {
+        height: 400px; /* Vous pouvez ajuster la hauteur selon vos besoins */
+    }
+    
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+    </style>
 </head>
 
 <body>
@@ -237,7 +254,10 @@
     <main>
         @yield('content')
     </main>
-
+ {{-- map --}}
+ {{-- @yield('content')
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha384-o1xFAaEE0rKROAxYvn0PLQHgTzmNSzIY/Eb9F1PQKt+Og/Fj7LQly9eKlXygh24u" crossorigin=""></script>
+ @yield('scripts') --}}
 
     <footer class="bg-custom-blue-header text-white py-4 flex flex-col items-center justify-center">
         <!-- Logo -->

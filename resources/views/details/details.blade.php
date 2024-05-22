@@ -112,13 +112,15 @@
         </div>
        
         <!-- Google Maps??? -->
-        <div class="mb-4">
-            API GOOGLE ????
-            
-        </div>
+        
+            <h3 class="font font-semibold text-custom-blue-header mt-12 text-xl">Carte des manèges</h3>
+            <div id="map-container" class="w-full mt-4 border border-custom-blue-header shadow-lg" style="height: 400px; width: calc(100% - 20px);"> <!-- Ajustez la hauteur selon vos besoins -->
+                <div id="map" class="w-full h-full"></div>
+            </div>
     </div>
 
 </section>
+
 <div class="flex justify-center my-16">
     <a href="/manèges" class="block bg-custom-blue-header hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Retour aux manèges</a>
 </div>
