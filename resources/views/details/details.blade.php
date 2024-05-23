@@ -22,7 +22,7 @@
     </div>
 </section>
     <!-- 2eme section -->
-<section class="flex flex-wrap justify-between mt-16 text-custom-blue-header">
+<section id="50" class="flex flex-wrap justify-between mt-16 text-custom-blue-header">
 
     <!-- Div de Gauche -->
     <div class="w-full lg:w-2/3 p-4 relative">
@@ -31,7 +31,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4 0 24 24" style="fill: rgba(1, 16, 90, 1);transform: ;msFilter:;">
                 <path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
             </svg>
-            {{$carousel->localization}}
+            {{$carousel->city}}
         </p>        
         <div class="flex items-center bg-gray-100 p-6 my-8 w-10/12">
             <label for="prix" class="text-custom-blue-header text-xl mr-4">Prix : </label>
@@ -72,10 +72,10 @@
                 @endunless
             @endforeach
         </div>
-        <div id="fullScreenImage" class="fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
+        {{-- <div id="fullScreenImage" class="fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
             <img src="image1.jpg" alt="Image en plein écran" class="max-w-3xl max-h-3xl">
         </div>
-        
+         --}}
         
         
         <div class="w-full lg:w-2/3 py-4 mt-16">
@@ -86,21 +86,30 @@
             <div class="flex justify-between">
             
                 <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mr-2">
-                    <p class="text-lg font-bold mb-2">Dimensions</p>
-                    <p>{{$carousel->size}}m²</p>
+                    <p class="text-lg font-bold mb-2">Longeur </p>
+                    <p>{{$carousel->length}} m</p>
                 </div>
-        
+                <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mr-2">
+                    <p class="text-lg font-bold mb-2">Largeur </p>
+                    <p>{{$carousel->width}} m</p>
+                </div>
+                <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mr-2">
+                    <p class="text-lg font-bold mb-2">Poids </p>
+                    <p>{{$carousel->weight}} T</p>
+                </div>
                 <!-- Rectangle 2 -->
                 <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mx-2">
-                    <p class="text-lg font-bold mb-2">Puissance (kWatt)</p>
-                    <p>{{$carousel->watt_power}}</p>
+                    <p class="text-lg font-bold mb-2">Puissance</p>
+                    <p>{{$carousel->watt_power}} kWatt</p>
                 </div>
         
                 <!-- Rectangle 3 -->
                 <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 ml-2">
                     <p class="text-lg font-bold mb-2">Temps de montage</p>
-                    <p>{{$carousel->install_time}} Heure(s)</p>
+                    <p>{{$carousel->install_time}} H</p>
                 </div>
+                <div id="carousel-data" style="display: none;" data-carousel="{{ $carouselJson }}"></div>
+
             </div>
         </div>
         

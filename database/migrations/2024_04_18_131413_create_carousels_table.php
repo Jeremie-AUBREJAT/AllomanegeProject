@@ -22,12 +22,17 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name', 100);
-            $table->decimal('size', 15, 2);
+            $table->decimal('length', 15, 2);
+            $table->decimal('width', 15, 2);
             $table->integer('weight');
             $table->integer('watt_power');
             $table->decimal('install_time', 15, 2);
             $table->text('description');
-            $table->text('localization');
+            $table->string('street_number')->nullable();
+            $table->string('street_name')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
             $table->decimal('price', 15, 2);
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
@@ -38,6 +43,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable()->default(null);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
         });
    // Réactiver les contraintes de clé étrangère
    DB::statement('SET FOREIGN_KEY_CHECKS=1');

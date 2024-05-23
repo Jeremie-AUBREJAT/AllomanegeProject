@@ -10,20 +10,31 @@ class Carousel extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'size',
+        'length',
+        'width',
         'weight',
         'watt_power',
         'install_time',
         'description',
-        'localization',
+        'street_number', 
+        'street_name', 
+        'postal_code', 
+        'city', 
+        'country',
         'price',
+        'category_id',
+        'picture_id',
+        'quote_id',
+        'user_id',
         'status',
+        'latitude',
+        'longitude'
     
 
     ];
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class);
     }
     public function carouselPictureMany()
     {
@@ -31,7 +42,7 @@ class Carousel extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
     public function carouselQuoteMany()
     {
