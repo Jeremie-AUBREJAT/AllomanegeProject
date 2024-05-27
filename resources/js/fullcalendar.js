@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     },
     fixedWeekCount: false,
-    height: 'auto',
+    contentHeight: 'auto',
     headerToolbar: {
       start: 'title',
       center: '',

@@ -72,10 +72,10 @@
                 @endunless
             @endforeach
         </div>
-        {{-- <div id="fullScreenImage" class="fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
-            <img src="image1.jpg" alt="Image en plein écran" class="max-w-3xl max-h-3xl">
+        <div id="fullScreenImage" class="fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
+            {{-- <img src="image1.jpg" alt="Image en plein écran" class="max-w-3xl max-h-3xl"> --}}
         </div>
-         --}}
+        
         
         
         <div class="w-full lg:w-2/3 py-4 mt-16">
@@ -115,7 +115,7 @@
         
     </div>
     <!-- Div de droite -->
-    <div class="w-full lg:w-1/3 p-4">   
+    <div class="w-full h-64 lg:w-1/3 p-4">   
         <div class="z-0 lg:mt-2 pt-4 lg:mr-4">
             <livewire:reserve-calendar />
         </div>
@@ -124,7 +124,7 @@
         
             <h3 class="font font-semibold text-custom-blue-header mt-12 text-xl">Carte des manèges</h3>
             <div id="map-container" class="w-full mt-4 border border-custom-blue-header shadow-lg" style="height: 400px; width: calc(100% - 20px);"> <!-- Ajustez la hauteur selon vos besoins -->
-                <div id="map" class="w-full h-full"></div>
+                <div id="map" class="w-full h-full z-0"></div>
             </div>
     </div>
 

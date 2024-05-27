@@ -3,26 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/carouseldetails.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js', 'resources/js/fullscreenimage.js', 'resources/js/fullcalendar.js','resources/js/map.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js',   ])
+    @if (request()->is('*détails*'))
+        @vite(['resources/js/fullscreenimage.js','resources/js/fullcalendar.js','resources/js/map.js'])
+    @endif
+    @if (request()->is('*create*','*update*'))
+    @vite(['resources/js/autocompleteaddress.js'])
+    @endif
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allo Manège</title>
-    {{-- map --}}
-    {{-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha384-xodZBntM7LyVXkS2N2lL0lGXTfKk27sylINn6QpWLEs5zUOsmDixV30B7RoYqCTM" crossorigin=""/>
-    <style>
-        #map {
-            height: 500px;
-            width: 100%;
-        }
-    </style> --}}
-    <style>#map-container {
-        height: 400px; /* Vous pouvez ajuster la hauteur selon vos besoins */
-    }
-    
-    #map {
-        width: 100%;
-        height: 100%;
-    }
-    </style>
 </head>
 
 <body>
@@ -108,7 +97,6 @@
                                 <a href="/carousel/view" class="text-white font-semibold text-2xl">
                                     Tableau de bord
                                 </a>
-                                
                             @endif
                         </div>
                         <div class="flex items-center">
@@ -120,7 +108,8 @@
                                         <option value="/carousel/view">Tous les manèges</option>
                                         <option value="/allusers">Tous les utilisateurs</option>
                                     </select> --}}
-                                    <a class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer" href="/dashboard_SA">Tableau de bord</a>
+                                    <a class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer"
+                                        href="/dashboard_SA">Tableau de bord</a>
                                     <div class="relative inline-block mx-2">
                                         <span class="text-white bg-red-500 rounded-full px-4 py-2">
                                             {{ $pendingCount }}
@@ -254,8 +243,8 @@
     <main>
         @yield('content')
     </main>
- {{-- map --}}
- {{-- @yield('content')
+    {{-- map --}}
+    {{-- @yield('content')
  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha384-o1xFAaEE0rKROAxYvn0PLQHgTzmNSzIY/Eb9F1PQKt+Og/Fj7LQly9eKlXygh24u" crossorigin=""></script>
  @yield('scripts') --}}
 
