@@ -13,16 +13,20 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('surname'); // Ajouter le prénom avec la possibilité d'être nul
-            $table->string('compagny')->nullable(); // Ajouter le nom de la compagnie avec la possibilité d'être nul
-            $table->string('email');
+            $table->string('name',100);
+            $table->string('surname',100); 
+            $table->string('compagny')->nullable(); 
+            $table->string('email',100);
             $table->timestamp('email_verified_at');
-            $table->string('password');
-            $table->string('address'); // Ajouter l'adresse avec la possibilité d'être nul
-            $table->string('zipcode'); // Ajouter le code postal avec la possibilité d'être nul
-            $table->string('phone_number'); // Ajouter le numéro de téléphone avec la possibilité d'être nul
-            $table->enum('role', ['user', 'admin', 'super_admin'])->default('user'); // Ajouter le rôle par default
+            $table->string('password',100);
+            $table->string('street_number',20); 
+            $table->string('street_name',100); 
+            $table->string('postal_code',20); 
+            $table->string('city',100); 
+            $table->string('country',100); 
+            $table->string('phone_number',50); 
+            $table->enum('role', ['user', 'admin', 'super_admin'])->default('user');
+            $table->boolean('rgpd_consent')->default(false); 
             $table->rememberToken();
             $table->timestamps();
         });

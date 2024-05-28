@@ -27,7 +27,7 @@
 </section>
 <form action="/contact/send" method="POST" class="max-w-xl mx-auto mt-32 px-4 lg:flex lg:justify-between lg:items-start">
     @csrf
-    <div class="lg:w-1/2 lg:pr-4 mb-4">
+    <div class="mt-4 lg:w-1/2 lg:pr-4 mb-4">
         <label for="nom" class="block mb-2">Nom :</label>
         <input type="text" id="nom" name="nom" required class="w-full border border-gray-300 rounded-md px-0 py-2 mb-2">
         <label for="prenom" class="block mb-2">Prénom :</label>

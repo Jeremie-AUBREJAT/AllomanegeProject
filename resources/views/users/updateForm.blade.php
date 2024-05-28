@@ -32,15 +32,26 @@
         </div>
 
         <div class="mb-4">
-            <label for="address" class="block mb-2">Adresse :</label>
-            <input type="text" id="address" name="address" value="{{ $user->address }}" class="w-full px-4 py-2 border rounded-md">
+            <label for="street_number" class="block mb-2">Numéro de rue :</label>
+            <input type="text" id="street_number" name="street_number" value="{{ $user->street_number }}" class="w-full px-4 py-2 border rounded-md">
         </div>
 
         <div class="mb-4">
-            <label for="zipcode" class="block mb-2">Code postal :</label>
-            <input type="text" id="zipcode" name="zipcode" value="{{ $user->zipcode }}" class="w-full px-4 py-2 border rounded-md">
+            <label for="street_name" class="block mb-2">Nom de la rue :</label>
+            <input type="text" id="street_name" name="street_name" value="{{ $user->street_name }}" class="w-full px-4 py-2 border rounded-md">
         </div>
-
+        <div class="mb-4">
+            <label for="postal_code" class="block mb-2">Code postal :</label>
+            <input type="text" id="postal_code" name="postal_code" value="{{ $user->postal_code }}" class="w-full px-4 py-2 border rounded-md">
+        </div>
+        <div class="mb-4">
+            <label for="city" class="block mb-2">Ville/Commune :</label>
+            <input type="text" id="city" name="city" value="{{ $user->city }}" class="w-full px-4 py-2 border rounded-md">
+        </div>
+        <div class="mb-4">
+            <label for="country" class="block mb-2">Pays :</label>
+            <input type="text" id="country" name="country" value="{{ $user->country }}" class="w-full px-4 py-2 border rounded-md">
+        </div>
         <div class="mb-4">
             <label for="phone_number" class="block mb-2">Numéro de téléphone :</label>
             <input type="text" id="phone_number" name="phone_number" value="{{ $user->phone_number }}" class="w-full px-4 py-2 border rounded-md">

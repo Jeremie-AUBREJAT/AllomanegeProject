@@ -57,9 +57,9 @@
 
     // Initialise l'autocomplétion pour chaque champ d'entrée du formulaire
     autocomplete(document.getElementById('search'), 'search-suggestions');
-    autocomplete(document.getElementById('country'), 'country-suggestions');
-    autocomplete(document.getElementById('postal_code'), 'postal_code-suggestions');
-    autocomplete(document.getElementById('city'), 'city-suggestions');
-    autocomplete(document.getElementById('street_name'), 'street_name-suggestions');
-    autocomplete(document.getElementById('street_number'), 'street_number-suggestions');
+    // autocomplete(document.getElementById('country'), 'country-suggestions');
+    // autocomplete(document.getElementById('postal_code'), 'postal_code-suggestions');
+    // autocomplete(document.getElementById('city'), 'city-suggestions');
+    // autocomplete(document.getElementById('street_name'), 'street_name-suggestions');
+    // autocomplete(document.getElementById('street_number'), 'street_number-suggestions');
 

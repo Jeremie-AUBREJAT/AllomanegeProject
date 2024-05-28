@@ -13,6 +13,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendRegistrationEmail;
+use App\Http\Requests\UserRequest;
 
 class RegisteredUserController extends Controller
 {
@@ -29,41 +30,38 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            'compagny' => ['nullable', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'address' => ['nullable', 'string', 'max:255'],
-            'zipcode' => ['nullable', 'string', 'max:255'],
-            'phone_number' => ['nullable', 'string', 'max:255'],
-            // 'role' => ['required', 'string', 'in:user,admin,super_admin'],
-        ]);
+    public function store(UserRequest $request): RedirectResponse
+{
+    // Déterminer la valeur de rgpd_consent en fonction de la case à cocher
+    $rgpd_consent = $request->has('rgpd_consent');
 
-        $user = User::create([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'compagny' => $request->compagny,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'address' => $request->address,
-            'zipcode' => $request->zipcode,
-            'phone_number' => $request->phone_number,
-            // 'role' => $request->role
-        ]);
-        if ($request->has('professional')) {
-            // Envoyer un e-mail
-            Mail::to(env('CONTACT_EMAIL'))->send(new SendRegistrationEmail($user));
-        }
-        event(new Registered($user));
+    $user = User::create([
+        'name' => $request->name,
+        'surname' => $request->surname,
+        'compagny' => $request->compagny,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'street_number' => $request->street_number,
+        'street_name' => $request->street_name,
+        'postal_code' => $request->postal_code,
+        'city' => $request->city,
+        'country' => $request->country,
+        'phone_number' => $request->phone_number,
+        'rgpd_consent' => $rgpd_consent, // Utiliser la valeur déterminée ci-dessus
+        // 'role' => $request->role
+    ]);
 
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+    if ($request->has('professional')) {
+        // Envoyer un e-mail
+        Mail::to(env('CONTACT_EMAIL'))->send(new SendRegistrationEmail($user));
     }
+
+    event(new Registered($user));
+
+    Auth::login($user);
+
+    return redirect(route('dashboard', absolute: false));
+}
 
 //     public function viewAllUsers()
 // {

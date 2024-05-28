@@ -21,10 +21,14 @@ class User extends Authenticatable
         'compagny',
         'email',
         'password',
-        'address',
-        'zipcode',
         'phone_number',
         'role',
+        'street_number',
+        'street_name',
+        'postal_code',
+        'city',
+        'country',
+        'rgpd_consent',
     ];
 
     /**

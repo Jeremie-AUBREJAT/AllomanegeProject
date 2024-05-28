@@ -4,6 +4,7 @@
     <div class="flex justify-center my-4">
         <div class="w-2/3 bg-white p-8 rounded-lg shadow-md">
             <h1 class="text-2xl mb-4">Création d'un manège</h1>
+            
             <form method="POST" action="{{ url('/carousel/create') }}" enctype="multipart/form-data">
                 @csrf
 
@@ -115,7 +116,6 @@
                             <label for="street_name" class="block mb-2">Nom de rue :</label>
                             <input type="text" name="street_name" id="street_name" value="{{ old('street_name') }}"
                                 class="border rounded-md px-3 py-2 w-full">
-                            <div id="street_name-suggestions" class="autocomplete-suggestions"></div>
                             @error('street_name')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
@@ -123,8 +123,7 @@
                         <div class="mb-4">
                             <label for="street_number" class="block mb-2">Numéro de rue :</label>
                             <input type="text" name="street_number" id="street_number"
-                                value="{{ old('street_number') }}" class="border rounded-md px-3 py-2 w-full">
-                            <div id="street_number-suggestions" class="autocomplete-suggestions"></div>
+                                value="{{ old('street_number', 'Entrez un numero') }}" class="border rounded-md px-3 py-2 w-full">
                             @error('street_number')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
@@ -142,7 +141,6 @@
                             <label for="city" class="block mb-2">Ville :</label>
                             <input type="text" name="city" id="city" value="{{ old('city') }}"
                                 class="border rounded-md px-3 py-2 w-full autocomplete">
-                            <div id="city-suggestions" class="autocomplete-suggestions"></div>
                             @error('city')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror

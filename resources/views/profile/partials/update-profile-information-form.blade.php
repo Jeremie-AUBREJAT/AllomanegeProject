@@ -36,37 +36,52 @@
                 >{{ __('Profil mis à jour') }}</p>
             @endif
         <div>
-            <x-input-label class="font-semibold" for="name" :value="__('Nom')" />
+            <x-input-label class="text-xl" for="name" :value="__('Nom :')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
         <div>
-            <x-input-label class="font-semibold" for="surname" :value="__('Prénom')" />
+            <x-input-label class="text-xl" for="surname" :value="__('Prénom :')" />
             <x-text-input id="surname" name="surname" type="text" class="mt-1 block w-full" :value="old('surname', $user->surname)" required autofocus autocomplete="surname" />
             <x-input-error class="mt-2" :messages="$errors->get('surname')" />
         </div>
         <div>
-            <x-input-label class="font-semibold" for="compagny" :value="__('Entreprise')" />
+            <x-input-label class="text-xl" for="compagny" :value="__('Entreprise :')" />
             <x-text-input id="compagny" name="compagny" type="text" class="mt-1 block w-full" :value="old('compagny', $user->compagny)" required autofocus autocomplete="compagny" />
             <x-input-error class="mt-2" :messages="$errors->get('compagny')" />
         </div>
         <div>
-            <x-input-label class="font-semibold" for="address" :value="__('Adresse')" />
-            <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address', $user->address)" required autofocus autocomplete="address" />
-            <x-input-error class="mt-2" :messages="$errors->get('address')" />
+            <x-input-label class="text-xl" for="street_number" :value="__('Numero de rue :')" />
+            <x-text-input id="street_number" name="street_number" type="text" class="mt-1 block w-full" :value="old('street_number', $user->street_number)" required autofocus autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('street_number')" />
         </div>
         <div>
-            <x-input-label class="font-semibold" for="zipcode" :value="__('code postal')" />
-            <x-text-input id="zipcode" name="zipcode" type="text" class="mt-1 block w-full" :value="old('zipcode', $user->zipcode)" required autofocus autocomplete="zipcode" />
-            <x-input-error class="mt-2" :messages="$errors->get('zipcode')" />
+            <x-input-label class="text-xl" for="street_name" :value="__('Nom de la rue :')" />
+            <x-text-input id="street_name" name="street_name" type="text" class="mt-1 block w-full" :value="old('street_name', $user->street_name)" required autofocus autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('street_name')" />
         </div>
         <div>
-            <x-input-label class="font-semibold" for="phone_number" :value="__('Numéro de téléphone')" />
+            <x-input-label class="text-xl" for="postal_code" :value="__('Code postal :')" />
+            <x-text-input id="postal_code" name="postal_code" type="text" class="mt-1 block w-full" :value="old('postal_code', $user->postal_code)" required autofocus autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('postal_code')" />
+        </div>
+        <div>
+            <x-input-label class="text-xl" for="city" :value="__('Ville/Commune :')" />
+            <x-text-input id="city" name="city" type="text" class="mt-1 block w-full" :value="old('city', $user->city)" required autofocus autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('city')" />
+        </div>
+        <div>
+            <x-input-label class="text-xl" for="country" :value="__('Pays :')" />
+            <x-text-input id="city" name="country" type="text" class="mt-1 block w-full" :value="old('country', $user->country)" required autofocus autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('country')" />
+        </div>
+        <div>
+            <x-input-label class="text-xl" for="phone_number" :value="__('Numéro de téléphone :')" />
             <x-text-input id="phone_number" name="phone_number" type="text" class="mt-1 block w-full" :value="old('phone_number', $user->phone_number)" required autofocus autocomplete="phone_number" />
             <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
         </div>
         <div>
-            <x-input-label class="font-semibold" for="email" :value="__('Email')" />
+            <x-input-label class="text-xl" for="email" :value="__('Email :')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 

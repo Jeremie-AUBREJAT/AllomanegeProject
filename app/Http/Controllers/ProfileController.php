@@ -33,8 +33,11 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->surname = $request->surname;
         $user->compagny = $request->compagny;
-        $user->address = $request->address;
-        $user->zipcode = $request->zipcode;
+        $user->street_number = $request->street_number;
+        $user->street_name = $request->street_name;
+        $user->postal_code = $request->postal_code;
+        $user->city = $request->city;
+        $user->country = $request->country;
         $user->phone_number = $request->phone_number;
         $user->email = $request->email;
         if ($user->isDirty('email')) {
@@ -139,20 +142,6 @@ class ProfileController extends Controller
         if (Auth::user()->role !== 'Super_admin') {
             abort(404); // Retourner une erreur 403 (Accès refusé) si l'utilisateur n'est pas autorisé
         }
-
-        // Valider les données du formulaire
-        // $request->validate([
-        //     'name' => ['required', 'string', 'max:255'],
-        //     'surname' => ['required', 'string', 'max:255'],
-        //     'compagny' => ['nullable', 'string', 'max:255'],
-        //     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $id],
-        //     'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-        //     'address' => ['nullable', 'string', 'max:255'],
-        //     'zipcode' => ['nullable', 'string', 'max:255'],
-        //     'phone_number' => ['nullable', 'string', 'max:255'],
-        //     'role' => ['required', 'string', 'in:user,admin,super_admin'],
-        // ]);
-
         // Mettre à jour les données de l'utilisateur
         $user->update([
             'name' => $request->name,
@@ -160,8 +149,11 @@ class ProfileController extends Controller
             'compagny' => $request->compagny,
             'email' => $request->email,
             // 'password' => $request->password ? Hash::make($request->password) : $user->password,
-            'address' => $request->address,
-            'zipcode' => $request->zipcode,
+            'street_number' => $request->street_number,
+            'street_name' => $request->street_name,
+            'postal_code' => $request->postal_code,
+            'city' => $request->city,
+            'country' => $request->country,
             'phone_number' => $request->phone_number,
             // 'role' => $request->role,
         ]);

@@ -138,14 +138,8 @@
                         <div class="flex items-center">
                             @if (Auth::user()->role === 'Super_admin')
                                 <div class="relative inline-block mx-2">
-                                    {{-- <select onchange="location = this.value"
-                                        class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer">
-                                        <option value="/tableau-de-bord">Tableau de bord</option>
-                                        <option value="/carousel/view">Tous les manèges</option>
-                                        <option value="/allusers">Tous les utilisateurs</option>
-                                    </select> --}}
                                     <a class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer" href="/dashboard_SA">Tableau de bord</a>
-                                    <div class="relative inline-block mx-2">
+                                    {{-- <div class="relative inline-block mx-2">
                                         <span class="text-white bg-red-500 rounded-full px-4 py-2">
                                             {{ $pendingCount }}
                                         </span>
@@ -153,7 +147,7 @@
                                             class="absolute bottom-4 left-6 bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-xs text-white">
                                             !
                                         </span>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             @endif
                         </div>

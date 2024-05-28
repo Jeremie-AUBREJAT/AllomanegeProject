@@ -92,49 +92,15 @@
                         @error('watt_power')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
-
-                        <!-- Champ localisation du manèges -->
+                        <!-- Champ prix -->
                         <div class="mb-4">
-                            <label for="street_number" class="block mb-2">Numero de rue :</label>
-                            <input type="text" name="street_number" id="street_number"
-                                value="{{ $carousel->street_number }}" class="border rounded-md px-3 py-2 w-full">
+                            <label for="price" class="block mb-2">Prix :</label>
+                            <input type="number" value="{{ $carousel->price }}" name="price" id="price"
+                                step="0.01" required class="border rounded-md px-3 py-2 w-full">
                         </div>
-                        <div class="mb-4">
-                            <label for="street_name" class="block mb-2">Nom de rue :</label>
-                            <input type="text" name="street_name" id="street_name" value="{{ $carousel->street_name }}"
-                                class="border rounded-md px-3 py-2 w-full">
-                        </div>
-                        <div class="mb-4">
-                            <label for="postal_code" class="block mb-2">Code postal :</label>
-                            <input type="text" name="postal_code" id="postal_code" value="{{ $carousel->postal_code }}"
-                                class="border rounded-md px-3 py-2 w-full">
-                        </div>
-                        <div class="mb-4">
-                            <label for="city" class="block mb-2">Ville :</label>
-                            <input type="text" name="city" id="city" value="{{ $carousel->city }}"
-                                class="border rounded-md px-3 py-2 w-full">
-                        </div>
-                        <div class="mb-4">
-                            <label for="country" class="block mb-2">Ville :</label>
-                            <input type="text" name="country" id="country" value="{{ $carousel->country }}"
-                                class="border rounded-md px-3 py-2 w-full">
-                        </div>
-                        @if (Auth::check() && Auth::user()->role === 'Super_admin')
-                            <div class="mb-4">
-                                <label for="latitude" class="block mb-2">GPS Latitude :</label>
-                                <input type="text" name="latitude" id="latitude" value="{{ $carousel->latitude }}"
-                                    class="border rounded-md px-3 py-2 w-full">
-                            </div>
-                            <div class="mb-4">
-                                <label for="longitude" class="block mb-2">GPS Longitude :</label>
-                                <input type="text" name="longitude" id="longitude"
-                                    value="{{ $carousel->longitude }}" class="border rounded-md px-3 py-2 w-full">
-                            </div>
-                        @endif
-                        @error('localization')
+                        @error('price')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
-
                         <!-- Champ temps d'installation -->
                         <div class="mb-4">
                             <label for="install_time" class="block mb-2">Temps d'installation en heure "s" :</label>
@@ -145,15 +111,7 @@
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
 
-                        <!-- Champ prix -->
-                        <div class="mb-4">
-                            <label for="price" class="block mb-2">Prix :</label>
-                            <input type="number" value="{{ $carousel->price }}" name="price" id="price"
-                                step="0.01" required class="border rounded-md px-3 py-2 w-full">
-                        </div>
-                        @error('price')
-                            <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
-                        @enderror
+
 
                         <!-- Champ description -->
                         <div class="mb-4">
@@ -180,6 +138,7 @@
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
 
+                        {{-- status --}}
                         @if (Auth::user()->role === 'Super_admin')
                             <select name="status" class="form-control mb-4">
                                 @foreach (config('enumStatus.status') as $key => $value)
@@ -188,6 +147,64 @@
                                 @endforeach
                             </select>
                         @endif
+                        <!-- Champ localisation du manèges -->
+                        <div class="text-2xl mt-6">Location de votre manège: </div>
+
+                        <div class="mb-4 mt-4">
+                            <label for="search" class="block mb-2">Recherche adresse :</label>
+                            <div class="relative">
+                                <input type="text" id="search" placeholder="Recherche adresse..."
+                                    class="search-input border rounded-md px-3 py-2 w-full pl-10">
+                                <div id="search-suggestions" class="autocomplete-suggestions"></div>
+                                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"
+                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M12.9 14.32a8 8 0 111.42-1.42l4.6 4.6a1 1 0 01-1.42 1.42l-4.6-4.6zM8 14A6 6 0 108 2a6 6 0 000 12z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="street_name" class="block mb-2">Nom de rue :</label>
+                            <input type="text" name="street_name" id="street_name"
+                                value="{{ $carousel->street_name }}" class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="street_number" class="block mb-2">Numero de rue :</label>
+                            <input type="text" name="street_number" id="street_number"
+                                value="{{ $carousel->street_number }}" class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="postal_code" class="block mb-2">Code postal :</label>
+                            <input type="text" name="postal_code" id="postal_code"
+                                value="{{ $carousel->postal_code }}" class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="city" class="block mb-2">Ville :</label>
+                            <input type="text" name="city" id="city" value="{{ $carousel->city }}"
+                                class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="country" class="block mb-2">Ville :</label>
+                            <input type="text" name="country" id="country" value="{{ $carousel->country }}"
+                                class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        @if (Auth::check() && Auth::user()->role === 'Super_admin')
+                            <div class="mb-4">
+                                <label for="latitude" class="block mb-2">GPS Latitude :</label>
+                                <input type="text" name="latitude" id="latitude" value="{{ $carousel->latitude }}"
+                                    class="border rounded-md px-3 py-2 w-full">
+                            </div>
+                            <div class="mb-4">
+                                <label for="longitude" class="block mb-2">GPS Longitude :</label>
+                                <input type="text" name="longitude" id="longitude"
+                                    value="{{ $carousel->longitude }}" class="border rounded-md px-3 py-2 w-full">
+                            </div>
+                        @endif
+                        @error('localization')
+                            <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Colonne droite pour les images -->
