@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js',   ])
     @if (request()->is('*détails*'))
-        @vite(['resources/js/fullscreenimage.js','resources/js/fullcalendar.js','resources/js/map.js'])
+        @vite(['resources/js/fullscreenimage.js','resources/js/fullcalendar.js','resources/js/map.js','resources/js/carouselDetails.js'])
     @endif
     @if (request()->is('*create*','*update*'))
     @vite(['resources/js/autocompleteaddress.js'])

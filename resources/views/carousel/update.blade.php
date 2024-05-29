@@ -174,7 +174,7 @@
                             <input type="text" name="street_number" id="street_number"
                                 value="{{ $carousel->street_number }}" class="border rounded-md px-3 py-2 w-full">
                         </div>
-                        
+
                         <div class="mb-4">
                             <label for="postal_code" class="block mb-2">Code postal :</label>
                             <input type="text" name="postal_code" id="postal_code"
@@ -209,9 +209,14 @@
 
                     <!-- Colonne droite pour les images -->
                     <div>
+
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger font-bold" style="color: red;">{{ $error }}</div>
+                        @endforeach
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @foreach ($carousel->carouselPictureMany as $picture)
                                 <div class="mb-4">
+
                                     <label for="imageUpdate{{ $picture->id }}" class="block mb-2">Modifier Image
                                         {{ $loop->index + 1 }} :</label>
                                     <input type="file" name="imageUpdate[]" id="imageUpdate{{ $picture->id }}"
@@ -219,7 +224,7 @@
                                     <p class="existing-image mt-2">Image actuelle :</p>
                                     @if (!empty($picture->images))
                                         <img src="{{ asset($picture->images) }}" alt="Image du carrousel"
-                                            class="mt-2 w-full h-auto">
+                                            class="mt-2 w-auto h-1/2">
                                         <input type="hidden" name="current_image[]" value="{{ $picture->images }}">
                                     @else
                                         <p>Aucune image disponible</p>

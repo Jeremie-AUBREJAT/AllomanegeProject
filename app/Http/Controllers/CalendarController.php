@@ -19,7 +19,7 @@ class CalendarController extends Controller
     // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur
     if (Auth::check() && Auth::user()->role === 'Super_admin') {
         // Récupère toutes les réservations et tous les carrousels
-        $reservations = Calendar::all();
+        $reservations = Calendar::orderBy('id', 'desc')->get();
         $carousels = Carousel::all();
 
         // Retourne la vue avec les réservations et les carrousels

@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fullScreenImage.src = selectedThumbnail.src;
             fullScreenImage.alt = selectedThumbnail.alt;
         }
-
+        
         // Affiche l'élément en plein écran
         fullScreenDiv.innerHTML = ''; // Efface le contenu précédent
         fullScreenDiv.appendChild(fullScreenImage);

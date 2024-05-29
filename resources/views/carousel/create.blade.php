@@ -92,7 +92,9 @@
                             <select name="category" id="category" required class="border rounded-md px-3 py-2 w-full">
                                 <option value="">Sélectionnez une catégorie</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
+                                </option>
                                 @endforeach
                             </select>
                             @error('category')
@@ -159,9 +161,18 @@
 
                     <!-- Colonne droite pour les images -->
                     <div>
+                        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                         <!-- Champ image -->
                         <div id="imageFields" class="mb-4">
-                            <label for="imageCreate" class="block mb-2">Image :</label>
+                            <label for="imageCreate" class="block mb-2">Image(s) au format "JPG" ou "JPEG":</label>
                             <input type="file" name="imageCreate[]" id="imageCreate" accept="image/*" multiple
                                 class="border rounded-md px-3 py-2 w-full">
                             @error('imageCreate')

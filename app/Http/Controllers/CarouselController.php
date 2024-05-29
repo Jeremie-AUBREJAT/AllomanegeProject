@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Carousel;
 use App\Http\Requests\CarouselRequest;
+use App\Http\Requests\CarouselUpdateRequest;
 use App\Models\Picture;
 use App\Models\Category;
 use App\Models\Calendar;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Models\Quote;
 use Illuminate\Http\Request;
+
 
 class CarouselController extends Controller
 {   
@@ -142,6 +144,41 @@ public function createCarousel(CarouselRequest $request)
         return redirect()->back()->withErrors(['localization' => 'Adresse non valide ou non trouvée.']);
     }
 
+    // Ajout d'une ou plusieurs images
+    if (!$request->hasFile('imageCreate')) {
+        return redirect()->back()->withErrors(['imageCreate' => 'Veuillez télécharger au moins une image.'])->withInput();
+    }
+
+    foreach ($request->file('imageCreate') as $image) {
+        // Vérifier si le fichier est au format JPEG
+        if (!in_array($image->getClientOriginalExtension(), ['jpg', 'jpeg'])) {
+            return redirect()->back()->withErrors(['imageCreate' => 'Veuillez télécharger une image au format JPG ou JPEG.'])->withInput();
+        }
+
+        // Redimensionner l'image et la convertir en WebP
+$source = imagecreatefromjpeg($image->getPathname());
+
+// Obtenez les dimensions de l'image d'origine
+$sourceWidth = imagesx($source);
+$sourceHeight = imagesy($source);
+
+// Définir la hauteur souhaitée à 720 pixels
+$newHeight = 720;
+
+// Calculer la nouvelle largeur en conservant le ratio d'aspect
+$newWidth = intval($sourceWidth * ($newHeight / $sourceHeight));
+
+// Créer une nouvelle image redimensionnée
+$resizedImage = imagescale($source, $newWidth, $newHeight);
+
+        // Convertir l'image en format WebP et enregistrer
+        imagewebp($resizedImage, public_path('imageCreate/' . $image->getClientOriginalName() . '.webp'), 75);
+
+        // Libérer la mémoire
+        imagedestroy($source);
+        imagedestroy($resizedImage);
+    }
+
     // Créer une instance de Carousel
     $carousel = new Carousel;
     $carousel->name = $request->input('name');
@@ -159,7 +196,7 @@ public function createCarousel(CarouselRequest $request)
     $carousel->latitude = $coordinates['latitude'];
     $carousel->longitude = $coordinates['longitude'];
     $carousel->price = $request->input('price');
-    
+
     // Associer le carousel à l'utilisateur actuellement authentifié
     $carousel->user()->associate($user);
 
@@ -170,27 +207,22 @@ public function createCarousel(CarouselRequest $request)
     if (Auth::user()->role === 'Super_admin') {
         $carousel->status = 'approved';
     }
-    
+
     // Enregistrer le Carousel
     $carousel->category_id = $request->input('category');
     $carousel->save();
-    
-    // Ajout d'une ou plusieurs images 
-    if ($request->hasFile('imageCreate')) {
-        foreach ($request->file('imageCreate') as $image) {
-            $imageName = $image->getClientOriginalName();
-            $image->move(public_path('imageCreate'), $imageName); // Déplacer l'image vers le répertoire public/images
-    
-            // Créer une Picture associée au Carousel créé pour chaque image
-            $picture = new Picture();
-            $picture->images = 'imageCreate/' . $imageName;
-            $picture->carousel_id = $carousel->id; // Associer l'image au Carousel créé
-            $picture->save();
-        }
+
+    // Créer une Picture associée au Carousel créé pour chaque image
+    foreach ($request->file('imageCreate') as $image) {
+        $picture = new Picture();
+        $picture->images = 'imageCreate/' . $image->getClientOriginalName() . '.webp';
+        $picture->carousel_id = $carousel->id; // Associer l'image au Carousel créé
+        $picture->save();
     }
-    
+
     return redirect("/carousel/view");
 }
+
 
 private function formatAddress($streetNumber, $streetName, $postalCode, $city, $country)
 {
@@ -218,7 +250,7 @@ private function geocodeAddress($address)
 
 
 // update carousel
-public function updateCarousel(CarouselRequest $request, $id)
+public function updateCarousel(CarouselUpdateRequest $request, $id)
 {
     // Récupérer le carousel à mettre à jour
     $carousel = Carousel::findOrFail($id);
@@ -280,58 +312,131 @@ public function updateCarousel(CarouselRequest $request, $id)
     // Mettre à jour les champs du carousel
     $carousel->update($updatedData);
 
-    // Supprimer une image spécifique si nécessaire
-    if ($request->has('delete_image_id')) {
-        $deleteImageIds = $request->input('delete_image_id');
-        foreach ($deleteImageIds as $imageId) {
-            $pictureToDelete = Picture::find($imageId);
-            if ($pictureToDelete) {
-                // Supprimer l'image de la base de données
-                $pictureToDelete->delete();
-                // Supprimer le fichier physique de l'image
-                if (file_exists(public_path($pictureToDelete->images))) {
-                    unlink(public_path($pictureToDelete->images));
-                }
+   // Supprimer une image spécifique si nécessaire
+if ($request->has('delete_image_id')) {
+    $deleteImageIds = $request->input('delete_image_id');
+    // Récupérer le carousel
+    $carousel = Carousel::findOrFail($id);
+    // Récupérer les images associées au carousel
+    $pictures = $carousel->carouselPictureMany;
+    // S'assurer qu'il reste au moins une image dans le carousel
+    $remainingImagesCount = $pictures->count() - count($deleteImageIds);
+    if ($remainingImagesCount < 1) {
+        // S'il ne reste pas assez d'images, afficher un message d'erreur et rediriger
+        return redirect()->back()->withErrors(['error' => 'Vous devez conserver au moins une photo.']);
+    }
+    foreach ($deleteImageIds as $imageId) {
+        // Vérifier si l'image à supprimer appartient au carousel
+        $pictureToDelete = $pictures->where('id', $imageId)->first();
+        if ($pictureToDelete) {
+            // Supprimer l'image de la base de données
+            $pictureToDelete->delete();
+            // Supprimer le fichier physique de l'image
+            if (file_exists(public_path($pictureToDelete->images))) {
+                unlink(public_path($pictureToDelete->images));
             }
         }
     }
+}
+if ($request->hasFile('imageUpdate')) {
+    $imagesToUpdate = $request->file('imageUpdate');
+    foreach ($imagesToUpdate as $key => $newImage) {
+        // Vérifier si une image a été fournie
+        if ($newImage !== null) {
+            // Vérifier si le fichier est au format JPEG
+            if (!in_array($newImage->getClientOriginalExtension(), ['jpg', 'jpeg'])) {
+                return redirect()->back()->withErrors(['imageUpdate' => 'Veuillez télécharger une image au format JPG ou JPEG.'])->withInput();
+            }
 
-    // Remplacer une image existante par une nouvelle si une est fournie
-    if ($request->hasFile('imageUpdate')) {
-        $imagesToUpdate = $request->file('imageUpdate');
-        foreach ($imagesToUpdate as $key => $newImage) {
-            // Vérifier si une image a été fournie
-            if ($newImage !== null) {
-                // Supprimer le fichier physique de l'image existante
-                if (file_exists(public_path($request->input('current_image')[$key]))) {
-                    unlink(public_path($request->input('current_image')[$key]));
-                }
-                // Déplacer la nouvelle image vers le répertoire public/images
-                $imageName = $newImage->getClientOriginalName();
-                $newImage->move(public_path('imageCreate'), $imageName);
-                // Mettre à jour le chemin de l'image dans la base de données
-                $carousel->carouselPictureMany[$key]->update([
-                    'images' => 'imageCreate/' . $imageName
-                ]);
+            // Supprimer le fichier physique de l'image existante
+            if (file_exists(public_path($request->input('current_image')[$key]))) {
+                unlink(public_path($request->input('current_image')[$key]));
             }
-        }
-    }
 
-    // Ajouter une nouvelle image si une est fournie
-    if ($request->hasFile('imageCreate')) {
-        $newImages = $request->file('imageCreate');
-        foreach ($newImages as $newImage) {
-            // Vérifier si une image a été fournie
-            if ($newImage !== null) {
-                // Enregistrer la nouvelle image dans la base de données
-                $picture = new Picture();
-                $imageName = $newImage->getClientOriginalName();
-                $newImage->move(public_path('imageCreate'), $imageName);
-                $picture->images = 'imageCreate/' . $imageName;
-                $carousel->carouselPictureMany()->save($picture);
-            }
+            // Redimensionner l'image et la convertir en WebP
+            $source = imagecreatefromjpeg($newImage->getPathname());
+
+            // Obtenez les dimensions de l'image d'origine
+            $sourceWidth = imagesx($source);
+            $sourceHeight = imagesy($source);
+
+            // Définir la hauteur souhaitée à 720 pixels
+            $newHeight = 720;
+
+            // Calculer la nouvelle largeur en conservant le ratio d'aspect
+            $newWidth = intval($sourceWidth * ($newHeight / $sourceHeight));
+
+            // Créer une nouvelle image redimensionnée
+            $resizedImage = imagescale($source, $newWidth, $newHeight);
+
+            // Nom de fichier sans l'extension
+            $filename = pathinfo($newImage->getClientOriginalName(), PATHINFO_FILENAME);
+
+            // Chemin de sauvegarde
+            $webpPath = 'imageCreate/' . $filename . '.webp';
+
+            // Convertir l'image en format WebP et enregistrer
+            imagewebp($resizedImage, public_path($webpPath), 75);
+
+            // Libérer la mémoire
+            imagedestroy($source);
+            imagedestroy($resizedImage);
+
+            // Mettre à jour le chemin de l'image dans la base de données
+            $carousel->carouselPictureMany[$key]->update([
+                'images' => $webpPath
+            ]);
         }
     }
+}
+
+// Ajouter une nouvelle image si une est fournie
+if ($request->hasFile('imageCreate')) {
+    $newImages = $request->file('imageCreate');
+    foreach ($newImages as $newImage) {
+        if ($newImage !== null) {
+            // Vérifier si le fichier est au format JPEG
+            if (!in_array($newImage->getClientOriginalExtension(), ['jpg', 'jpeg'])) {
+                return redirect()->back()->withErrors(['imageCreate' => 'Veuillez télécharger une image au format JPG ou JPEG.'])->withInput();
+            }
+
+            // Redimensionner l'image et la convertir en WebP
+            $source = imagecreatefromjpeg($newImage->getPathname());
+
+            // Obtenez les dimensions de l'image d'origine
+            $sourceWidth = imagesx($source);
+            $sourceHeight = imagesy($source);
+
+            // Définir la hauteur souhaitée à 720 pixels
+            $newHeight = 720;
+
+            // Calculer la nouvelle largeur en conservant le ratio d'aspect
+            $newWidth = intval($sourceWidth * ($newHeight / $sourceHeight));
+
+            // Créer une nouvelle image redimensionnée
+            $resizedImage = imagescale($source, $newWidth, $newHeight);
+
+            // Nom de fichier sans l'extension
+            $filename = pathinfo($newImage->getClientOriginalName(), PATHINFO_FILENAME);
+
+            // Chemin de sauvegarde
+            $webpPath = 'imageCreate/' . $filename . '.webp';
+
+            // Convertir l'image en format WebP et enregistrer
+            imagewebp($resizedImage, public_path($webpPath), 75);
+
+            // Libérer la mémoire
+            imagedestroy($source);
+            imagedestroy($resizedImage);
+
+            // Enregistrer la nouvelle image dans la base de données
+            $picture = new Picture();
+            $picture->images = $webpPath;
+            $carousel->carouselPictureMany()->save($picture);
+        }
+    }
+}
+
 
     // Rediriger vers la page de visualisation du carrousel après la mise à jour
     return redirect("/carousel/view");

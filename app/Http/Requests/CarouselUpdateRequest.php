@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CarouselRequest extends FormRequest
+class CarouselUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -36,7 +36,7 @@ class CarouselRequest extends FormRequest
             'city' => ['required', 'string', 'max:100'],
             'country' => ['required', 'string', 'max:100'],
             'price' => ['required', 'numeric', 'min:1'],
-            'imageCreate' => ['required', 'max:5'],
+            'imageCreate' => ['nullable', 'max:5'],
         ];
     }
     public function messages()

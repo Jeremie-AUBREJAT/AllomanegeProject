@@ -72,7 +72,7 @@
         <nav class="hidden md:flex md:justify-between bg-custom-blue-header items-center px-8 py-4">
             <div class="navlinks text-white flex items-center gap-8">
                 <ul class="flex items-center gap-4">
-                    <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
+                    <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
                             href="/manèges">MANÈGES</a>
                         {{-- <details class="relative inline-block text-left">
                             <summary class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700">
