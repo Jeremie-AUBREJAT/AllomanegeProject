@@ -54,7 +54,7 @@
                                 </path>
                             </svg>
                             <p class="text-custom-blue-header font-semibold text-lg" name="localization">
-                                {{ $carousel->localization }}</p>
+                                {{ $carousel->city }} {{ $carousel->postal_code }}</p>
                         </div>
                         <p class="text-custom-blue-header font-semibold text-lg mb-2 mt-4"name="price">
                             {{ $carousel->price }} €</p>

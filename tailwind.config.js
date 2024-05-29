@@ -23,6 +23,12 @@ export default {
               'custom-orange':'#ff8d00',
               'custom-font-blue' :'#353858',
             },
+            height: {
+                '64' : '4rem',
+                '112': '6rem',
+                '320': '20rem', // Exemple de hauteur personnalisée, vous pouvez en ajouter d'autres
+                '480': '35rem',
+              },
         },
     },
 
