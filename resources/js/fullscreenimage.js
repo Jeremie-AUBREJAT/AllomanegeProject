@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    if (window.innerWidth >= 1024) {
     const carouselDiv = document.querySelector('#carousel'); // Sélection de la div du carrousel
     const fullScreenDiv = document.querySelector('#fullScreenImage'); // Sélection de la div pour l'affichage en plein écran
     const fullScreenImage = document.createElement('img'); // Création de l'image dans la div en plein écran
@@ -81,5 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentIndex = (currentIndex - 1 + thumbnails.length + 1) % (thumbnails.length + 1); // Décrémenter l'index en boucle
         showFullScreenImage(currentIndex);
     }
+};
 });
 

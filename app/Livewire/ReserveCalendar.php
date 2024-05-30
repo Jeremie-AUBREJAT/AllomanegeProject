@@ -34,15 +34,24 @@ class ReserveCalendar extends Component
 
     public function submitReservation()
 {
+    // Vérifier si l'utilisateur est connecté
+    if (!Auth::check()) {
+        // Si l'utilisateur n'est pas connecté, retourner un message ou rediriger vers la page de connexion
+        $this->erreurReservation = "Veuillez vous connecter pour effectuer une réservation ou nous envoyer un e-mail.";
+        return;
+    }
+
+    // Validation des données de réservation
     $this->validate([
         'debut_date' => 'required|date',
         'fin_date' => 'required|date|after_or_equal:debut_date',
     ]);
 
+    // Vérification de l'existence de réservations existantes pour ces dates
     $existingReservation = Calendar::where('carousel_id', $this->carousel_id)
         ->where(function ($query) {
             $query->where('debut_date', '<=', $this->fin_date)
-                  ->where('fin_date', '>=', $this->debut_date);
+                ->where('fin_date', '>=', $this->debut_date);
         })->exists();
 
     if ($existingReservation) {
@@ -62,12 +71,12 @@ class ReserveCalendar extends Component
         Mail::to(env('CONTACT_EMAIL'))->send(new ReservationMail($this->debut_date, $this->fin_date, $carousel->name, $user->name));
         Mail::to($user->email)->send(new UserReservationMail($this->debut_date, $this->fin_date, $carousel->name, $user->name, $user->email));
 
-
         $this->reservationEnregistree = true;
         $this->reset(['debut_date', 'fin_date']);
         $this->erreurReservation = '';
     }
 }
+
 
 
     public function getReservedDates()

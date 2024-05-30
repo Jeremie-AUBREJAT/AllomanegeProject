@@ -19,8 +19,12 @@
             <!-- Bouton pour réserver -->
             @if (!$this->reservationEnregistree)
                 <!-- Bouton pour réserver -->
+                @auth <!-- Vérifie si l'utilisateur est connecté -->
                 <button type="submit"
                     class="my-4 bg-custom-blue2 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400">Réserver</button>
+            @else
+                <span class="text-red-500 font-bold text-lg" >Veuillez vous connecter pour effectuer une réservation ou nous envoyer un e-mail.</span>
+            @endauth
                 @error('debut_date')
                     <div class="text-red-500">{{ 'Veuillez entrer une date de début' }}</div>
                 @enderror

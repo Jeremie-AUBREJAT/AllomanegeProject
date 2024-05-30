@@ -29,11 +29,11 @@ class CarouselController extends Controller
 
     }
     public function carouselsFront()
-    {
-        $carousels = Carousel::with('category')->where('status', 'approved')->get();
-        $categories = Category::all();
-        return view('carousels', compact('carousels', 'categories'));
-    }
+{
+    $carousels = Carousel::with('category')->where('status', 'approved')->paginate(6); // Paginer avec 9 carrousels par page
+    $categories = Category::all();
+    return view('carousels', compact('carousels', 'categories'));
+}
     public function detailsFront($carouselId)
 {
     // Récupérer le carrousel par son ID avec sa catégorie associée

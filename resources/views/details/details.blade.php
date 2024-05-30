@@ -39,38 +39,10 @@
                 </svg>
                 {{ $carousel->city }}
             </p>
+            <p class="text-custom-blue-header text-xl mb-2 flex items-center">Catégorie: {{ $carousel->category->name}}</p>
             <div class="flex items-center bg-gray-100 p-6 my-8 w-10/12">
                 <label for="prix" class="text-custom-blue-header text-xl mr-4">Prix : </label>
                 <p class="mr-4 text-custom-orange">{{ $carousel->price }}€</p>
-                <div class="flex ml-auto items-center">
-                    <span class="stars-container flex ml-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 1l2.5 6.5H18l-5 4.5 1.5 6-5-4.5-5 4.5 1.5-6-5-4.5h5.5L10 1z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 1l2.5 6.5H18l-5 4.5 1.5 6-5-4.5-5 4.5 1.5-6-5-4.5h5.5L10 1z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 1l2.5 6.5H18l-5 4.5 1.5 6-5-4.5-5 4.5 1.5-6-5-4.5h5.5L10 1z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 1l2.5 6.5H18l-5 4.5 1.5 6-5-4.5-5 4.5 1.5-6-5-4.5h5.5L10 1z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 1l2.5 6.5H18l-5 4.5 1.5 6-5-4.5-5 4.5 1.5-6-5-4.5h5.5L10 1z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </span>
-                </div>
             </div>
 
             <div id="carousel" class="relative">
@@ -89,7 +61,7 @@
             <div id="thumbnails" class="flex space-x-2 ml-1">
                 @foreach ($carousel->carouselPictureMany as $picture)
                     @unless ($loop->first)
-                            <div class="w-1/5 mb-4 rounded-lg border-2 border-gray-300 h-64 sm:h-112 md:h-112 lg:h-112 xl:h-112"
+                        <div class="w-1/5 mb-4 rounded-lg border-2 border-gray-300 h-64 sm:h-112 md:h-112 lg:h-112 xl:h-112"
                             style="overflow: hidden;">
                             <img src="{{ asset($picture->images) }}" alt="{{ $carousel->description }}"
                                 class="w-full h-full object-contain" style="object-fit: contain;">
@@ -98,55 +70,55 @@
                 @endforeach
             </div>
             <div id="fullScreenImage"
-                class="fixed z-10 top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden flex justify-center items-center">
-                {{-- <img src="image1.jpg" alt="Image en plein écran" class="max-w-3xl max-h-3xl"> --}}
+                class="fixed z-10 top-0 left-0 w-screen h-screen bg-black bg-opacity-80 hidden flex justify-center items-center">
+
             </div>
 
 
 
-            <div class="w-full lg:w-2/3 py-4 mt-16">
+            <div class="lg:w-2/3 py-4 mt-16">
                 <h3 class="text-2xl font-bold mb-4">Description: </h3>
                 <p class="text-gray-700 mb-4">{{ $carousel->description }}</p>
 
                 <!-- Rectangle 1 -->
-                <div class="flex justify-between">
-
-                    <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mr-2">
-                        <p class="text-lg font-bold mb-2">Longeur </p>
+                <div class="flex justify-between flex-wrap md:flex-no-wrap">
+                    <div
+                        class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-full md:w-auto md:flex-no-shrink md:mr-2 lg:mr-2">
+                        <p class="text-lg font-bold mb-2">Longeur</p>
                         <p>{{ $carousel->length }} m</p>
                     </div>
-                    <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mr-2">
-                        <p class="text-lg font-bold mb-2">Largeur </p>
+                    <div
+                        class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-full md:w-auto md:flex-no-shrink md:mr-2 lg:mr-2">
+                        <p class="text-lg font-bold mb-2">Largeur</p>
                         <p>{{ $carousel->width }} m</p>
                     </div>
-                    <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mr-2">
-                        <p class="text-lg font-bold mb-2">Poids </p>
+                    <div
+                        class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-full md:w-auto md:flex-no-shrink md:mr-2 lg:mr-2">
+                        <p class="text-lg font-bold mb-2">Poids</p>
                         <p>{{ $carousel->weight }} T</p>
                     </div>
-                    <!-- Rectangle 2 -->
-                    <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 mx-2">
+                    <div
+                        class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-full md:w-auto md:flex-no-shrink md:mr-2 lg:mr-2">
                         <p class="text-lg font-bold mb-2">Puissance</p>
                         <p>{{ $carousel->watt_power }} kWatt</p>
                     </div>
-
-                    <!-- Rectangle 3 -->
-                    <div class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-1/3 ml-2">
+                    <div
+                        class="flex flex-col items-center bg-gray-200 p-4 rounded-sm w-full md:w-auto md:flex-no-shrink md:ml-2 lg:ml-2">
                         <p class="text-lg font-bold mb-2">Temps de montage</p>
                         <p>{{ $carousel->install_time }} H</p>
                     </div>
-                    <div id="carousel-data" style="display: none;" data-carousel="{{ $carouselJson }}"></div>
-
                 </div>
+
             </div>
 
         </div>
         <!-- Div de droite -->
-        <div class="w-full h-64 lg:w-1/3 p-4">
+        <div class="lg:w-1/3 p-4">
             <div class="z-0 lg:mt-2 pt-4 lg:mr-4">
                 <livewire:reserve-calendar />
             </div>
 
-            <!-- Google Maps??? -->
+
 
             <h3 class="font font-semibold text-custom-blue-header mt-12 text-xl">Carte des manèges</h3>
             <div id="map-container" class="w-full mt-4 border border-custom-blue-header shadow-lg"
@@ -156,7 +128,7 @@
         </div>
 
     </section>
-
+    <div id="carousel-data" style="display: none;" data-carousel="{{ $carouselJson }}"></div>
     <div class="flex justify-center my-16">
         <a href="/manèges"
             class="block bg-custom-blue-header hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Retour aux

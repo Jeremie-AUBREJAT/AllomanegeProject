@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (dateRange.status === 'approved') {
             title = 'Réservé';
         } else if (dateRange.status === 'pending') {
-            title = 'En attente de validation';
+            title = 'En attente';
         }
 
         calendar.addEvent({
