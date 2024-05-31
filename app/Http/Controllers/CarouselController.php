@@ -32,9 +32,13 @@ class CarouselController extends Controller
 {
     $carousels = Carousel::with('category')->where('status', 'approved')->paginate(6); // Paginer avec 9 carrousels par page
     $categories = Category::all();
-    $calendars = Calendar::all();
+    // $calendars = Calendar::all();
     // dd(compact('carousels', 'categories','calendars'));
-    return view('carousels', compact('carousels', 'categories','calendars'));
+    // test
+    foreach ($carousels as $carousel) {
+        $carousel->reservations = Calendar::where('carousel_id', $carousel->id)->get();
+    }
+    return view('carousels', compact('carousels', 'categories'));
 }
     public function detailsFront($carouselId)
 {

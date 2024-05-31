@@ -56,37 +56,7 @@
                     </form>
                 </div>
             </div>
-            {{-- test recherche --}}
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-    const prixSlider = document.getElementById('prix');
-    const prixValue = document.getElementById('prix-value');
-    const searchButton = document.getElementById('search-button');
-    const categoryFilter = document.getElementById('category-filter');
-    const nameInput = document.getElementById('name'); // Sélection de l'input pour le nom du manège
-    const dateStartInput = document.getElementById('date-start'); // Sélection de l'input pour la date de début
-    const dateEndInput = document.getElementById('date-end'); // Sélection de l'input pour la date de fin
-
-    prixSlider.addEventListener('input', () => {
-        prixValue.textContent = `${prixSlider.value} €`;
-    });
-
-    searchButton.addEventListener('click', () => {
-        const prix = prixSlider.value;
-        const category = categoryFilter.value;
-        const name = nameInput.value; // Récupérer la valeur du champ "Nom du manège"
-        const dateStart = dateStartInput.value; // Récupérer la valeur du champ "Date de début"
-        const dateEnd = dateEndInput.value; // Récupérer la valeur du champ "Date de fin"
-
-        const url = `/manèges?maxPrice=${prix}&category=${category}&name=${name}&dateStart=${dateStart}&dateEnd=${dateEnd}`; // Ajouter les valeurs des dates à l'URL
-        window.open(url, '_blank');
-    });
-});
-
-            </script>
-            
-
-
+    
             <!-- Container 2 Détails -->
             <div class="w-full h-full md:w-1/2 my-auto bg-custom-blue">
                 <div class="container2 mx-auto p-4 h-full ">

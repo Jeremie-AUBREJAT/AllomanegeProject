@@ -13,8 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Écouteur d'événement pour mettre à jour la valeur affichée de l'input range
     locationInput.addEventListener('input', function () {
         locationValue.innerText = this.value + " km"; // Mettre à jour la valeur affichée
-        getPosition(); // Appel de la fonction pour obtenir la position actuelle de l'utilisateur lorsque la valeur du range change
     });
+
+    // Nouvel écouteur d'événement pour détecter le changement de valeur du slider
+    locationInput.addEventListener('change', getPosition);
 
     // Fonction pour filtrer par prix
     function filterByPrice() {
@@ -111,19 +113,28 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// fonction du home par recherche
+
 document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const maxPrice = parseFloat(urlParams.get('maxPrice')) || Infinity;
     const selectedCategory = urlParams.get('category');
     const nameFromURL = urlParams.get('name');
+    const dateStartFromURL = urlParams.get('dateStart'); // Récupérer la date de début depuis l'URL
+    const dateEndFromURL = urlParams.get('dateEnd'); // Récupérer la date de fin depuis l'URL
 
-    filterCarousels(maxPrice, selectedCategory, nameFromURL);
+    console.log('Réservation récupérée - Date de début :', dateStartFromURL);
+    console.log('Réservation récupérée - Date de fin :', dateEndFromURL);
+
+    filterCarousels(maxPrice, selectedCategory, nameFromURL, dateStartFromURL, dateEndFromURL);
 });
 
-function filterCarousels(maxPrice, selectedCategory, nameFromURL) {
+function filterCarousels(maxPrice, selectedCategory, nameFromURL, dateStartFromURL, dateEndFromURL) {
     const carouselContainer = document.querySelector('.grid');
     const carousels = Array.from(carouselContainer.children);
+
+    // Convertir les dates de l'URL en objets Date
+    const dateStartFromURLObj = new Date(dateStartFromURL);
+    const dateEndFromURLObj = new Date(dateEndFromURL);
 
     carousels.forEach(carousel => {
         // Filtrer par prix
@@ -136,8 +147,27 @@ function filterCarousels(maxPrice, selectedCategory, nameFromURL) {
         // Filtrer par nom
         const nameFilter = nameFromURL ? serializeString(carousel.querySelector('[name="name"]').textContent).includes(serializeString(nameFromURL)) : true;
 
+        // Récupérer les réservations du carousel
+        const reservations = carousel.querySelectorAll('.carousel-reservation');
+        let notReservedInRange = true;
+
+        reservations.forEach(reservation => {
+            const dateStartCarousel = new Date(reservation.dataset.dateStart);
+           
+
+            const dateEndCarousel = new Date(reservation.dataset.dateEnd);
+
+            console.log('Dates de réservation du carousel :');
+            console.log('Date de début :', serializeDate(dateStartCarousel));
+            console.log('Date de fin :', serializeDate(dateEndCarousel));
+
+            if ((dateStartFromURLObj < dateStartCarousel && dateEndFromURLObj > dateStartCarousel) || (dateStartFromURLObj < dateEndCarousel && dateEndFromURLObj > dateEndCarousel)) {
+                notReservedInRange = false;
+            }
+        });
+console.log(notReservedInRange);
         // Afficher ou masquer le carousel en fonction des filtres
-        carousel.style.display = priceFilter && categoryFilter && nameFilter ? 'block' : 'none';
+        carousel.style.display = priceFilter && categoryFilter && nameFilter && notReservedInRange ? 'block' : 'none';
     });
 }
 
@@ -146,3 +176,10 @@ function serializeString(str) {
     return str.trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '');
 }
 
+// Fonction pour sérialiser une date en 'YYYY-MM-DD'
+function serializeDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mois de 0 à 11, donc +1 et padStart pour avoir '01' au lieu de '1'
+    const day = String(date.getDate()).padStart(2, '0'); // padStart pour avoir '01' au lieu de '1'
+    return `${year}-${month}-${day}`;
+}

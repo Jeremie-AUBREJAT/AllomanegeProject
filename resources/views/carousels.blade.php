@@ -44,6 +44,7 @@
                         <option value="highToLow">Du plus cher au moins cher</option>
                     </select>
                 </div>
+               
                 <div class="filter mb-4 lg:mb-0 lg:mr-8">
                     <label for="category" class="mr-2 text-xl text-custom-blue-header font-semibold">Catégorie :</label>
                     <select id="category-filter" class="border p-2 rounded pr-8">
@@ -62,18 +63,22 @@
                     <output for="location" id="locationValue" class="ml-2">0 km</output>
                 </div>
             </div>
-
+            
             <section class="container mx-auto px-4 py-8 mt-16">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                     @foreach ($carousels as $carousel)
                         <div class="carousel bg-white rounded-lg shadow-md p-4" data-latitude="{{$carousel->latitude}}" data-longitude="{{$carousel->longitude}}">
+                            @foreach ($carousel->reservations as $reservation)
+                            <div class="carousel-reservation" data-date-start="{{ $reservation->debut_date }}" data-date-end="{{ $reservation->fin_date }}"></div>
+                            
+                            @endforeach
                             @if ($carousel->carouselPictureMany->isNotEmpty())
                                 <img src="{{ asset($carousel->carouselPictureMany->first()->images) }}" alt="Image 1"
                                     class="w-full h-48 object-contain mb-2">
                             @else
                                 <p>Aucune image disponible</p>
                             @endif
-
+                            
                             <h3 class="text-custom-blue-header text-2xl font-semibold mb-2" id="name" name="name">
                                 {{ $carousel->name }}</h3>
                             <div class="flex items-center mt-4">
@@ -95,7 +100,7 @@
                         </div>
                     @endforeach
                 </div>
-
+                
                 <!-- Pagination -->
                 <div class="mt-8 flex justify-center pagination-hidden">
                     {{ $carousels->links() }}
