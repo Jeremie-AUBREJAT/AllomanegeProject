@@ -38,6 +38,7 @@
                 <div class="filter ml-8 mb-4 lg:mb-0 lg:mr-8">
                     <label for="price" class="mr-2 text-xl text-custom-blue-header font-semibold">Prix :</label>
                     <select id="price" class="border p- rounded pr-8">
+                        <option value="" disabled selected hidden>Trier par prix</option>
                         <option value="allcarousels">Tout les manèges</option>
                         <option value="lowToHigh">Du moins cher au plus cher</option>
                         <option value="highToLow">Du plus cher au moins cher</option>
@@ -46,6 +47,7 @@
                 <div class="filter mb-4 lg:mb-0 lg:mr-8">
                     <label for="category" class="mr-2 text-xl text-custom-blue-header font-semibold">Catégorie :</label>
                     <select id="category-filter" class="border p-2 rounded pr-8">
+                        <option value="" disabled selected hidden>Trier par catégorie</option>
                         <option value="allcategories" class="category-option">Toutes les catégories</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->name }}" class="category-option">{{ $category->name }}</option>
@@ -72,7 +74,7 @@
                                 <p>Aucune image disponible</p>
                             @endif
 
-                            <h3 class="text-custom-blue-header text-2xl font-semibold mb-2" name="name">
+                            <h3 class="text-custom-blue-header text-2xl font-semibold mb-2" id="name" name="name">
                                 {{ $carousel->name }}</h3>
                             <div class="flex items-center mt-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4 0 24 24"

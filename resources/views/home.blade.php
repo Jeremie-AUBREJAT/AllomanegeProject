@@ -8,37 +8,47 @@
             <div class="w-full md:w-1/2">
                 <div class="container1 mx-auto p-8 bg-custom-orange">
                     <div class="flex justify-center mb-8">
-                        <img src="votre-logo.png" alt="Logo" class="h-16">
+                        <img src="/images/logo.png" alt="Logo" class="h-16">
                     </div>
                     <form class="px-24 pt-6 pb-8 mb-4 bg-custom-orange">
                         <div class="mb-4">
                             <label class="block text-black text-xl font-semibold mb-2"
-                                for="localisation">Localisation</label>
+                                for="name">Nom du manège: </label>
                             <input
                                 class="shadow appearance-none border rounded-full w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                                id="localisation" type="text" placeholder="Entrez votre localisation">
+                                id="name" type="text" placeholder="Entrez votre recherche">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-black text-xl font-semibold mb-2" for="date">Date</label>
+                            <label class="block text-black text-xl font-semibold mb-2" for="date-start">Date de début: </label>
                             <input
                                 class="shadow appearance-none border rounded-full w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                                id="date" type="date">
+                                id="date-start" type="date">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-black text-xl font-semibold mb-2" for="taille">Taille Manège</label>
+                            <label class="block text-black text-xl font-semibold mb-2" for="date-end">Date de fin: </label>
                             <input
                                 class="shadow appearance-none border rounded-full w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                                id="taille" type="text" placeholder="Entrez la taille du manège">
+                                id="date-end" type="date">
                         </div>
                         <div class="mb-4">
-                            <label class="block text-black text-xl font-semibold mb-2" for="prix">Prix</label>
+                            <label class="block text-black text-xl font-semibold mb-2" for="taille">Catégories: </label>
+                            <select id="category-filter" class="border p-2 rounded-full pr-8">
+                                <option value="" disabled selected hidden>Trier par catégorie</option>
+                                <option value="allcategories" class="category-option">Toutes les catégories</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->name }}" class="category-option">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-black text-xl font-semibold mb-2" for="prix">Prix: </label>
                             <input class="slider" id="prix" type="range" min="0" max="15000"
                                 step="10">
                             <p class="text-black mt-2" id="prix-value">0 €</p>
                         </div>
                         <div class="flex items-center justify-between">
                             <button
-                                class="bg-white hover:bg-blue-950 hover:text-white text-black font-bold py-2 px-4 mx-auto rounded-full focus:outline-none focus:shadow-outline"
+                               id="search-button" class="bg-white hover:bg-blue-950 hover:text-white text-black font-bold py-2 px-4 mx-auto rounded-full focus:outline-none focus:shadow-outline"
                                 type="button">
                                 Rechercher
                             </button>
@@ -46,6 +56,36 @@
                     </form>
                 </div>
             </div>
+            {{-- test recherche --}}
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+    const prixSlider = document.getElementById('prix');
+    const prixValue = document.getElementById('prix-value');
+    const searchButton = document.getElementById('search-button');
+    const categoryFilter = document.getElementById('category-filter');
+    const nameInput = document.getElementById('name'); // Sélection de l'input pour le nom du manège
+    const dateStartInput = document.getElementById('date-start'); // Sélection de l'input pour la date de début
+    const dateEndInput = document.getElementById('date-end'); // Sélection de l'input pour la date de fin
+
+    prixSlider.addEventListener('input', () => {
+        prixValue.textContent = `${prixSlider.value} €`;
+    });
+
+    searchButton.addEventListener('click', () => {
+        const prix = prixSlider.value;
+        const category = categoryFilter.value;
+        const name = nameInput.value; // Récupérer la valeur du champ "Nom du manège"
+        const dateStart = dateStartInput.value; // Récupérer la valeur du champ "Date de début"
+        const dateEnd = dateEndInput.value; // Récupérer la valeur du champ "Date de fin"
+
+        const url = `/manèges?maxPrice=${prix}&category=${category}&name=${name}&dateStart=${dateStart}&dateEnd=${dateEnd}`; // Ajouter les valeurs des dates à l'URL
+        window.open(url, '_blank');
+    });
+});
+
+            </script>
+            
+
 
             <!-- Container 2 Détails -->
             <div class="w-full h-full md:w-1/2 my-auto bg-custom-blue">
