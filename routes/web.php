@@ -21,6 +21,7 @@ Route::get('/manège/details/{id}', \App\Livewire\ReserveCalendar::class);
 
 // Route::get('/', function () {return view('home');});
 Route::get('/', [CarouselController::class, 'homeFront']);
+Route::view('/réservations', 'reservations');
 // Route::get('/manèges', function () {return view('carousels');});
 Route::get('/manèges', [CarouselController::class, 'carouselsFront']);
 // Route::get('/détails', function () {return view('details/details');});

@@ -116,16 +116,16 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateGeolocationStatus(enabled) {
         if (enabled) {
             localStorage.setItem('geolocationEnabled', 'true');
-            geolocationStatus.textContent = 'Activé';
+            geolocationStatus.textContent = "Activé";
             geolocationStatus.classList.remove('text-red-600');
             geolocationStatus.classList.add('text-green-500');
-            toggleButton.style.transform = 'translateX(0)';
+            toggleButton.style.transform = 'translateX(100%)';
         } else {
             localStorage.removeItem('geolocationEnabled');
             geolocationStatus.textContent = 'Désactivé';
             geolocationStatus.classList.remove('text-green-500');
             geolocationStatus.classList.add('text-red-600');
-            toggleButton.style.transform = 'translateX(100%)';
+            toggleButton.style.transform = 'translateX(0)';
         }
     }
 
@@ -140,7 +140,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Ouvre la modal lorsque l'utilisateur clique sur le bouton "Paramètres de Confidentialité"
-    openModalBtn.addEventListener('click', showModal);
+    if (openModalBtn) {
+        openModalBtn.addEventListener('click', showModal);
+    }
 
     // Affiche la modal si aucune donnée de consentement n'est trouvée dans le localStorage
     const consent = localStorage.getItem('consent');
@@ -155,17 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function() {
             location.reload();
         }, 500);  // Temporisation de 500 ms avant le rafraîchissement
-    });
-
-    // Ferme la modal et enregistre le consentement si l'utilisateur clique en dehors de la modal
-    modal.addEventListener('click', function (event) {
-        if (event.target === modal) {
-            localStorage.setItem('consent', 'true');
-            hideModal();
-            setTimeout(function() {
-                location.reload();
-            }, 0);  // Temporisation de 0 ms avant le rafraîchissement
-        }
     });
 
     // Activer le bouton "Enregistrer et accepter" par défaut
