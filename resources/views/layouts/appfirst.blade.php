@@ -3,14 +3,49 @@
 
 <head>
     <meta charset="UTF-8">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/sliderPrice.js', 'resources/js/Menuburger.js','resources/js/homesearch.js'])
-    
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/sliderPrice.js', 'resources/js/Menuburger.js', 'resources/js/homesearch.js', 'resources/js/cookies.js'])
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allo Manège</title>
 </head>
 
 <body>
     <header>
+        <!-- Modal pour le consentement aux cookies et à la géolocalisation -->
+        <div id="consentModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 hidden">
+            <div class="bg-white rounded-lg overflow-hidden shadow-xl w-1/2 overflow-y-auto mr-28 lg:mx-auto ">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Paramètres de confidentialité</h3>
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-500">Nous utilisons des cookies pour améliorer votre expérience. Veuillez accepter les cookies fonctionnels pour continuer.</p>
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <span class="mr-2 text-sm text-gray-500">Géolocalisation :</span>
+                        <label for="toggleGeolocation" class="flex items-center cursor-pointer">
+                            <div>
+                                <span id="geolocationStatus" class="text-red-600">Désactivé</span>
+                            </div>
+                            <div class="relative ml-2">
+                                <!-- Input caché pour le toggle -->
+                                <input type="checkbox" id="toggleGeolocation" class="sr-only">
+                                <!-- Élément visuel du toggle -->
+                                <div class="block bg-gray-600 w-10 h-6 rounded-full"></div>
+                                <!-- Bouton du toggle -->
+                                <div id="toggleButton" class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform"></div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="px-4 py-3 sm:px-6 flex justify-end">
+                    <button id="saveSettings" class="inline-flex justify-center w-full md:w-auto px-4 py-2 rounded-md border border-transparent shadow-sm bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" disabled>Enregistrer et accepter</button>
+                </div>
+            </div>
+        </div>
+        
+        
+
+        <style></style>
+        </div>
         <nav class="flex items-center justify-between px-8 py-4">
             <div class="flex items-center">
                 <div class="facebook mr-4">
@@ -139,7 +174,8 @@
                         <div class="flex items-center">
                             @if (Auth::user()->role === 'Super_admin')
                                 <div class="relative inline-block mx-2">
-                                    <a class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer" href="/dashboard_SA">Tableau de bord</a>
+                                    <a class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer"
+                                        href="/dashboard_SA">Tableau de bord</a>
                                     {{-- <div class="relative inline-block mx-2">
                                         <span class="text-white bg-red-500 rounded-full px-4 py-2">
                                             {{ $pendingCount }}
@@ -202,7 +238,7 @@
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12" />
                                 </svg>
-                                
+
                             </button>
                         </div>
                     </div>
@@ -243,7 +279,7 @@
                             class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
                             <a href="mentionsLégales">MENTIONS LÉGALES</a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -283,6 +319,9 @@
                 générales de vente</a>
             <a href="contact"
                 class="bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-lg font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700 mb-2 md:mb-0 md:mr-4">Contact</a>
+            <button id="openConsentModal"
+                class="bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-lg font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700 mb-2 md:mb-0 md:mr-4">Paramètres
+                de Confidentialité</button>
         </div>
         <!-- Copyright -->
         <div class="text-center mt-4">&copy; 2024 Allo Manège</div>

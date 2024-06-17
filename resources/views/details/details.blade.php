@@ -1,5 +1,5 @@
 @extends('layouts.appsecond')
-
+@section('title', 'Détails du manège')
 @section('content')
     <!--1er section-->
     <section class="bg-custom-blue2 py-12 px-4 lg:px-8">
@@ -39,7 +39,7 @@
                 </svg>
                 {{ $carousel->city }}
             </p>
-            <p class="text-custom-blue-header text-xl mb-2 flex items-center">Catégorie: {{ $carousel->category->name}}</p>
+            <p class="text-custom-blue-header text-xl mb-2 flex items-center">Catégorie: {{ $carousel->category->name }}</p>
             <div class="flex items-center bg-gray-100 p-6 my-8 w-10/12">
                 <label for="prix" class="text-custom-blue-header text-xl mr-4">Prix : </label>
                 <p class="mr-4 text-custom-orange">{{ $carousel->price }}€</p>

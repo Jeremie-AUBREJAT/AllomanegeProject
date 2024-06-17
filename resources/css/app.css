@@ -61,9 +61,11 @@
 .reservedDates-approved {
     background-color: red;
     color: white;
-    font-size: 16px; 
+    font-size: 16px;
     font-weight: 600;
-    padding-left: 5px;
+    padding: 5px; /* Augmenter le padding */
+    height: 30px; /* Augmenter la hauteur */
+    line-height: 15px; /* Ajuster la hauteur de ligne */
 }
 
 /* Styles pour les réservations en attente */

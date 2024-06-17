@@ -1,5 +1,5 @@
 @extends('layouts.appsecond')
-
+@section('title', 'Manèges')
 @section('content')
     <!--1er section-->
     <section class="bg-custom-blue2 py-12 px-4 lg:px-8">

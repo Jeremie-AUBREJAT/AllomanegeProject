@@ -5,7 +5,9 @@
 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     <a href="/category/create">Créer une catégorie</a>
 </button>
-
+<button class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded">
+    <a href="/dashboard_SA">Retour au tableau de bord</a>
+</button>
 @foreach ($categories as $category)
     <div class="border border-gray-300 p-4 rounded mb-4">
         <p class="text-lg font-semibold">Nom catégorie : {{ $category->name }}</p>
@@ -28,3 +30,4 @@
 
 
 @endforeach
+@endsection

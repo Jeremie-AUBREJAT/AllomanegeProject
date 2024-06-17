@@ -3,22 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js', 'resources/js/cookies.js'])
     @if (request()->is('*détails*'))
-        @vite(['resources/js/fullscreenimage.js','resources/js/fullcalendar.js','resources/js/map.js','resources/js/carouselDetails.js'])
+        @vite(['resources/js/fullscreenimage.js', 'resources/js/fullcalendar.js', 'resources/js/map.js', 'resources/js/carouselDetails.js'])
     @endif
-    @if (request()->is('*create*','*update*'))
-    @vite(['resources/js/autocompleteaddress.js'])
+    @if (request()->is('*create*', '*update*'))
+        @vite(['resources/js/autocompleteaddress.js'])
     @endif
     @if (request()->is('*manèges*'))
-    @vite(['resources/js/carouselsfilter.js'])
+        @vite(['resources/js/carouselsfilter.js'])
     @endif
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allo Manège</title>
+    <title>@yield('title', 'Default Title')</title>
 </head>
 
 <body>
     <header class="">
+        <!-- Modal pour le consentement aux cookies et à la géolocalisation -->
+        <div id="consentModal"
+            class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 hidden">
+            <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+                <div class="px-4 py-5 sm:p-6">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Paramètres de
+                        confidentialité
+                    </h3>
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-500">Nous utilisons des cookies pour améliorer votre expérience.
+                            Veuillez accepter les cookies fonctionnels pour continuer.</p>
+                    </div>
+                    <div class="mt-4">
+                        <hr>
+                        <p class="mt-4 text-sm text-gray-500">Souhaitez-vous activer la géolocalisation ?</p>
+                        <button id="enableGeolocation" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md">Activer
+                            la Géolocalisation</button>
+                        <button id="disableGeolocation"
+                            class="mt-2 ml-2 px-4 py-2 bg-red-600 text-white rounded-md">Désactiver la
+                            Géolocalisation</button>
+                    </div>
+                </div>
+                <div class="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button id="saveSettings"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">Enregistrer
+                        et accepter</button>
+                </div>
+            </div>
+        </div>
         <!-- Nav Desktop -->
         <nav class="hidden md:flex md:justify-between bg-custom-blue-header items-center px-8 py-4">
             <div class="flex items-center gap-4">
@@ -272,6 +301,9 @@
                 générales de vente</a>
             <a href="contact"
                 class="bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-lg font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700 mb-2 md:mb-0 md:mr-4">Contact</a>
+            <button id="openConsentModal"
+                class="bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-lg font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700 mb-2 md:mb-0 md:mr-4">Paramètres
+                de Confidentialité</button>
         </div>
         <!-- Copyright -->
         <div class="text-center mt-4">&copy; 2024 Allo Manège</div>
