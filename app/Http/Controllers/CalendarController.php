@@ -14,6 +14,26 @@ use Illuminate\Support\Facades\Auth;
 
 class CalendarController extends Controller
 {
+    public function viewUserReservationsFront()
+    {
+        // Vérifie si l'utilisateur est authentifié
+        if (Auth::check()) {
+            // Récupère l'ID de l'utilisateur connecté
+            $userId = Auth::id();
+            
+            // Récupère les réservations de l'utilisateur connecté avec les carrousels associés
+            $reservations = Calendar::where('user_id', $userId)
+                ->with('carousel') // Charger la relation avec les carrousels
+                ->orderByDesc('id')
+                ->get();
+    
+            // Retourne la vue avec les réservations
+            return view('reservationstest', ['reservations' => $reservations]);
+        } else {
+            // Si l'utilisateur n'est pas authentifié, redirigez-le avec un message d'erreur
+            return redirect()->route('register')->with('error', 'Connectez-vous ou créez un compte');
+        }
+    }
     public function viewAll()
 {
     // Vérifie si l'utilisateur est authentifié et s'il est un super administrateur

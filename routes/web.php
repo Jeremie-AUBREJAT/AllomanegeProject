@@ -12,16 +12,16 @@ use App\Http\Controllers\CalendarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\MailController;
-
+use App\Models\Calendar;
 
 //middleware Notif Super_admin
 Route::middleware([PendingCountMiddleware::class])->group(function () {
 // Route Front calendar livewire
 Route::get('/manège/details/{id}', \App\Livewire\ReserveCalendar::class);
 
-// Route::get('/', function () {return view('home');});
+Route::get('politique-de-confidentialité', function () {return view('privacypolicy');});
 Route::get('/', [CarouselController::class, 'homeFront']);
-Route::view('/réservations', 'reservations');
+Route::get('/réservations', [CalendarController::class, 'viewUserReservationsFront']);
 // Route::get('/manèges', function () {return view('carousels');});
 Route::get('/manèges', [CarouselController::class, 'carouselsFront']);
 // Route::get('/détails', function () {return view('details/details');});

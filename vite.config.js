@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/js/autocompleteaddress.js',
                 'resources/js/carouselsfilter.js',
                 'resources/js/cookies.js',
+                'resources/js/registervalidation.js',
                 ],
             refresh: true,
         }),
