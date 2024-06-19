@@ -1,0 +1,38 @@
+\doxysection{Référence de la classe App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Super\+\_\+admin\+Middleware}
+\hypertarget{class_app_1_1_http_1_1_middleware_1_1_super__admin_middleware}{}\label{class_app_1_1_http_1_1_middleware_1_1_super__admin_middleware}\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Super\_adminMiddleware@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Super\_adminMiddleware}}
+\doxysubsubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_super__admin_middleware_ad111fd6a31ef2700e0eb1e84f4286b6f}{handle}} (Request \$request, Closure \$next)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Middleware pour vérifier si l\textquotesingle{}utilisateur est authentifié en tant que super administrateur. 
+
+\doxysubsection{Documentation des fonctions membres}
+\Hypertarget{class_app_1_1_http_1_1_middleware_1_1_super__admin_middleware_ad111fd6a31ef2700e0eb1e84f4286b6f}\label{class_app_1_1_http_1_1_middleware_1_1_super__admin_middleware_ad111fd6a31ef2700e0eb1e84f4286b6f} 
+\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Super\_adminMiddleware@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Super\_adminMiddleware}!handle@{handle}}
+\index{handle@{handle}!App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Super\_adminMiddleware@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Super\_adminMiddleware}}
+\doxysubsubsection{\texorpdfstring{handle()}{handle()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Middleware\textbackslash{}\+Super\+\_\+admin\+Middleware\+::handle (\begin{DoxyParamCaption}\item[{Request}]{\$request,  }\item[{Closure}]{\$next }\end{DoxyParamCaption})}
+
+Gère une requête entrante.
+
+Vérifie si l\textquotesingle{}utilisateur est authentifié et a le rôle "{}\+Super\+\_\+admin"{}. Si l\textquotesingle{}utilisateur remplit cette condition, la requête est transmise au prochain middleware dans la chaîne. Sinon, redirige l\textquotesingle{}utilisateur non autorisé vers la page d\textquotesingle{}accueil avec un message d\textquotesingle{}erreur.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+Request & {\em \$request} & La requête HTTP entrante. \\
+\hline
+Closure & {\em \$next} & Le prochain middleware dans la chaîne. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+mixed 
+\end{DoxyReturn}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Middleware/Super\+\_\+admin\+Middleware.\+php\end{DoxyCompactItemize}

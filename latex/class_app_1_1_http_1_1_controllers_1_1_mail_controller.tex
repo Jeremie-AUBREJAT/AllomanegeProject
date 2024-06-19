@@ -1,0 +1,42 @@
+\doxysection{Référence de la classe App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}Mail\+Controller}
+\hypertarget{class_app_1_1_http_1_1_controllers_1_1_mail_controller}{}\label{class_app_1_1_http_1_1_controllers_1_1_mail_controller}\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}MailController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}MailController}}
+Graphe d\textquotesingle{}héritage de App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}Mail\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_http_1_1_controllers_1_1_mail_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_mail_controller_a973dbac982c61224e6fa5b0c4d004109}{send\+Form}} (Request \$request)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Contrôleur pour la gestion de l\textquotesingle{}envoi de formulaire par email. 
+
+\doxysubsection{Documentation des fonctions membres}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_mail_controller_a973dbac982c61224e6fa5b0c4d004109}\label{class_app_1_1_http_1_1_controllers_1_1_mail_controller_a973dbac982c61224e6fa5b0c4d004109} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}MailController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}MailController}!sendForm@{sendForm}}
+\index{sendForm@{sendForm}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}MailController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}MailController}}
+\doxysubsubsection{\texorpdfstring{sendForm()}{sendForm()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Mail\+Controller\+::send\+Form (\begin{DoxyParamCaption}\item[{Request}]{\$request }\end{DoxyParamCaption})}
+
+Envoie le formulaire par email.
+
+Cette méthode valide les données du formulaire, récupère les données soumises, et envoie un email à l\textquotesingle{}adresse de contact définie dans la configuration avec les détails du formulaire.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+Request & {\em \$request} & La requête HTTP contenant les données du formulaire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Redirect\+Response Redirection après l\textquotesingle{}envoi de l\textquotesingle{}e-\/mail avec un message de succès. 
+\end{DoxyReturn}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Controllers/Mail\+Controller.\+php\end{DoxyCompactItemize}

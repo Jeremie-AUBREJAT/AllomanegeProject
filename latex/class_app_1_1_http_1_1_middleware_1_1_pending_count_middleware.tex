@@ -1,0 +1,38 @@
+\doxysection{Référence de la classe App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}Pending\+Count\+Middleware}
+\hypertarget{class_app_1_1_http_1_1_middleware_1_1_pending_count_middleware}{}\label{class_app_1_1_http_1_1_middleware_1_1_pending_count_middleware}\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}PendingCountMiddleware@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}PendingCountMiddleware}}
+\doxysubsubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_pending_count_middleware_a43356b300121dd5d6104445cc74a126a}{handle}} (\$request, Closure \$next)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Middleware pour récupérer et partager le nombre de carousels en attente ("{}pending"{}). 
+
+\doxysubsection{Documentation des fonctions membres}
+\Hypertarget{class_app_1_1_http_1_1_middleware_1_1_pending_count_middleware_a43356b300121dd5d6104445cc74a126a}\label{class_app_1_1_http_1_1_middleware_1_1_pending_count_middleware_a43356b300121dd5d6104445cc74a126a} 
+\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}PendingCountMiddleware@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}PendingCountMiddleware}!handle@{handle}}
+\index{handle@{handle}!App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}PendingCountMiddleware@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}PendingCountMiddleware}}
+\doxysubsubsection{\texorpdfstring{handle()}{handle()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Middleware\textbackslash{}\+Pending\+Count\+Middleware\+::handle (\begin{DoxyParamCaption}\item[{}]{\$request,  }\item[{Closure}]{\$next }\end{DoxyParamCaption})}
+
+Gère une requête entrante.
+
+Vérifie si l\textquotesingle{}utilisateur est connecté en tant que super administrateur. Récupère le nombre de carousels en attente ("{}pending"{}) et le partage avec toutes les vues.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+mixed & {\em \$request} & La requête HTTP entrante. \\
+\hline
+Closure & {\em \$next} & Le prochain middleware dans la chaîne. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+mixed 
+\end{DoxyReturn}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Middleware/Pending\+Count\+Middleware.\+php\end{DoxyCompactItemize}

@@ -6,8 +6,22 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Middleware pour vérifier si l'utilisateur est authentifié en tant que simple utilisateur.
+ */
 class UserMiddleware
 {
+    /**
+     * Gère une requête entrante.
+     *
+     * Vérifie si l'utilisateur est authentifié et a le rôle "user". Si l'utilisateur
+     * n'a pas ce rôle, il est redirigé vers la page d'accueil avec un message d'erreur.
+     * Les utilisateurs non authentifiés sont redirigés vers la page de connexion.
+     *
+     * @param  Request  $request La requête HTTP entrante.
+     * @param  Closure  $next    Le prochain middleware dans la chaîne.
+     * @return mixed
+     */
     public function handle(Request $request, Closure $next)
     {
         // Vérifie si l'utilisateur est authentifié

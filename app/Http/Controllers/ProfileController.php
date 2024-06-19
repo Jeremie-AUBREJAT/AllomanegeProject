@@ -172,11 +172,6 @@ class ProfileController extends Controller
         // Récupérer l'utilisateur à supprimer
         $user = User::find($id);
 
-        // Vérifier si l'utilisateur existe
-        // if (!$user) {
-        //     abort(404); // Retourner une erreur 404 si l'utilisateur n'existe pas
-        // }
-
         // Récupérer tous les carousels de l'utilisateur
         $carousels = $user->carousels;
 
@@ -205,7 +200,7 @@ class ProfileController extends Controller
 
         // Rediriger avec un message de succès ou afficher une vue appropriée
         return redirect()->route('profile.viewAllUsers')->with('success', 'Utilisateur et ses données associées supprimés avec succès');
-        abort(403); // Retourner une erreur 403 (Accès refusé) si l'utilisateur n'est pas autorisé
+        abort(404); // Retourner une erreur 403 (Accès refusé) si l'utilisateur n'est pas autorisé
     }
 }
 
