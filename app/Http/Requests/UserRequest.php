@@ -24,8 +24,8 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:100'],
-            'surname' => ['required', 'string', 'max:100'],
+            'name' => ['required', 'string', 'max:100', 'min:2'],
+            'surname' => ['required', 'string', 'max:100', 'min:2'],
             'compagny' => ['nullable', 'string'],
             'email' => ['required', 'string', 'email', 'max:100'],
             'password' => [
@@ -39,11 +39,11 @@ class UserRequest extends FormRequest
                 'max:100'
             ],
             'street_number' => ['nullable', 'string', 'max:20'],
-            'street_name' => ['required', 'string', 'max:100'],
-            'postal_code' => ['required', 'string', 'max:20'],
-            'city' => ['required', 'string', 'max:100'],
-            'country' => ['required', 'string', 'max:100'],
-            'phone_number' => ['required', 'string', 'max:50'],
+            'street_name' => ['required', 'string', 'max:100', 'min:2'],
+            'postal_code' => ['required', 'string', 'max:20', 'min:2'],
+            'city' => ['required', 'string', 'max:100', 'min:2'],
+            'country' => ['required', 'string', 'max:100', 'min:2'],
+            'phone_number' => ['required', 'string', 'max:50', 'min:10'],
             // 'role' => ['required', 'string', 'in:user,admin,super_admin'],
             'rgpd_consent' => ['required', 'accepted'],
         ];
@@ -60,10 +60,12 @@ class UserRequest extends FormRequest
             'name.required' => 'Le champ nom est requis.',
             'name.string' => 'Le champ nom doit être une chaîne de caractères.',
             'name.max' => 'Le champ nom ne doit pas dépasser :max caractères.',
+            'name.min' => 'Le champ nom doit avoir minimum :min caractères.',
 
             'surname.required' => 'Le champ prénom est requis.',
             'surname.string' => 'Le champ prénom doit être une chaîne de caractères.',
             'surname.max' => 'Le champ prénom ne doit pas dépasser :max caractères.',
+            'surname.min' => 'Le champ prénom doit avoir minimum :min caractères.',
 
             'compagny.string' => 'Le champ compagnie doit être une chaîne de caractères.',
 
@@ -84,22 +86,27 @@ class UserRequest extends FormRequest
             'street_name.required' => 'Le champ nom de rue est requis.',
             'street_name.string' => 'Le champ nom de rue doit être une chaîne de caractères.',
             'street_name.max' => 'Le champ nom de rue ne doit pas dépasser :max caractères.',
+            'street_name.min' => 'Le champ nom de rue doit avoir minimum :min caractères.',
 
             'postal_code.required' => 'Le champ code postal est requis.',
             'postal_code.string' => 'Le champ code postal doit être une chaîne de caractères.',
             'postal_code.max' => 'Le champ code postal ne doit pas dépasser :max caractères.',
+            'postal_code.min' => 'Le champ code postal doit avoir minimum :min caractères.',
 
             'city.required' => 'Le champ ville est requis.',
             'city.string' => 'Le champ ville doit être une chaîne de caractères.',
             'city.max' => 'Le champ ville ne doit pas dépasser :max caractères.',
+            'city.min' => 'Le champ ville doit avoir minimum :min caractères.',
 
             'country.required' => 'Le champ pays est requis.',
             'country.string' => 'Le champ pays doit être une chaîne de caractères.',
             'country.max' => 'Le champ pays ne doit pas dépasser :max caractères.',
+            'country.min' => 'Le champ pays doit avoir minimum :min caractères.',
 
             'phone_number.required' => 'Le champ numéro de téléphone est requis.',
             'phone_number.string' => 'Le champ numéro de téléphone doit être une chaîne de caractères.',
             'phone_number.max' => 'Le champ numéro de téléphone ne doit pas dépasser :max caractères.',
+            'phone_number.min' => 'Le champ numéro de téléphone doit avoir minimum :min caractères.',
 
             'role.required' => 'Le champ rôle est requis.',
             'role.string' => 'Le champ rôle doit être une chaîne de caractères.',
