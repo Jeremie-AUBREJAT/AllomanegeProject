@@ -89,7 +89,7 @@
                     <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
                             href="/réservations">RÉSERVATION</a></li>
                     <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
-                            href="/a_propos">À PROPOS</a></li>
+                            href="/à-propos">À PROPOS</a></li>
                     <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
                             href="/contact">CONTACT</a></li>
                 </ul>
@@ -97,14 +97,6 @@
             {{-- si Guest --}}
             @if (Auth::guest())
                 <div class="buttons flex gap-4">
-                    <div class="rounded-lg border border-gray-300 bg-white shadow-md p-4 flex flex-col">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
-                            <path
-                                d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z">
-                            </path>
-                        </svg>
-                    </div>
                     <details class="rounded-lg border border-gray-300 bg-white shadow-md p-4 flex flex-col">
                         <summary class="flex items-center gap-2 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

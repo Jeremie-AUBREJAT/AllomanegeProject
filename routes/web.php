@@ -22,7 +22,7 @@ Route::get('/manège/details/{id}', \App\Livewire\ReserveCalendar::class);
 Route::get('politique-de-confidentialité', function () {return view('privacypolicy');});
 Route::get('/', [CarouselController::class, 'homeFront']);
 Route::get('/réservations', [CalendarController::class, 'viewUserReservationsFront']);
-// Route::get('/manèges', function () {return view('carousels');});
+Route::get('/à-propos', function () {return view('apropos');});
 Route::get('/manèges', [CarouselController::class, 'carouselsFront']);
 // Route::get('/détails', function () {return view('details/details');});
 Route::get('manège/détails/{id}',[CarouselController::class, 'detailsFront']);

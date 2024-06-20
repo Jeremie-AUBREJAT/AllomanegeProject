@@ -1,11 +1,11 @@
 @extends('layouts.appsecond')
-
+@section('title', 'modifier-un-manège')
 @section('content')
     <div class="flex justify-center my-4">
         <a href="/carousel/{{ $carousel->id }}/reservations"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Voir les réservations</a>
     </div>
-    <h2 class="text-3xl ml-8">Dernière réservation associée: </h2>
+    {{-- <h2 class="text-3xl ml-8">Dernière réservation associée: </h2>
 
     <div class="bg-white p-4 rounded-lg shadow-md mb-8">
         @foreach ($reservations as $reservation)
@@ -33,7 +33,7 @@
                 @endif
             </div>
         @endforeach
-    </div>
+    </div> --}}
     <div class="flex justify-center">
 
 
@@ -142,8 +142,8 @@
                         @if (Auth::user()->role === 'Super_admin')
                             <select name="status" class="form-control mb-4">
                                 @foreach (config('enumStatus.status') as $key => $value)
-                                    <option value="{{ $key }}"
-                                        {{ $carousel->status == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                    <option value="{{ $key }}" {{ $carousel->status == $key ? 'selected' : '' }}>
+                                        {{ $value }}</option>
                                 @endforeach
                             </select>
                         @endif

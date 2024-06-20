@@ -214,8 +214,15 @@ class CarouselController extends Controller
     {
         // Récupérer l'utilisateur actuellement authentifié
         $user = Auth::user();
+        // Vérifier si les champs de latitude et longitude ont été saisis manuellement
+        // Vérifier si les champs de latitude et longitude ont été saisis manuellement
+    $latitude2 = $request->input('latitude2');
+    $longitude2 = $request->input('longitude2');
+    $coordinates = null; // Initialisation de la variable $coordinates
 
-        // Formater l'adresse
+    // Vérifier si les champs de latitude et longitude sont vides (ce qui indique qu'il faut géocoder l'adresse)
+    if (empty($latitude2) && empty($longitude2)) {
+        // Formater l'adresse pour le géocodage
         $address = $this->formatAddress(
             $request->input('street_number'),
             $request->input('street_name'),
@@ -228,9 +235,19 @@ class CarouselController extends Controller
         $coordinates = $this->geocodeAddress($address);
 
         if (!$coordinates) {
-            return redirect()->back()->withErrors(['localization' => 'Adresse non valide ou non trouvée.']);
+            // Si les coordonnées ne sont pas trouvées, préparer les champs pour saisie manuelle
+            $showManualCoords = true; // Indiquer qu'il faut afficher les champs de saisie manuelle
+            return redirect()->back()->withErrors(['localization' => 'Adresse non valide ou non trouvée.'])->with('showManualCoords', $showManualCoords)->withInput();
         }
+    } else {
+        // Utiliser les coordonnées manuelles si elles sont disponibles
+        $coordinates = [
+            'latitude' => $latitude2,
+            'longitude' => $longitude2,
+        ];
+    }
 
+    
         // Ajout d'une ou plusieurs images
         if (!$request->hasFile('imageCreate')) {
             return redirect()->back()->withErrors(['imageCreate' => 'Veuillez télécharger au moins une image.'])->withInput();

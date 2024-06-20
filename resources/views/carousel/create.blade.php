@@ -1,10 +1,10 @@
 @extends('layouts.appsecond')
-
+@section('title', 'ajouer-un-manège')
 @section('content')
     <div class="flex justify-center my-4">
         <div class="w-2/3 bg-white p-8 rounded-lg shadow-md">
             <h1 class="text-2xl mb-4">Création d'un manège</h1>
-            
+
             <form method="POST" action="{{ url('/carousel/create') }}" enctype="multipart/form-data">
                 @csrf
 
@@ -70,8 +70,8 @@
                         <!-- Champ temps d'installation -->
                         <div class="mb-4">
                             <label for="install_time" class="block mb-2">Temps d'installation en heure(s) :</label>
-                            <input type="text" name="install_time" id="install_time"
-                                value="{{ old('install_time') }}" class="border rounded-md px-3 py-2 w-full">
+                            <input type="text" name="install_time" id="install_time" value="{{ old('install_time') }}"
+                                class="border rounded-md px-3 py-2 w-full">
                             @error('install_time')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
@@ -92,9 +92,10 @@
                             <select name="category" id="category" required class="border rounded-md px-3 py-2 w-full">
                                 <option value="">Sélectionnez une catégorie</option>
                                 @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
+                                    <option value="{{ $category->id }}"
+                                        {{ old('category') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('category')
@@ -108,12 +109,17 @@
                             <label for="search" class="block mb-2">Recherche adresse :</label>
                             <div class="relative">
                                 <input type="text" id="search" placeholder="Recherche adresse..."
-                                       class="search-input border rounded-md px-3 py-2 w-full pl-10">
+                                    class="search-input border rounded-md px-3 py-2 w-full pl-10">
                                 <div id="search-suggestions" class="autocomplete-suggestions"></div>
-                                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.42-1.42l4.6 4.6a1 1 0 01-1.42 1.42l-4.6-4.6zM8 14A6 6 0 108 2a6 6 0 000 12z" clip-rule="evenodd"></path></svg>
+                                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"
+                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M12.9 14.32a8 8 0 111.42-1.42l4.6 4.6a1 1 0 01-1.42 1.42l-4.6-4.6zM8 14A6 6 0 108 2a6 6 0 000 12z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
                             </div>
                         </div>
-                        
+
                         <div class="mb-4">
                             <label for="street_name" class="block mb-2">Nom de rue :</label>
                             <input type="text" name="street_name" id="street_name" value="{{ old('street_name') }}"
@@ -125,12 +131,13 @@
                         <div class="mb-4">
                             <label for="street_number" class="block mb-2">Numéro de rue :</label>
                             <input type="text" name="street_number" id="street_number"
-                                value="{{ old('street_number', 'Entrez un numero') }}" class="border rounded-md px-3 py-2 w-full">
+                                value="{{ old('street_number', 'Entrez un numero') }}"
+                                class="border rounded-md px-3 py-2 w-full">
                             @error('street_number')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
                         </div>
-                        
+
                         <div class="mb-4">
                             <label for="postal_code" class="block mb-2">Code postal :</label>
                             <input type="text" name="postal_code" id="postal_code" value="{{ old('postal_code') }}"
@@ -155,21 +162,30 @@
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
                         </div>
-                        
+
 
                     </div>
 
                     <!-- Colonne droite pour les images -->
                     <div>
                         @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (session('showManualCoords'))
+                            <label for="latitude" class="block mb-2">Latitude :</label>
+                            <input type="text" id="latitude2" name="latitude2" value="{{ old('latitude') }}"
+                                class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
+                            <label for="longitude" class="block mb-2">Longitude :</label>
+                            <input type="text" id="longitude2" name="longitude2" value="{{ old('longitude') }}"
+                                class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
+                        @endif
+
                         <!-- Champ image -->
                         <div id="imageFields" class="mb-4">
                             <label for="imageCreate" class="block mb-2">Image(s) au format "JPG" ou "JPEG":</label>
@@ -178,10 +194,12 @@
                             @error('imageCreate')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
-                        </div>
-                        <button id="addImageField" type="button"
+                            <div id="previewContainer" class="mt-4"></div>
+                            <button id="addImageField" type="button"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Ajouter
                             une autre image</button>
+                        </div>
+                        
                     </div>
                 </div>
 

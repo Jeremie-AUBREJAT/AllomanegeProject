@@ -1,32 +1,102 @@
 // Vérifier si l'URL contient 'create' ou 'update'
+// var currentUrl = window.location.href;
+// if (currentUrl.includes('create') || currentUrl.includes('update')) {
+//     // Attacher un gestionnaire d'événements au clic sur le bouton
+//     document.getElementById('addImageField').addEventListener('click', function(event) {
+//         event.preventDefault(); // Empêche la soumission du formulaire
+
+//         var imageFields = document.getElementById('imageFields');
+//         var currentImageFieldsCount = imageFields.children.length;
+
+//         var totalImageCount = currentImageFieldsCount;
+        
+//         // Si c'est une page 'update', comptez également les images déjà présentes
+//         if (currentUrl.includes('update')) {
+//             var existingImagesCount = document.querySelectorAll('.existing-image').length;
+//             totalImageCount += existingImagesCount;
+//         }
+
+//         if (totalImageCount < 6) {
+//             // Créer un nouveau champ d'image
+//             var newImageField = document.createElement('div');
+//             newImageField.classList.add('mb-4');
+//             newImageField.innerHTML = `
+//                 <label for="imageCreate" class="block mb-2">Image :</label>
+//                 <input type="file" name="imageCreate[]" class="border rounded-md px-3 py-2 w-full" multiple>
+//             `;
+//             imageFields.appendChild(newImageField);
+//         } else {
+//             alert('Vous ne pouvez pas ajouter plus de 5 images.');
+//         }
+//     });
+// }
+
+
+// test visualisation images
 var currentUrl = window.location.href;
+
 if (currentUrl.includes('create') || currentUrl.includes('update')) {
-    // Attacher un gestionnaire d'événements au clic sur le bouton
     document.getElementById('addImageField').addEventListener('click', function(event) {
         event.preventDefault(); // Empêche la soumission du formulaire
 
         var imageFields = document.getElementById('imageFields');
-        var currentImageFieldsCount = imageFields.children.length;
+        var addButton = document.getElementById('addImageField');
+        var currentImageFieldsCount = imageFields.querySelectorAll('input[type="file"]').length;
 
         var totalImageCount = currentImageFieldsCount;
-        
-        // Si c'est une page 'update', comptez également les images déjà présentes
+
         if (currentUrl.includes('update')) {
             var existingImagesCount = document.querySelectorAll('.existing-image').length;
             totalImageCount += existingImagesCount;
         }
 
-        if (totalImageCount < 6) {
-            // Créer un nouveau champ d'image
+        if (totalImageCount < 5) {
+            // Créer un nouveau champ d'image et un conteneur de prévisualisation associé
             var newImageField = document.createElement('div');
             newImageField.classList.add('mb-4');
+            var newImageFieldId = 'imageField' + (totalImageCount + 1);
+
             newImageField.innerHTML = `
-                <label for="imageCreate" class="block mb-2">Image :</label>
-                <input type="file" name="imageCreate[]" class="border rounded-md px-3 py-2 w-full" multiple>
+                <label for="imageCreate${totalImageCount + 1}" class="block mb-2">Image :</label>
+                <input type="file" name="imageCreate[]" id="imageCreate${totalImageCount + 1}" class="border rounded-md px-3 py-2 w-full" multiple>
+                <div id="previewContainer${totalImageCount + 1}" class="mt-4"></div>
             `;
-            imageFields.appendChild(newImageField);
+
+            // Insérer le nouveau champ d'image juste au-dessus du bouton "Ajouter une autre image"
+            imageFields.insertBefore(newImageField, addButton);
+            document.getElementById(`imageCreate${totalImageCount + 1}`).addEventListener('change', function(event) {
+                previewImages(event, `previewContainer${totalImageCount + 1}`);
+            });
         } else {
             alert('Vous ne pouvez pas ajouter plus de 5 images.');
         }
     });
+
+    document.getElementById('imageCreate').addEventListener('change', function(event) {
+        previewImages(event, 'previewContainer');
+    });
 }
+
+function previewImages(event, previewContainerId) {
+    var files = event.target.files;
+    var previewContainer = document.getElementById(previewContainerId);
+    previewContainer.innerHTML = ''; // Clear existing previews
+
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+
+        if (file.type.startsWith('image/')) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('w-32', 'h-32', 'object-cover', 'mr-2', 'mb-2');
+                previewContainer.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+}
+

@@ -1,5 +1,5 @@
 @extends('layouts.appsecond')
-
+@section('title', 'tous-les-manèges')
 @section('content')
 
 <div class="flex justify-center m-8">
