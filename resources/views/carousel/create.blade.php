@@ -1,5 +1,5 @@
 @extends('layouts.appsecond')
-@section('title', 'ajouer-un-manège')
+@section('title', 'ajouter-un-manège')
 @section('content')
     <div class="flex justify-center my-4">
         <div class="w-2/3 bg-white p-8 rounded-lg shadow-md">

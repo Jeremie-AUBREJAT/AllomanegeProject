@@ -88,7 +88,7 @@
 
             <h3 class="text-2xl font-bold mb-4">Contactez-nous</h3>
             <p class="mb-4">
-                Si vous avez des questions ou des préoccupations concernant cette politique de confidentialité ou nos pratiques de données, veuillez nous contacter à [vos informations de contact].
+                Si vous avez des questions ou des préoccupations concernant cette politique de confidentialité ou nos pratiques de données, veuillez nous contacter à <a href="contact" class="text-blue-500 underline">contact@allomanege.com</a>.
             </p>
 
             <p class="mb-4">

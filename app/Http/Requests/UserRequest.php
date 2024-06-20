@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             'name' => ['required', 'string', 'max:100', 'min:2'],
             'surname' => ['required', 'string', 'max:100', 'min:2'],
             'compagny' => ['nullable', 'string'],
-            'email' => ['required', 'string', 'email', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
             'password' => [
                 'required',
                 'string',
@@ -73,6 +73,7 @@ class UserRequest extends FormRequest
             'email.string' => 'Le champ email doit être une chaîne de caractères.',
             'email.email' => 'Le champ email doit être une adresse email valide.',
             'email.max' => 'Le champ email ne doit pas dépasser :max caractères.',
+            'email.unique:users' => 'Vous possedez deja un compte ou cette adresse est déja utilisée',
 
             'password.required' => 'Le champ mot de passe est requis1.',
             'password.string' => 'Le champ mot de passe doit être une chaîne de caractères.',
