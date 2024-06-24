@@ -22,14 +22,21 @@ class CarouselRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'price' => ['required', 'numeric', 'min:1'],
             'name' => ['required', 'string', 'min:2', 'max:100'],
-            'size' => ['required', 'numeric'],
+            'length' => ['required', 'numeric'],
+            'width' => ['required', 'numeric'],
             'weight' => ['required', 'integer'],
             'watt_power' => ['required', 'integer'],
             'install_time' => ['required', 'numeric'],
             'description' => ['required', 'min:10', 'max:500', 'string'],
-            'localization' => ['required', 'string', 'min:1', 'max:255'],
+            'street_number' => ['nullable', 'string', 'max:20'],
+            'street_name' => ['required', 'string', 'max:100'],
+            'postal_code' => ['required', 'string', 'max:20'],
+            'city' => ['required', 'string', 'max:100'],
+            'country' => ['required', 'string', 'max:100'],
             'price' => ['required', 'numeric', 'min:1'],
+            'imageCreate' => ['required', 'max:5'],
         ];
     }
     public function messages()
@@ -40,8 +47,11 @@ class CarouselRequest extends FormRequest
             'name.min' => 'Le champ nom doit comporter au moins :min caractères.',
             'name.max' => 'Le champ nom ne doit pas dépasser :max caractères.',
 
-            'size.required' => 'Le champ taille est requis.',
-            'size.numeric' => 'Le champ taille doit être un nombre.',
+            'length.required' => 'Le champ longueur est requis.',
+            'length.numeric' => 'Le champ longueur doit être un nombre.',
+
+            'width.required' => 'Le champ largeur est requis.',
+            'width.numeric' => 'Le champ largeur doit être un nombre.',
 
             'weight.required' => 'Le champ poids est requis.',
             'weight.integer' => 'Le champ poids doit être un nombre entier.',
@@ -54,17 +64,33 @@ class CarouselRequest extends FormRequest
 
             'description.required' => 'Le champ description est requis.',
             'description.string' => 'Le champ description doit être une chaîne de caractères.',
-            'description.min' => 'Le champ description doit comporter au moins :min caractères.',
-            'description.max' => 'Le champ description ne doit pas dépasser :max caractères.',
+            'description.min' => 'Le champ description doit comporter au moins :min.',
 
-            'localization.required' => 'Le champ localisation est requis.',
-            'localization.string' => 'Le champ localisation doit être une chaîne de caractères.',
-            'localization.min' => 'Le champ localisation doit comporter au moins :min caractère.',
-            'localization.max' => 'Le champ localisation ne doit pas dépasser :max caractères.',
+            'street_number.string' => 'Le champ numéro de rue doit être une chaîne de caractères.',
+            'street_number.max' => 'Le champ numéro de rue ne doit pas dépasser :max caractères.',
+
+            'street_name.required' => 'Le champ nom de rue est requis.',
+            'street_name.string' => 'Le champ nom de rue doit être une chaîne de caractères.',
+            'street_name.max' => 'Le champ nom de rue ne doit pas dépasser :max caractères.',
+
+            'postal_code.required' => 'Le champ code postal est requis.',
+            'postal_code.string' => 'Le champ code postal doit être une chaîne de caractères.',
+            'postal_code.max' => 'Le champ code postal ne doit pas dépasser :max caractères.',
+
+            'city.required' => 'Le champ ville est requis.',
+            'city.string' => 'Le champ ville doit être une chaîne de caractères.',
+            'city.max' => 'Le champ ville ne doit pas dépasser :max caractères.',
+
+            'country.required' => 'Le champ pays est requis.',
+            'country.string' => 'Le champ pays doit être une chaîne de caractères.',
+            'country.max' => 'Le champ pays ne doit pas dépasser :max caractères.',
 
             'price.required' => 'Le champ prix est requis.',
             'price.numeric' => 'Le champ prix doit être un nombre.',
             'price.min' => 'Le champ prix doit être au moins :min.',
+
+            'imageCreate.required' => 'Vous devez ajouter au moins une image.',
+            'imageCreate.max' => 'Vous ne pouvez pas ajouter plus de :max images.',
         ];
     }
 }

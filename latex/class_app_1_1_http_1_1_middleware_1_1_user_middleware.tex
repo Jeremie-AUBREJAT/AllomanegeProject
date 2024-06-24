@@ -1,0 +1,38 @@
+\doxysection{Référence de la classe App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}User\+Middleware}
+\hypertarget{class_app_1_1_http_1_1_middleware_1_1_user_middleware}{}\label{class_app_1_1_http_1_1_middleware_1_1_user_middleware}\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}UserMiddleware@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}UserMiddleware}}
+\doxysubsubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_middleware_1_1_user_middleware_aa789dcc3e195c565ca46a929a30e1b6c}{handle}} (Request \$request, Closure \$next)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Middleware pour vérifier si l\textquotesingle{}utilisateur est authentifié en tant que simple utilisateur. 
+
+\doxysubsection{Documentation des fonctions membres}
+\Hypertarget{class_app_1_1_http_1_1_middleware_1_1_user_middleware_aa789dcc3e195c565ca46a929a30e1b6c}\label{class_app_1_1_http_1_1_middleware_1_1_user_middleware_aa789dcc3e195c565ca46a929a30e1b6c} 
+\index{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}UserMiddleware@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}UserMiddleware}!handle@{handle}}
+\index{handle@{handle}!App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}UserMiddleware@{App\textbackslash{}Http\textbackslash{}Middleware\textbackslash{}UserMiddleware}}
+\doxysubsubsection{\texorpdfstring{handle()}{handle()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Middleware\textbackslash{}\+User\+Middleware\+::handle (\begin{DoxyParamCaption}\item[{Request}]{\$request,  }\item[{Closure}]{\$next }\end{DoxyParamCaption})}
+
+Gère une requête entrante.
+
+Vérifie si l\textquotesingle{}utilisateur est authentifié et a le rôle "{}user"{}. Si l\textquotesingle{}utilisateur n\textquotesingle{}a pas ce rôle, il est redirigé vers la page d\textquotesingle{}accueil avec un message d\textquotesingle{}erreur. Les utilisateurs non authentifiés sont redirigés vers la page de connexion.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+Request & {\em \$request} & La requête HTTP entrante. \\
+\hline
+Closure & {\em \$next} & Le prochain middleware dans la chaîne. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+mixed 
+\end{DoxyReturn}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Middleware/User\+Middleware.\+php\end{DoxyCompactItemize}

@@ -1,5 +1,5 @@
 @extends('layouts.appsecond')
-
+@section('title', 'Contact')
 @section('content')
 <section class="bg-custom-blue2 py-12 px-4 lg:px-8">
     <div class="max-w-4xl mx-auto text-center">
@@ -25,34 +25,37 @@
         
     </div>
 </section>
-<form action="/contact/send" method="POST" class="max-w-xl mx-auto mt-32 px-4 lg:flex lg:justify-between lg:items-start">
+<form action="/contact/send" method="POST" class="max-w-4xl mx-auto my-12 px-4">
     @csrf
-    <div class="lg:w-1/2 lg:pr-4 mb-4">
-        <label for="nom" class="block mb-2">Nom :</label>
-        <input type="text" id="nom" name="nom" required class="w-full border border-gray-300 rounded-md px-0 py-2 mb-2">
-        <label for="prenom" class="block mb-2">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
-        <label for="entreprise" class="block mb-2">Entreprise :</label>
-        <input type="text" id="entreprise" name="entreprise" class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
-        <label for="email" class="block mb-2">Email :</label>
-        <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
-        
+    <div class="lg:flex lg:justify-between lg:items-start">
+        <div class="mt-4 lg:w-1/2 lg:pr-4 mb-4">
+            <label for="nom" class="block mb-2">Nom :</label>
+            <input type="text" id="nom" name="nom" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
+            <label for="prenom" class="block mb-2">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
+            <label for="entreprise" class="block mb-2">Entreprise :</label>
+            <input type="text" id="entreprise" name="entreprise" class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
+            <label for="email" class="block mb-2">Email :</label>
+            <input type="email" id="email" name="email" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
+        </div>
+        <div class="lg:w-1/2 lg:pl-4 mb-4">
+            {{-- <label for="manege" class="block mb-2">Manège :</label>
+            <select id="manege" name="manege" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
+                <option value="" disabled selected>Choisissez un manège</option> --}}
+                <!-- Boucle pour afficher les options des manèges -->
+                {{-- @foreach($maneges as $manege)
+                <option value="{{ $manege->id }}">{{ $manege->nom }}</option>
+                @endforeach --}}
+                <option value=""></option>
+            </select>
+            <label for="telephone" class="block mb-2">Téléphone :</label>
+            <input type="tel" id="telephone" name="telephone" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
+            <label for="message" class="block mb-2">Votre message :</label>
+            <textarea id="message" name="message" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2" rows="7"></textarea>
+        </div>
     </div>
-    <div class="lg:w-1/2 lg:pl-4 mb-4">
-        {{-- <label for="manege" class="block mb-2">Manège :</label>
-        <select id="manege" name="manege" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
-            <option value="" disabled selected>Choisissez un manège</option> --}}
-            <!-- Boucle pour afficher les options des manèges -->
-            {{-- @foreach($maneges as $manege)
-            <option value="{{ $manege->id }}">{{ $manege->nom }}</option>
-            @endforeach --}}
-            <option value=""></option>
-        </select>
-        <label for="telephone" class="block mb-2">Téléphone :</label>
-        <input type="tel" id="telephone" name="telephone" required class="w-full border border-gray-300 rounded-md px-3 py-2">
-        <label for="message" class="block mb-2">Votre message :</label>
-        <textarea id="message" name="message" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2"></textarea>
-        <button type="submit" class="w-full bg-custom-blue-header text-white py-2 px-4 rounded-md">Envoyer</button>
+    <div class="flex justify-center mt-4">
+        <button type="submit" class="bg-custom-blue-header text-white py-2 px-4 rounded-md">Envoyer</button>
     </div>
 </form>
 

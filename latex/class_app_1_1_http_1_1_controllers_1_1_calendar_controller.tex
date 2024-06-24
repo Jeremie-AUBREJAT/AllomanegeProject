@@ -1,0 +1,154 @@
+\doxysection{Référence de la classe App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}Calendar\+Controller}
+\hypertarget{class_app_1_1_http_1_1_controllers_1_1_calendar_controller}{}\label{class_app_1_1_http_1_1_controllers_1_1_calendar_controller}\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}}
+Graphe d\textquotesingle{}héritage de App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}Calendar\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_http_1_1_controllers_1_1_calendar_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a6c59b0b9a2a072a4e5160cd8753d2d2d}{view\+User\+Reservations\+Front}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a9f1e4222ec28ab4247cfbcf1763454f9}{view\+All}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a7390514d4abae076b97e328832bdb06d}{create}} (Request \$request)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_ac9fe5087739bf33e068836ef27eb3318}{reservations\+For\+Carousel}} (\$carousel\+Id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_aa24e565910e32188dd16c14f6e1b4954}{show\+Reservation\+Edit\+Form}} (\$reservation\+Id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a8998e7e6be1d3659ca80362273516e82}{update\+Reservation}} (Request \$request, \$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a5a8b6cb7dccac4290a78d0590864bfb0}{delete\+Reservation}} (\$id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Contrôleur pour la gestion des réservations dans le calendrier. 
+
+\doxysubsection{Documentation des fonctions membres}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a7390514d4abae076b97e328832bdb06d}\label{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a7390514d4abae076b97e328832bdb06d} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}!create@{create}}
+\index{create@{create}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Calendar\+Controller\+::create (\begin{DoxyParamCaption}\item[{Request}]{\$request }\end{DoxyParamCaption})}
+
+Crée une nouvelle réservation pour un carrousel spécifié.
+
+Cette méthode permet à un super administrateur de créer une nouvelle réservation pour un carrousel spécifié à partir des données fournies dans la requête HTTP.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+Request & {\em \$request} & La requête HTTP contenant les données du formulaire. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Redirect\+Response Redirection vers une page de confirmation. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a5a8b6cb7dccac4290a78d0590864bfb0}\label{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a5a8b6cb7dccac4290a78d0590864bfb0} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}!deleteReservation@{deleteReservation}}
+\index{deleteReservation@{deleteReservation}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}}
+\doxysubsubsection{\texorpdfstring{deleteReservation()}{deleteReservation()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Calendar\+Controller\+::delete\+Reservation (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Supprime une réservation spécifique.
+
+Cette méthode permet à un super administrateur de supprimer une réservation spécifique identifiée par son ID. Elle envoie également un email de notification à l\textquotesingle{}utilisateur concerné.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+int & {\em \$id} & L\textquotesingle{}ID de la réservation à supprimer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Contracts\textbackslash{}\+View\textbackslash{}\+View Vue de confirmation avec les réservations mises à jour. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_ac9fe5087739bf33e068836ef27eb3318}\label{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_ac9fe5087739bf33e068836ef27eb3318} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}!reservationsForCarousel@{reservationsForCarousel}}
+\index{reservationsForCarousel@{reservationsForCarousel}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}}
+\doxysubsubsection{\texorpdfstring{reservationsForCarousel()}{reservationsForCarousel()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Calendar\+Controller\+::reservations\+For\+Carousel (\begin{DoxyParamCaption}\item[{}]{\$carousel\+Id }\end{DoxyParamCaption})}
+
+Affiche toutes les réservations associées à un carrousel spécifié.
+
+Cette méthode permet à un administrateur ou à un super administrateur d\textquotesingle{}afficher toutes les réservations associées à un carrousel spécifié par son ID.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+int & {\em \$carousel\+Id} & L\textquotesingle{}ID du carrousel pour lequel afficher les réservations. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Redirect\+Response\texorpdfstring{$\vert$}{|}\textbackslash{}\+Illuminate\textbackslash{}\+View\textbackslash{}\+View Redirection ou vue des réservations. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_aa24e565910e32188dd16c14f6e1b4954}\label{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_aa24e565910e32188dd16c14f6e1b4954} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}!showReservationEditForm@{showReservationEditForm}}
+\index{showReservationEditForm@{showReservationEditForm}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}}
+\doxysubsubsection{\texorpdfstring{showReservationEditForm()}{showReservationEditForm()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Calendar\+Controller\+::show\+Reservation\+Edit\+Form (\begin{DoxyParamCaption}\item[{}]{\$reservation\+Id }\end{DoxyParamCaption})}
+
+Affiche le formulaire de modification d\textquotesingle{}une réservation spécifique.
+
+Cette méthode permet à un super administrateur d\textquotesingle{}afficher le formulaire pour modifier une réservation spécifique identifiée par son ID.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+int & {\em \$reservation\+Id} & L\textquotesingle{}ID de la réservation à modifier. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Redirect\+Response\texorpdfstring{$\vert$}{|}\textbackslash{}\+Illuminate\textbackslash{}\+View\textbackslash{}\+View Redirection ou vue du formulaire de modification. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a8998e7e6be1d3659ca80362273516e82}\label{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a8998e7e6be1d3659ca80362273516e82} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}!updateReservation@{updateReservation}}
+\index{updateReservation@{updateReservation}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}}
+\doxysubsubsection{\texorpdfstring{updateReservation()}{updateReservation()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Calendar\+Controller\+::update\+Reservation (\begin{DoxyParamCaption}\item[{Request}]{\$request,  }\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Met à jour une réservation spécifique.
+
+Cette méthode permet à un super administrateur de mettre à jour une réservation spécifique identifiée par son ID avec les nouvelles valeurs fournies dans la requête.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+Request & {\em \$request} & La requête HTTP contenant les nouvelles données de la réservation. \\
+\hline
+int & {\em \$id} & L\textquotesingle{}ID de la réservation à mettre à jour. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Redirect\+Response Redirection vers une page de confirmation ou une autre vue. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a9f1e4222ec28ab4247cfbcf1763454f9}\label{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a9f1e4222ec28ab4247cfbcf1763454f9} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}!viewAll@{viewAll}}
+\index{viewAll@{viewAll}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}}
+\doxysubsubsection{\texorpdfstring{viewAll()}{viewAll()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Calendar\+Controller\+::view\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Affiche toutes les réservations et tous les carrousels.
+
+Cette méthode récupère toutes les réservations et tous les carrousels et les affiche si l\textquotesingle{}utilisateur est un super administrateur.
+
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Contracts\textbackslash{}\+View\textbackslash{}\+View Vue contenant les réservations et les carrousels 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a6c59b0b9a2a072a4e5160cd8753d2d2d}\label{class_app_1_1_http_1_1_controllers_1_1_calendar_controller_a6c59b0b9a2a072a4e5160cd8753d2d2d} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}!viewUserReservationsFront@{viewUserReservationsFront}}
+\index{viewUserReservationsFront@{viewUserReservationsFront}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CalendarController}}
+\doxysubsubsection{\texorpdfstring{viewUserReservationsFront()}{viewUserReservationsFront()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Calendar\+Controller\+::view\+User\+Reservations\+Front (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Affiche les réservations de l\textquotesingle{}utilisateur connecté.
+
+Cette méthode récupère les réservations associées à l\textquotesingle{}utilisateur connecté et les affiche avec les détails des carrousels réservés.
+
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Contracts\textbackslash{}\+View\textbackslash{}\+View Vue contenant les réservations de l\textquotesingle{}utilisateur 
+\end{DoxyReturn}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Controllers/Calendar\+Controller.\+php\end{DoxyCompactItemize}

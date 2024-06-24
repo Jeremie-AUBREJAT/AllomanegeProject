@@ -1,0 +1,122 @@
+\doxysection{Référence de la classe App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}Category\+Controller}
+\hypertarget{class_app_1_1_http_1_1_controllers_1_1_category_controller}{}\label{class_app_1_1_http_1_1_controllers_1_1_category_controller}\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}}
+Graphe d\textquotesingle{}héritage de App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}Category\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_app_1_1_http_1_1_controllers_1_1_category_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_category_controller_a65ea4d7a5bded101accc444ee92d5012}{edit\+Category}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_category_controller_a6b4ee883cd1a73b9f0e8e4fabaf786d6}{create}} ()
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_category_controller_a1395a9c2b800da66c52b1cb90bd2de87}{create\+Category}} (\mbox{\hyperlink{class_app_1_1_http_1_1_requests_1_1_category_request}{Category\+Request}} \$request)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_category_controller_a82ae80026454e9c30fb4980681852626}{update}} (\$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_category_controller_a04af70484ee8024757f25d9b67c410ed}{update\+Category}} (\mbox{\hyperlink{class_app_1_1_http_1_1_requests_1_1_category_request}{Category\+Request}} \$request, \$id)
+\item 
+\mbox{\hyperlink{class_app_1_1_http_1_1_controllers_1_1_category_controller_a90b99d17799a2a33b8486334db9694d1}{destroy\+Category}} (\$id)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Contrôleur pour la gestion des catégories.(Super\+\_\+admin) 
+
+\doxysubsection{Documentation des fonctions membres}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_category_controller_a6b4ee883cd1a73b9f0e8e4fabaf786d6}\label{class_app_1_1_http_1_1_controllers_1_1_category_controller_a6b4ee883cd1a73b9f0e8e4fabaf786d6} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}!create@{create}}
+\index{create@{create}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Category\+Controller\+::create (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Affiche le formulaire de création d\textquotesingle{}une nouvelle catégorie.
+
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Contracts\textbackslash{}\+View\textbackslash{}\+View Vue avec les catégories chargées depuis la base de données. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_category_controller_a1395a9c2b800da66c52b1cb90bd2de87}\label{class_app_1_1_http_1_1_controllers_1_1_category_controller_a1395a9c2b800da66c52b1cb90bd2de87} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}!createCategory@{createCategory}}
+\index{createCategory@{createCategory}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}}
+\doxysubsubsection{\texorpdfstring{createCategory()}{createCategory()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Category\+Controller\+::create\+Category (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_app_1_1_http_1_1_requests_1_1_category_request}{Category\+Request}}}]{\$request }\end{DoxyParamCaption})}
+
+Crée une nouvelle catégorie à partir des données soumises dans le formulaire.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+Category\+Request & {\em \$request} & Les données validées du formulaire de création de catégorie. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Redirect\+Response Redirection vers la liste des catégories après création. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_category_controller_a90b99d17799a2a33b8486334db9694d1}\label{class_app_1_1_http_1_1_controllers_1_1_category_controller_a90b99d17799a2a33b8486334db9694d1} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}!destroyCategory@{destroyCategory}}
+\index{destroyCategory@{destroyCategory}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}}
+\doxysubsubsection{\texorpdfstring{destroyCategory()}{destroyCategory()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Category\+Controller\+::destroy\+Category (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Supprime une catégorie spécifique de la base de données.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+int & {\em \$id} & L\textquotesingle{}identifiant de la catégorie à supprimer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Redirect\+Response Redirection vers la liste des catégories après suppression. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_category_controller_a65ea4d7a5bded101accc444ee92d5012}\label{class_app_1_1_http_1_1_controllers_1_1_category_controller_a65ea4d7a5bded101accc444ee92d5012} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}!editCategory@{editCategory}}
+\index{editCategory@{editCategory}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}}
+\doxysubsubsection{\texorpdfstring{editCategory()}{editCategory()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Category\+Controller\+::edit\+Category (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Affiche le formulaire d\textquotesingle{}édition des catégories.
+
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Contracts\textbackslash{}\+View\textbackslash{}\+View Vue avec les catégories chargées depuis la base de données. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_category_controller_a82ae80026454e9c30fb4980681852626}\label{class_app_1_1_http_1_1_controllers_1_1_category_controller_a82ae80026454e9c30fb4980681852626} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}!update@{update}}
+\index{update@{update}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Category\+Controller\+::update (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Affiche le formulaire de mise à jour d\textquotesingle{}une catégorie spécifique.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+int & {\em \$id} & L\textquotesingle{}identifiant de la catégorie à mettre à jour. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Contracts\textbackslash{}\+View\textbackslash{}\+View Vue avec la catégorie à mettre à jour. 
+\end{DoxyReturn}
+\Hypertarget{class_app_1_1_http_1_1_controllers_1_1_category_controller_a04af70484ee8024757f25d9b67c410ed}\label{class_app_1_1_http_1_1_controllers_1_1_category_controller_a04af70484ee8024757f25d9b67c410ed} 
+\index{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}!updateCategory@{updateCategory}}
+\index{updateCategory@{updateCategory}!App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController@{App\textbackslash{}Http\textbackslash{}Controllers\textbackslash{}CategoryController}}
+\doxysubsubsection{\texorpdfstring{updateCategory()}{updateCategory()}}
+{\footnotesize\ttfamily App\textbackslash{}\+Http\textbackslash{}\+Controllers\textbackslash{}\+Category\+Controller\+::update\+Category (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_app_1_1_http_1_1_requests_1_1_category_request}{Category\+Request}}}]{\$request,  }\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Met à jour les informations d\textquotesingle{}une catégorie spécifique avec les données soumises dans le formulaire.
+
+
+\begin{DoxyParams}[1]{Paramètres}
+Category\+Request & {\em \$request} & Les données validées du formulaire de mise à jour de catégorie. \\
+\hline
+int & {\em \$id} & L\textquotesingle{}identifiant de la catégorie à mettre à jour. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+\textbackslash{}\+Illuminate\textbackslash{}\+Http\textbackslash{}\+Redirect\+Response Redirection vers la liste des catégories après mise à jour. 
+\end{DoxyReturn}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+app/\+Http/\+Controllers/Category\+Controller.\+php\end{DoxyCompactItemize}

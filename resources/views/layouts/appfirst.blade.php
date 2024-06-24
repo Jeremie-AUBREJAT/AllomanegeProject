@@ -3,13 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/sliderPrice.js', 'resources/js/Menuburger.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/sliderPrice.js', 'resources/js/Menuburger.js', 'resources/js/homesearch.js', 'resources/js/cookies.js'])
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allo Manège</title>
 </head>
 
 <body>
     <header>
+
         <nav class="flex items-center justify-between px-8 py-4">
             <div class="flex items-center">
                 <div class="facebook mr-4">
@@ -72,7 +74,7 @@
         <nav class="hidden md:flex md:justify-between bg-custom-blue-header items-center px-8 py-4">
             <div class="navlinks text-white flex items-center gap-8">
                 <ul class="flex items-center gap-4">
-                    <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
+                    <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
                             href="/manèges">MANÈGES</a>
                         {{-- <details class="relative inline-block text-left">
                             <summary class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700">
@@ -85,9 +87,9 @@
                         </details> --}}
                     </li>
                     <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
-                            href="/Réservation">RÉSERVATION</a></li>
+                            href="/réservations">RÉSERVATION</a></li>
                     <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
-                            href="/a_propos">À PROPOS</a></li>
+                            href="/à-propos">À PROPOS</a></li>
                     <li><a class="w-full bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-2xl font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700"
                             href="/contact">CONTACT</a></li>
                 </ul>
@@ -95,14 +97,6 @@
             {{-- si Guest --}}
             @if (Auth::guest())
                 <div class="buttons flex gap-4">
-                    <div class="rounded-lg border border-gray-300 bg-white shadow-md p-4 flex flex-col">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
-                            <path
-                                d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z">
-                            </path>
-                        </svg>
-                    </div>
                     <details class="rounded-lg border border-gray-300 bg-white shadow-md p-4 flex flex-col">
                         <summary class="flex items-center gap-2 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -138,14 +132,9 @@
                         <div class="flex items-center">
                             @if (Auth::user()->role === 'Super_admin')
                                 <div class="relative inline-block mx-2">
-                                    {{-- <select onchange="location = this.value"
-                                        class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer">
-                                        <option value="/tableau-de-bord">Tableau de bord</option>
-                                        <option value="/carousel/view">Tous les manèges</option>
-                                        <option value="/allusers">Tous les utilisateurs</option>
-                                    </select> --}}
-                                    <a class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer" href="/dashboard_SA">Tableau de bord</a>
-                                    <div class="relative inline-block mx-2">
+                                    <a class="text-white bg-transparent font-semibold text-2xl border-none cursor-pointer"
+                                        href="/dashboard_SA">Tableau de bord</a>
+                                    {{-- <div class="relative inline-block mx-2">
                                         <span class="text-white bg-red-500 rounded-full px-4 py-2">
                                             {{ $pendingCount }}
                                         </span>
@@ -153,7 +142,7 @@
                                             class="absolute bottom-4 left-6 bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-xs text-white">
                                             !
                                         </span>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             @endif
                         </div>
@@ -207,7 +196,7 @@
                                         stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M6 18L18 6M6 6l12 12" />
                                 </svg>
-                                
+
                             </button>
                         </div>
                     </div>
@@ -248,7 +237,7 @@
                             class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
                             <a href="mentionsLégales">MENTIONS LÉGALES</a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -288,12 +277,59 @@
                 générales de vente</a>
             <a href="contact"
                 class="bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-lg font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700 mb-2 md:mb-0 md:mr-4">Contact</a>
+            <button id="openConsentModal"
+                class="bg-custom-blue-header border border-transparent shadow-sm py-4 px-4 inline-flex justify-center text-lg font-semibold text-white hover:bg-amber-600 focus:outline-none active:bg-orange-700 mb-2 md:mb-0 md:mr-4">Paramètres
+                de Confidentialité</button>
         </div>
+        <span class="text-md text-white">
+            <a href="politique-de-confidentialité" target="_blank" class="underline">politique de confidentialité</a>
+        </span>
         <!-- Copyright -->
         <div class="text-center mt-4">&copy; 2024 Allo Manège</div>
+
     </footer>
+     <!-- Modal pour le consentement aux cookies et à la géolocalisation -->
+    <div id="consentModal" class="fixed inset-0 items-center justify-center bg-gray-800 bg-opacity-75 z-50 hidden">
+        <div class="bg-white rounded-lg overflow-hidden md:mx-auto mt-2 shadow-xl w-screen overflow-y-auto  lg:w-1/2 border-8 border-custom-blue-header ">
+            <div class="px-4 py-5 sm:p-6">
+                <h3 class="text-xl leading-6 font-bold text-gray-900" id="modal-title">Paramètres de confidentialité</h3>
+                <div class="mt-2">
+                    <p class="text-md font-semibold text-gray-800">Nous utilisons des cookies pour améliorer votre expérience. Veuillez accepter les cookies fonctionnels pour continuer.</p>
+                    <p class="text-md font-semibold text-gray-800">Nous utilisons la géolocalisation pour améliorer votre expérience sur notre site. La géolocalisation est utilisée pour faciliter les recherches et l'affichage sur la carte.
 
-
+                        Si vous désactivez la géolocalisation, certaines fonctionnalités du site ne seront pas disponibles.
+                        
+                        Nous ne conservons aucune trace de votre position géographique. Votre confidentialité est notre priorité.</p>
+                </div>
+                <div class="mt-4 flex items-center">
+                   
+                    <span class="mr-2 text-md text-gray-700">Géolocalisation :</span>
+                    <label for="toggleGeolocation" class="flex items-center cursor-pointer">
+                        
+                        <div class="relative ml-2">
+                            <!-- Input caché pour le toggle -->
+                            <input type="checkbox" id="toggleGeolocation" class="sr-only">
+                            <!-- Élément visuel du toggle -->
+                            <div class="block bg-gray-600 w-10 h-6 rounded-full"></div>
+                            <!-- Bouton du toggle -->
+                            <div id="toggleButton" class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform"></div>
+                        </div>
+                        <div class="ml-2">
+                            <span id="geolocationStatus" class="text-red-600 font-semibold text-xl">Désactivé</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="px-4 py-3 sm:px-6 flex justify-end items-center space-x-2">
+                <button id="saveSettings" class="inline-flex justify-center w-full md:w-auto px-4 py-2 rounded-md border border-transparent shadow-sm bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" disabled>
+                    Accepter et enregistrer
+                </button>
+                <span class="text-md text-gray-700">
+                    <a href="politique-de-confidentialité" target="_blank" class="underline">politique de confidentialité</a>
+                </span>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

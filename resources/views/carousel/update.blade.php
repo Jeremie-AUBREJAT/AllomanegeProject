@@ -1,11 +1,11 @@
 @extends('layouts.appsecond')
-
+@section('title', 'modifier-un-manège')
 @section('content')
     <div class="flex justify-center my-4">
         <a href="/carousel/{{ $carousel->id }}/reservations"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Voir les réservations</a>
     </div>
-    <h2 class="text-3xl ml-8">Dernière réservation associée: </h2>
+    {{-- <h2 class="text-3xl ml-8">Dernière réservation associée: </h2>
 
     <div class="bg-white p-4 rounded-lg shadow-md mb-8">
         @foreach ($reservations as $reservation)
@@ -33,7 +33,7 @@
                 @endif
             </div>
         @endforeach
-    </div>
+    </div> --}}
     <div class="flex justify-center">
 
 
@@ -50,7 +50,7 @@
                     <div>
                         <!-- Champ nom -->
                         <div class="mb-4">
-                            <label for="name" class="block mb-2">Nom :</label>
+                            <label for="name" class="block mb-2">Nom du manège :</label>
                             <input type="text" name="name" id="name" value="{{ $carousel->name }}"
                                 class="border rounded-md px-3 py-2 w-full">
                         </div>
@@ -60,8 +60,13 @@
 
                         <!-- Champ taille -->
                         <div class="mb-4">
-                            <label for="size" class="block mb-2">Taille :</label>
-                            <input type="text" name="size" id="size" value="{{ $carousel->size }}"
+                            <label for="length" class="block mb-2">Longeur en mètre(s) :</label>
+                            <input type="text" name="length" id="length" value="{{ $carousel->length }}"
+                                class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="width" class="block mb-2">Largeur en mètre(s) :</label>
+                            <input type="text" name="width" id="width" value="{{ $carousel->width }}"
                                 class="border rounded-md px-3 py-2 w-full">
                         </div>
                         @error('size')
@@ -70,7 +75,7 @@
 
                         <!-- Champ poid -->
                         <div class="mb-4">
-                            <label for="weight" class="block mb-2">Poid :</label>
+                            <label for="weight" class="block mb-2">Poids en tonnes :</label>
                             <input type="text" name="weight" id="weight" value="{{ $carousel->weight }}"
                                 class="border rounded-md px-3 py-2 w-full">
                         </div>
@@ -87,17 +92,15 @@
                         @error('watt_power')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
-
-                        <!-- Champ localisation du manèges -->
+                        <!-- Champ prix -->
                         <div class="mb-4">
-                            <label for="localization" class="block mb-2">Localisation :</label>
-                            <input type="text" name="localization" id="localization"
-                                value="{{ $carousel->localization }}" class="border rounded-md px-3 py-2 w-full">
+                            <label for="price" class="block mb-2">Prix :</label>
+                            <input type="number" value="{{ $carousel->price }}" name="price" id="price"
+                                step="0.01" required class="border rounded-md px-3 py-2 w-full">
                         </div>
-                        @error('localization')
+                        @error('price')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
-
                         <!-- Champ temps d'installation -->
                         <div class="mb-4">
                             <label for="install_time" class="block mb-2">Temps d'installation en heure "s" :</label>
@@ -108,15 +111,7 @@
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
 
-                        <!-- Champ prix -->
-                        <div class="mb-4">
-                            <label for="price" class="block mb-2">Prix :</label>
-                            <input type="number" value="{{ $carousel->price }}" name="price" id="price"
-                                step="0.01" required class="border rounded-md px-3 py-2 w-full">
-                        </div>
-                        @error('price')
-                            <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
-                        @enderror
+
 
                         <!-- Champ description -->
                         <div class="mb-4">
@@ -143,29 +138,93 @@
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
 
+                        {{-- status --}}
                         @if (Auth::user()->role === 'Super_admin')
                             <select name="status" class="form-control mb-4">
                                 @foreach (config('enumStatus.status') as $key => $value)
-                                    <option value="{{ $key }}"
-                                        {{ $carousel->status == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                    <option value="{{ $key }}" {{ $carousel->status == $key ? 'selected' : '' }}>
+                                        {{ $value }}</option>
                                 @endforeach
                             </select>
                         @endif
+                        <!-- Champ localisation du manèges -->
+                        <div class="text-2xl mt-6">Location de votre manège: </div>
+
+                        <div class="mb-4 mt-4">
+                            <label for="search" class="block mb-2">Recherche adresse :</label>
+                            <div class="relative">
+                                <input type="text" id="search" placeholder="Recherche adresse..."
+                                    class="search-input border rounded-md px-3 py-2 w-full pl-10">
+                                <div id="search-suggestions" class="autocomplete-suggestions"></div>
+                                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500"
+                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M12.9 14.32a8 8 0 111.42-1.42l4.6 4.6a1 1 0 01-1.42 1.42l-4.6-4.6zM8 14A6 6 0 108 2a6 6 0 000 12z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="street_name" class="block mb-2">Nom de rue :</label>
+                            <input type="text" name="street_name" id="street_name"
+                                value="{{ $carousel->street_name }}" class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="street_number" class="block mb-2">Numero de rue :</label>
+                            <input type="text" name="street_number" id="street_number"
+                                value="{{ $carousel->street_number }}" class="border rounded-md px-3 py-2 w-full">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="postal_code" class="block mb-2">Code postal :</label>
+                            <input type="text" name="postal_code" id="postal_code"
+                                value="{{ $carousel->postal_code }}" class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="city" class="block mb-2">Ville :</label>
+                            <input type="text" name="city" id="city" value="{{ $carousel->city }}"
+                                class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        <div class="mb-4">
+                            <label for="country" class="block mb-2">Ville :</label>
+                            <input type="text" name="country" id="country" value="{{ $carousel->country }}"
+                                class="border rounded-md px-3 py-2 w-full">
+                        </div>
+                        @if (Auth::check() && Auth::user()->role === 'Super_admin')
+                            <div class="mb-4">
+                                <label for="latitude" class="block mb-2">GPS Latitude :</label>
+                                <input type="text" name="latitude" id="latitude" value="{{ $carousel->latitude }}"
+                                    class="border rounded-md px-3 py-2 w-full">
+                            </div>
+                            <div class="mb-4">
+                                <label for="longitude" class="block mb-2">GPS Longitude :</label>
+                                <input type="text" name="longitude" id="longitude"
+                                    value="{{ $carousel->longitude }}" class="border rounded-md px-3 py-2 w-full">
+                            </div>
+                        @endif
+                        @error('localization')
+                            <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Colonne droite pour les images -->
                     <div>
+
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger font-bold" style="color: red;">{{ $error }}</div>
+                        @endforeach
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @foreach ($carousel->carouselPictureMany as $picture)
                                 <div class="mb-4">
+
                                     <label for="imageUpdate{{ $picture->id }}" class="block mb-2">Modifier Image
                                         {{ $loop->index + 1 }} :</label>
                                     <input type="file" name="imageUpdate[]" id="imageUpdate{{ $picture->id }}"
                                         accept="image/*" class="border rounded-md px-3 py-2 w-full">
-                                    <p class="mt-2">Image actuelle :</p>
+                                    <p class="existing-image mt-2">Image actuelle :</p>
                                     @if (!empty($picture->images))
                                         <img src="{{ asset($picture->images) }}" alt="Image du carrousel"
-                                            class="mt-2 w-full h-auto">
+                                            class="mt-2 w-auto h-1/2">
                                         <input type="hidden" name="current_image[]" value="{{ $picture->images }}">
                                     @else
                                         <p>Aucune image disponible</p>
@@ -175,14 +234,15 @@
                                             id="deleteImage{{ $picture->id }}">
                                         <label for="deleteImage{{ $picture->id }}">Supprimer cette image</label>
                                     </div>
+
                                 </div>
                             @endforeach
                         </div>
 
-                        <div class="mb-4">
-                            <label for="newImages" class="block mb-2">Ajouter de nouvelles images :</label>
-                            <input type="file" name="newImages[]" id="newImages" accept="image/*" multiple
-                                class="border rounded-md px-3 py-2 w-full">
+                        <div id="imageFields" class="mb-4">
+                            <button id="addImageField" type="button"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Ajouter
+                                une autre image</button>
                         </div>
                     </div>
                 </div>

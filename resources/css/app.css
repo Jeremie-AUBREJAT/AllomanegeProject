@@ -46,7 +46,11 @@
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 4px;
+    padding: 2px; /* Réduire le padding */
+    height: 10px; /* Réduire la hauteur */
+    line-height: 10px; /* Ajuster la hauteur de ligne */
+    font-size: 12px; /* Réduire la taille de la police */
+
 }
 
 .fc-daygrid-body {
@@ -57,18 +61,22 @@
 .reservedDates-approved {
     background-color: red;
     color: white;
-    font-size: 16px; 
+    font-size: 16px;
     font-weight: 600;
-    padding-left: 5px;
+    padding: 5px; /* Augmenter le padding */
+    height: 30px; /* Augmenter la hauteur */
+    line-height: 15px; /* Ajuster la hauteur de ligne */
 }
 
 /* Styles pour les réservations en attente */
 .reservedDates-pending {
     background-color: #f97316;
     color: white;
-    font-size: 16px; 
+    font-size: 16px;
     font-weight: 600;
-    padding-left: 5px;
+    padding: 5px; /* Augmenter le padding */
+    height: 30px; /* Augmenter la hauteur */
+    line-height: 15px; /* Ajuster la hauteur de ligne */
 }
 /* Styles pour les boutons d'interaction (ajouter, éditer, supprimer) */
 .fc-button-primary {

@@ -1,5 +1,5 @@
 @extends('layouts.appsecond')
-
+@section('title', 'Conditions générales de vente')
 @section('content')
 <section class="bg-custom-blue2 py-12 px-4 lg:px-8">
     <div class="max-w-4xl mx-auto text-center">
@@ -51,13 +51,13 @@
         <p class="text-xl">Les produits sont garantis conformément aux dispositions légales en vigueur.</p>
     
         <p class="text-xl mt-4">9. Responsabilité</p>
-        <p class="text-xl">La responsabilité de [Votre Entreprise] ne saurait être engagée en cas de non-exécution ou de mauvaise exécution du contrat due, soit au fait du client, soit au fait insurmontable et imprévisible d'un tiers au contrat, soit à un cas de force majeure.</p>
+        <p class="text-xl">La responsabilité d' <strong>Allomanège</strong> ne saurait être engagée en cas de non-exécution ou de mauvaise exécution du contrat due, soit au fait du client, soit au fait insurmontable et imprévisible d'un tiers au contrat, soit à un cas de force majeure.</p>
     
         <p class="text-xl mt-4">10. Litiges</p>
         <p class="text-xl">Tout litige relatif à l'interprétation ou à l'exécution des présentes conditions générales de vente sera de la compétence exclusive des tribunaux compétents.</p>
     
         <p class="text-xl mt-4">11. Contact</p>
-        <p class="text-xl">Pour toute question ou réclamation concernant les produits ou les commandes, le client peut contacter le service clientèle à l'adresse [adresse e-mail] ou par téléphone au [numéro de téléphone].</p>
+        <p class="text-xl">Pour toute question ou réclamation concernant les produits ou les commandes, le client peut contacter le service clientèle à l'adresse <a href="contact" class="text-blue-500 underline">contact@allomanege.com</a> ou par téléphone au [numéro de téléphone].</p>
     </section>
     
     
