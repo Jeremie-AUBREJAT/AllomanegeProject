@@ -67,7 +67,7 @@
             <section class="container mx-auto px-4 py-8 mt-16">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                     @foreach ($carousels as $carousel)
-                        <div class="carousel bg-white rounded-lg shadow-md p-4" data-latitude="{{$carousel->latitude}}" data-longitude="{{$carousel->longitude}}">
+                        <div class="carousel bg-white rounded-lg shadow-md p-4 mb-8" data-latitude="{{$carousel->latitude}}" data-longitude="{{$carousel->longitude}}">
                             @foreach ($carousel->reservations as $reservation)
                             <div class="carousel-reservation" data-date-start="{{ $reservation->debut_date }}" data-date-end="{{ $reservation->fin_date }}"></div>
                             

@@ -215,9 +215,9 @@
                         @endforeach
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @foreach ($carousel->carouselPictureMany as $picture)
-                                <div class="mb-4">
+                                <div  class="mb-4">
 
-                                    <label for="imageUpdate{{ $picture->id }}" class="block mb-2">Modifier Image
+                                    <label for="imageUpdate{{ $picture->id }}" class="block mb-2" id="imageCreate">Modifier Image
                                         {{ $loop->index + 1 }} :</label>
                                     <input type="file" name="imageUpdate[]" id="imageUpdate{{ $picture->id }}"
                                         accept="image/*" class="border rounded-md px-3 py-2 w-full">

@@ -17,6 +17,7 @@ export default defineConfig({
                 'resources/js/carouselsfilter.js',
                 'resources/js/cookies.js',
                 'resources/js/registervalidation.js',
+                'resources/js/createcarousel.js',
                 ],
             refresh: true,
         }),

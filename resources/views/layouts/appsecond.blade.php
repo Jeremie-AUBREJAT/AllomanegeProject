@@ -16,6 +16,9 @@
     @if (request()->is('*register*'))
         @vite(['resources/js/registervalidation.js'])
     @endif
+    @if (request()->is('*carousel/create*'))
+        @vite(['resources/js/createcarousel.js'])
+    @endif
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Default Title')</title>
@@ -175,6 +178,7 @@
         </nav>
         <!-- Menu burger Smartphone -->
         <div class="md:hidden fixed-bottom-0 flex justify-end bg-custom-blue-header">
+            <a class="ml-4" href="/">
             <svg class="w-1/3" version="1.1" id="svg1" width="256" height="100" viewBox="0 0 512 406"
                 xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                 <defs id="defs1" />
@@ -188,6 +192,7 @@
                             id="path9" />
                     </g>
             </svg>
+        </a>
             <button id="burger-btn" class="px-4 py-2 mx-6 text-white sm:block lg:hidden font-semibold">Menu
                 <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -200,34 +205,56 @@
             <div class="container mx-auto p-8">
 
                 <div class="max-w-2xl mx-auto">
-
                     <ul id="mobile-menu-list" class="w-full h-full text-2xl mt-4 flex-wrap">
-                        <li
-                            class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                        @if (Auth::guest())
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                            <a href="{{ route('register') }}">S'INSCRIRE</a>
+                        </li>
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                            <a href="{{ route('login') }}">SE CONNECTER</a>
+                        </li>
+                        @else
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                            @if (Auth::user()->role === 'Admin')
+                            <a href="/carousel/view">TABLEAU DE BORD</a>
+                            @endif
+                            @if (Auth::user()->role === 'Super_admin')
+                            <a href="/dashboard_SA">TABLEAU DE BORD</a>
+                            @endif
+                        </li>
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                            <a href="{{ route('profile.edit') }}">PROFILE</a>
+                        </li>
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="text-white text-center w-full">DÉCONNEXION</button>
+                            </form>
+                        </li>
+                        @endif
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
                             <a href="/">ACCUEIL</a>
                         </li>
-                        <li
-                            class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
                             <a href="manèges">MANÈGES</a>
                         </li>
-                        <li
-                            class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
                             <a href="/réservations">RÉSERVATION</a>
                         </li>
-                        <li
-                            class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
                             <a href="">A PROPOS</a>
                         </li>
-                        <li
-                            class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
                             <a href="/contact">CONTACT</a>
                         </li>
-                        <li
-                            class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
+                        <li class="text-white text-center font-semibold block px-4 py-2 space-y-4 bg-custom-blue-header hover:bg-amber-600 active:bg-orange-700 mb-4">
                             <a href="mentionslegales">MENTIONS LÉGALES</a>
                         </li>
+                
+                        
                     </ul>
                 </div>
+                
             </div>
         </nav>
 
@@ -247,6 +274,7 @@
             <svg class="w-1/2 mx-auto" version="1.1" id="svg1" width="256" height="100"
                 viewBox="0 0 512 406" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                 <defs id="defs1" />
+                <a href="/">
                 <g id="g1">
                     <g id="g9" transform="matrix(0.24702629,0,0,0.2431524,1.4972376,5.5641271)">
                         <path style="fill:#fc8c00"
@@ -257,6 +285,7 @@
                             id="path9" />
                     </g>
             </svg>
+            </a>
         </div>
         <!-- Liens -->
         <div class="flex flex-col items-center md:flex-row md:justify-end md:items-start">

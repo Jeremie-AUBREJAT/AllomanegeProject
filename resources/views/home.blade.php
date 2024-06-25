@@ -4,16 +4,16 @@
 
     <body>
         {{-- test rgpd --}}
-    <!-- Modal for cookies and geolocation consent -->
-   
+        <!-- Modal for cookies and geolocation consent -->
 
-    
+
+
         <section class="Formulaire flex flex-wrap bg-custom-blue z-0">
             <!-- Container formulaire recherche -->
             <div class="w-full md:w-1/2">
-                <div class="container1 mx-auto p-8 bg-custom-orange">
+                <div class="container1 mx-auto md:p-8 bg-custom-orange">
                     <div class="flex justify-center mb-8">
-                        <img src="/images/logo.png" alt="Logo" class="h-16">
+                        <img src="/images/logo.png" alt="Logo" class="h-16 mt-8">
                     </div>
                     <form class="px-24 pt-6 pb-8 mb-4 bg-custom-orange">
                         <div class="mb-4">

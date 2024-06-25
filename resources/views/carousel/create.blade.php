@@ -5,7 +5,7 @@
         <div class="w-2/3 bg-white p-8 rounded-lg shadow-md">
             <h1 class="text-2xl mb-4">Création d'un manège</h1>
 
-            <form method="POST" action="{{ url('/carousel/create') }}" enctype="multipart/form-data">
+            <form method="POST" id="carouselForm" action="{{ url('/carousel/create') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -19,6 +19,7 @@
                             @error('name')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="nameError" class="text-red-500 font-semibold" ></span>
                         </div>
 
                         <!-- Champ taille -->
@@ -29,6 +30,7 @@
                             @error('length')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="lengthError" class="text-red-500 font-semibold" ></span>
                         </div>
                         <div class="mb-4">
                             <label for="width" class="block mb-2">Largeur en mètre(s) :</label>
@@ -37,6 +39,7 @@
                             @error('width')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="widthError" class="text-red-500 font-semibold" ></span>
                         </div>
 
                         <!-- Champ poids -->
@@ -47,6 +50,7 @@
                             @error('weight')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="weightError" class="text-red-500 font-semibold" ></span>
                         </div>
 
                         <!-- Champ puissance en Kwatt -->
@@ -57,6 +61,7 @@
                             @error('watt_power')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="watt_powerError" class="text-red-500 font-semibold" ></span>
                         </div>
                         <!-- Champ prix -->
                         <div class="mb-4">
@@ -66,6 +71,7 @@
                             @error('price')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="priceError" class="text-red-500 font-semibold" ></span>
                         </div>
                         <!-- Champ temps d'installation -->
                         <div class="mb-4">
@@ -75,6 +81,7 @@
                             @error('install_time')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="install_timeError" class="text-red-500 font-semibold" ></span>
                         </div>
 
                         <!-- Champ description -->
@@ -84,6 +91,7 @@
                             @error('description')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="descriptionError" class="text-red-500 font-semibold" ></span>
                         </div>
 
                         <!-- Champ catégorie -->
@@ -103,7 +111,7 @@
                             @enderror
                         </div>
 
-                        <div class="text-2xl mt-6">Location de votre manège: </div>
+                        <div class="text-2xl mt-6">Localisation de votre manège: </div>
                         <!-- Champs localisation -->
                         <div class="mb-4 mt-4">
                             <label for="search" class="block mb-2">Recherche adresse :</label>
@@ -127,6 +135,8 @@
                             @error('street_name')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="street_nameError" class="text-red-500 font-semibold" ></span>
+                            
                         </div>
                         <div class="mb-4">
                             <label for="street_number" class="block mb-2">Numéro de rue :</label>
@@ -136,6 +146,7 @@
                             @error('street_number')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="street_numberError" class="text-red-500 font-semibold" ></span>
                         </div>
 
                         <div class="mb-4">
@@ -145,6 +156,7 @@
                             @error('postal_code')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="postal_codeError" class="text-red-500 font-semibold" ></span>
                         </div>
                         <div class="mb-4">
                             <label for="city" class="block mb-2">Ville :</label>
@@ -153,6 +165,7 @@
                             @error('city')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="cityError" class="text-red-500 font-semibold" ></span>
                         </div>
                         <div class="mb-4">
                             <label for="country" class="block mb-2">Pays :</label>
@@ -161,6 +174,7 @@
                             @error('country')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            <span id="countryError" class="text-red-500 font-semibold" ></span>
                         </div>
 
 
@@ -188,12 +202,14 @@
 
                         <!-- Champ image -->
                         <div id="imageFields" class="mb-4">
+                            <span id="imageCreateError" class="text-red-500 font-semibold" ></span>
                             <label for="imageCreate" class="block mb-2">Image(s) au format "JPG" ou "JPEG":</label>
                             <input type="file" name="imageCreate[]" id="imageCreate" accept="image/*" multiple
                                 class="border rounded-md px-3 py-2 w-full">
                             @error('imageCreate')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                             @enderror
+                            
                             <div id="previewContainer" class="mt-4"></div>
                             <button id="addImageField" type="button"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Ajouter
