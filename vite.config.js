@@ -18,6 +18,8 @@ export default defineConfig({
                 'resources/js/cookies.js',
                 'resources/js/registervalidation.js',
                 'resources/js/createcarousel.js',
+                'resources/js/updateUserValidation.js',
+                'resources/js/updatecarousel.js',
                 ],
             refresh: true,
         }),

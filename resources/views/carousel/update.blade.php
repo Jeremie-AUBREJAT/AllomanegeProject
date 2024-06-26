@@ -41,7 +41,7 @@
         <div class="w-2/3 bg-white p-8 rounded-lg shadow-md">
             <h1 class="text-2xl mb-4">Modification de {{ $carousel->name }}</h1>
 
-            <form method="POST" action="{{ url('carousel/update/' . $carousel->id) }}" enctype="multipart/form-data">
+            <form method="POST" id="carouselForm" action="{{ url('carousel/update/' . $carousel->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -57,6 +57,8 @@
                         @error('name')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
+                        <span id="nameError" class="text-red-500 font-semibold" ></span>
+
 
                         <!-- Champ taille -->
                         <div class="mb-4">
@@ -64,14 +66,19 @@
                             <input type="text" name="length" id="length" value="{{ $carousel->length }}"
                                 class="border rounded-md px-3 py-2 w-full">
                         </div>
+                        @error('length')
+                            <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
+                        @enderror
+                        <span id="lengthError" class="text-red-500 font-semibold" ></span>
                         <div class="mb-4">
                             <label for="width" class="block mb-2">Largeur en mètre(s) :</label>
                             <input type="text" name="width" id="width" value="{{ $carousel->width }}"
                                 class="border rounded-md px-3 py-2 w-full">
                         </div>
-                        @error('size')
+                        @error('width')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
+                        <span id="widthError" class="text-red-500 font-semibold" ></span>
 
                         <!-- Champ poid -->
                         <div class="mb-4">
@@ -82,6 +89,8 @@
                         @error('weight')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
+                        <span id="weightError" class="text-red-500 font-semibold" ></span>
+
 
                         <!-- Champ puissance en Kwatt -->
                         <div class="mb-4">
@@ -92,6 +101,8 @@
                         @error('watt_power')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
+                        <span id="watt_powerError" class="text-red-500 font-semibold" ></span>
+
                         <!-- Champ prix -->
                         <div class="mb-4">
                             <label for="price" class="block mb-2">Prix :</label>
@@ -101,6 +112,8 @@
                         @error('price')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
+                        <span id="priceError" class="text-red-500 font-semibold" ></span>
+
                         <!-- Champ temps d'installation -->
                         <div class="mb-4">
                             <label for="install_time" class="block mb-2">Temps d'installation en heure "s" :</label>
@@ -110,6 +123,8 @@
                         @error('install_time')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
+                        <span id="install_timeError" class="text-red-500 font-semibold" ></span>
+
 
 
 
@@ -121,6 +136,8 @@
                         @error('description')
                             <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>
                         @enderror
+                        <span id="descriptionError" class="text-red-500 font-semibold" ></span>
+
 
                         <!-- Champ catégorie -->
                         <div class="mb-4">
@@ -216,6 +233,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @foreach ($carousel->carouselPictureMany as $picture)
                                 <div  class="mb-4">
+                                    <span id="imageUpdateError" class="text-red-500 font-semibold" ></span>
 
                                     <label for="imageUpdate{{ $picture->id }}" class="block mb-2" id="imageCreate">Modifier Image
                                         {{ $loop->index + 1 }} :</label>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email',100);
             $table->timestamp('email_verified_at');
             $table->string('password',100);
-            $table->string('street_number',20); 
+            $table->string('street_number',20)->nullable(); 
             $table->string('street_name',100); 
             $table->string('postal_code',20); 
             $table->string('city',100); 

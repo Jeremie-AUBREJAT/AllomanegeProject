@@ -141,7 +141,7 @@
                         <div class="mb-4">
                             <label for="street_number" class="block mb-2">Numéro de rue :</label>
                             <input type="text" name="street_number" id="street_number"
-                                value="{{ old('street_number', 'Entrez un numero') }}"
+                                value="{{ old('street_number') }}"
                                 class="border rounded-md px-3 py-2 w-full">
                             @error('street_number')
                                 <p class="text-red-500 bg-red-100 p-2 rounded">{{ $message }}</p>

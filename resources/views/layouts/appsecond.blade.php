@@ -19,6 +19,9 @@
     @if (request()->is('*carousel/create*'))
         @vite(['resources/js/createcarousel.js'])
     @endif
+    @if (request()->is('*carousel/update*'))
+        @vite(['resources/js/updatecarousel.js'])
+    @endif
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Default Title')</title>
