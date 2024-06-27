@@ -39,13 +39,6 @@
             <input type="email" id="email" name="email" placeholder="Entrez votre E-mail" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
         </div>
         <div class="lg:w-1/2 lg:pl-4 mb-4">
-            {{-- <label for="manege" class="block mb-2">Manège :</label>
-            <select id="manege" name="manege" required class="w-full border border-gray-300 rounded-md px-3 py-2 mb-2">
-                <option value="" disabled selected>Choisissez un manège</option> --}}
-                <!-- Boucle pour afficher les options des manèges -->
-                {{-- @foreach($maneges as $manege)
-                <option value="{{ $manege->id }}">{{ $manege->nom }}</option>
-                @endforeach --}}
                 <option value=""></option>
             </select>
             <label for="telephone" class="block mb-2">Téléphone :</label>

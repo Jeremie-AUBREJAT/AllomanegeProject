@@ -3,11 +3,6 @@
 @section('content')
 
     <body>
-        {{-- test rgpd --}}
-        <!-- Modal for cookies and geolocation consent -->
-
-
-
         <section class="Formulaire flex flex-wrap bg-custom-blue z-0">
             <!-- Container formulaire recherche -->
             <div class="w-full md:w-1/2">

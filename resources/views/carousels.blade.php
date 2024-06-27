@@ -28,13 +28,6 @@
         <div class="container mx-auto px-4">
 
             <div class="flex flex-wrap justify-start gap-4 mb-16">
-                {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="4 0 24 24" style="fill: rgba(1, 16, 90, 1);transform: ;msFilter:;">
-                <path d="M12 2C7.589 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.029-5.56 8-12 0-4.411-3.589-8-8-8zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"></path>
-            </svg> --}}
-                {{-- <input type="text" id="locationInput" class="text-lg text-custom-blue-header placeholder-custom-blue-header" placeholder="Localisation...">
-            <input type="date" id="dateInput" class="text-lg text-custom-blue-header">
-            <input type="text" id="priceInput" class="text-lg text-custom-blue-header placeholder-custom-blue-header ml-16" placeholder="Prix maximum...">
-             --}}
                 <div class="filter ml-8 mb-4 lg:mb-0 lg:mr-8">
                     <label for="price" class="mr-2 text-xl text-custom-blue-header font-semibold">Prix :</label>
                     <select id="price" class="border p- rounded pr-8">
