@@ -1,22 +1,18 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-return new class extends Migration
+class CreateCarouselsTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up()
     {
-        DB::beginTransaction();
-
-        try {
-            // Désactiver les contraintes de clé étrangère
-            DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        // Désactiver temporairement la vérification des clés étrangères
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
         Schema::create('carousels', function (Blueprint $table) {
             $table->id();
@@ -24,7 +20,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->decimal('length', 15, 2);
             $table->decimal('width', 15, 2);
-            $table->integer('weight',15,2);
+            $table->decimal('weight',15,2);
             $table->integer('watt_power');
             $table->decimal('install_time', 15, 2);
             $table->text('description');
@@ -46,22 +42,18 @@ return new class extends Migration
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
         });
-   // Réactiver les contraintes de clé étrangère
-   DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-   DB::commit();
-} catch (\Exception $e) {
-   // En cas d'erreur, annuler la transaction
-   DB::rollback();
-   throw $e;
-}
-}
+        // Réactiver la vérification des clés étrangères à la fin des migrations
+        register_shutdown_function(function () {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        });
+    }
 
-/**
-* Reverse the migrations.
-*/
-public function down(): void
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
     {
         Schema::dropIfExists('carousels');
     }
-};
+}
