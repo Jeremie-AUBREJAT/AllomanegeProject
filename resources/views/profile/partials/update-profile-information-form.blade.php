@@ -87,13 +87,13 @@
             <x-input-label class="text-xl" for="phone_number" :value="__('Numéro de téléphone :')" />
             <x-text-input id="phone_number" name="phone_number" type="text" class="mt-1 block w-full" :value="old('phone_number', $user->phone_number)" required autofocus autocomplete="phone_number" />
             <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
-            <p id="phone_number-error" class="mt-2 text-red-600"></p>
+            <p id="phone_number-error" class="mt-2 text-red-500 font-semibold"></p>
         </div>
         <div>
             <x-input-label class="text-xl" for="email" :value="__('Email :')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
-            <p id="email-error" class="mt-2 text-red-600"></p>
+            <p id="email-error" class="mt-2 text-red-500 font-semibold"></p>
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
