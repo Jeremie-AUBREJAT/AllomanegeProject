@@ -14,18 +14,19 @@ Allomanège est une plateforme web permettant aux clients de louer des manèges 
 
 Assurez-vous d'avoir les logiciels suivants installés sur votre système :
 
-- Node.js (version X.Y.Z)
-- NPM (version A.B.C)
-- Composer (version D.E.F)
-- PHP (version 8.2)
+- Node.js (version 20.11.0)
+- NPM (version 10.2.4)
+- Composer (version 2.7.2)
+- PHP (version 8.3.4)
 - MySQL ou MariaDB
 
 ### Étapes d'installation
 
 Clonez le dépôt :
 
-
+```sh
 git clone https://github.com/votre-utilisateur/allomanege.git
+```
 
 Naviguez dans le répertoire du projet :
 ```sh
