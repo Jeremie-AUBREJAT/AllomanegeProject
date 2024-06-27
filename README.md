@@ -8,8 +8,6 @@ Allomanège est une plateforme web permettant aux clients de louer des manèges 
 
 - [Installation](#installation)
 - [Utilisation](#utilisation)
-- [Contribuer](#contribuer)
-- [Licence](#licence)
 - [Contact](#contact)
 
 ---
@@ -18,11 +16,13 @@ Allomanège est une plateforme web permettant aux clients de louer des manèges 
 
 ### Prérequis
 
-- Node.js (version X.Y.Z)
-- NPM (version A.B.C)
-- Composer (version D.E.F)
-- PHP (version G.H.I)
-- MySQL ou MariaDB
+Assurez-vous d'avoir les logiciels suivants installés sur votre système :
+
+- [Node.js](https://nodejs.org/) (version X.Y.Z)
+- [NPM](https://www.npmjs.com/) (version A.B.C)
+- [Composer](https://getcomposer.org/) (version D.E.F)
+- [PHP](https://www.php.net/) (version 8.2)
+- [MySQL](https://www.mysql.com/) ou [MariaDB](https://mariadb.org/)
 
 ### Étapes d'installation
 
@@ -54,6 +54,7 @@ sh
 
 cp .env.example .env
 
+Configurez votre fichier .env :
 Configurez votre fichier .env avec les informations de votre base de données et autres configurations nécessaires.
 
 Générez la clé de l'application :
@@ -62,7 +63,7 @@ sh
 
 php artisan key:generate
 
-Exécutez les migrations pour créer les tables de la base de données :
+Exécutez les migrations :
 
 sh
 
@@ -71,44 +72,30 @@ sh
 Utilisation
 Lancement du projet en mode développement
 
-    Pour lancer le serveur de développement :
-
-    sh
-
-php artisan serve
-
-Pour lancer le compilateur Vite :
+Pour lancer le serveur de développement Laravel :
 
 sh
 
-    npm run dev
+php artisan serve
 
-    Accès à l'application : Accédez à l'application via http://localhost:8000 après avoir démarré le serveur.
+Pour lancer le compilateur Vite pour le front-end :
 
+sh
+
+npm run dev
+
+Accédez à votre application via http://localhost:8000 après avoir démarré le serveur.
 Fonctionnalités
 
     Location de manèges : Les clients peuvent naviguer et louer des manèges de fêtes foraines.
     Compte admin pour forains : Les forains peuvent proposer leurs manèges à la location.
     Système de réservation : Les clients peuvent réserver des manèges via un calendrier interactif utilisant FullCalendar.
     Validation par super admin : Les manèges proposés et les réservations sont validés par un super admin.
+    Les devis et payements sont réalisés hors du site.
 
-Contribuer
 
-Les contributions sont les bienvenues ! Veuillez suivre les étapes ci-dessous pour contribuer :
-
-    Forkez le projet
-    Créez une branche pour votre fonctionnalité (git checkout -b feature/AmazingFeature)
-    Committez vos modifications (git commit -m 'Add some AmazingFeature')
-    Poussez votre branche (git push origin feature/AmazingFeature)
-    Ouvrez une Pull Request
-
-Licence
-
-Distribué sous la licence MIT. Voir LICENSE pour plus d'informations.
 Contact
 
-    Votre Nom
-    @VotrePseudo
-    votre.email@example.com
+    @Jeremie-AUBREJAT
 
 Lien du projet : https://github.com/votre-utilisateur/allomanege
