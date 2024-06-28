@@ -122,8 +122,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const dateStartFromURL = urlParams.get('dateStart'); // Récupérer la date de début depuis l'URL
     const dateEndFromURL = urlParams.get('dateEnd'); // Récupérer la date de fin depuis l'URL
 
-    console.log('Réservation récupérée - Date de début :', dateStartFromURL);
-    console.log('Réservation récupérée - Date de fin :', dateEndFromURL);
+    // console.log('Réservation récupérée - Date de début :', dateStartFromURL);
+    // console.log('Réservation récupérée - Date de fin :', dateEndFromURL);
 
     filterCarousels(maxPrice, selectedCategory, nameFromURL, dateStartFromURL, dateEndFromURL);
 });
@@ -157,15 +157,15 @@ function filterCarousels(maxPrice, selectedCategory, nameFromURL, dateStartFromU
 
             const dateEndCarousel = new Date(reservation.dataset.dateEnd);
 
-            console.log('Dates de réservation du carousel :');
-            console.log('Date de début :', serializeDate(dateStartCarousel));
-            console.log('Date de fin :', serializeDate(dateEndCarousel));
+            // console.log('Dates de réservation du carousel :');
+            // console.log('Date de début :', serializeDate(dateStartCarousel));
+            // console.log('Date de fin :', serializeDate(dateEndCarousel));
 
             if ((dateStartFromURLObj < dateStartCarousel && dateEndFromURLObj > dateStartCarousel) || (dateStartFromURLObj < dateEndCarousel && dateEndFromURLObj > dateEndCarousel)) {
                 notReservedInRange = false;
             }
         });
-console.log(notReservedInRange);
+// console.log(notReservedInRange);
         // Afficher ou masquer le carousel en fonction des filtres
         carousel.style.display = priceFilter && categoryFilter && nameFilter && notReservedInRange ? 'block' : 'none';
     });
