@@ -3,13 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/Menuburger.js', 'resources/js/imageAdd.js', 'resources/js/cookies.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/Menuburger.js', 'resources/js/cookies.js'])
     @if (request()->is('*détails*'))
         @vite(['resources/js/fullscreenimage.js', 'resources/js/fullcalendar.js', 'resources/js/map.js', 'resources/js/carouselDetails.js'])
     @endif
-    @if (request()->is('*create*', '*update*'))
+    @if (request()->is('*carousel/create*', '*carousel/update*'))
         @vite(['resources/js/autocompleteaddress.js'])
     @endif
+    @if (request()->is('*carousel/create*', '*carousel/update*'))
+    @vite(['resources/js/imageAdd.js'])
+@endif
     @if (request()->is('*manèges*'))
         @vite(['resources/js/carouselsfilter.js'])
     @endif
@@ -264,7 +267,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-custom-blue-header text-white py-4 flex flex-col items-center justify-center">
+    <footer class="bg-custom-blue-header text-white py-4 flex flex-col items-center justify-center mt-32">
         <!-- Logo -->
         <div class="mb-4">
             <svg class="w-1/2 mx-auto" version="1.1" id="svg1" width="256" height="100"

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('surname',100); 
             $table->string('compagny')->nullable(); 
             $table->string('email',100);
-            $table->timestamp('email_verified_at');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password',100);
             $table->string('street_number',20)->nullable(); 
             $table->string('street_name',100); 
