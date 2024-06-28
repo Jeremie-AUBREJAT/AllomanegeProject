@@ -1,5 +1,5 @@
 @extends('layouts.appsecond')
-
+@section('title', 'Modification réservation')
 @section('content')
 <div class="container mx-auto p-4 my-8">
     <div class="flex justify-center">

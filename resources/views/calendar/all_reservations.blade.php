@@ -1,5 +1,5 @@
 @extends('layouts.appsecond')
-
+@section('title', 'Toutes les réservations')
 @section('content')
 
 <div class="container mx-auto">
