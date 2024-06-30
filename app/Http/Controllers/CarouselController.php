@@ -8,6 +8,7 @@ use App\Http\Requests\CarouselUpdateRequest;
 use App\Models\Picture;
 use App\Models\Category;
 use App\Models\Calendar;
+use DateTime;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -47,16 +48,59 @@ class CarouselController extends Controller
      *
      * @return \Illuminate\View\View La vue 'carousels' avec les carrousels paginés et les catégories.
      */
-    public function carouselsFront()
-    {
-        $carousels = Carousel::with('category')->where('status', 'approved')->paginate(6); // Paginer avec 9 carrousels par page
-        $categories = Category::all();
-        foreach ($carousels as $carousel) {
-            $carousel->reservations = Calendar::where('carousel_id', $carousel->id)->get();
-        }
-        return view('carousels', compact('carousels', 'categories'));
+    // public function carouselsFront()
+    // {
+    //     $carousels = Carousel::with('category')->where('status', 'approved')->paginate(4); // Paginer avec 9 carrousels par page
+    //     $categories = Category::all();
+    //     foreach ($carousels as $carousel) {
+    //         $carousel->reservations = Calendar::where('carousel_id', $carousel->id)->get();
+    //     }
+    //     return view('carousels', compact('carousels', 'categories'));
+    // }
+    public function carouselsFront(Request $request)
+{
+    // Initialiser la requête pour récupérer les carrousels approuvés avec pagination
+    $query = Carousel::with('category')->where('status', 'approved');
+
+    // Appliquer les filtres si des paramètres sont présents dans la requête
+    if ($request->filled('maxPrice')) {
+        $query->where('price', '<=', $request->maxPrice);
     }
 
+    if ($request->filled('category') && $request->category != 'allcategories') {
+        $query->whereHas('category', function ($q) use ($request) {
+            $q->where('name', $request->category);
+        });
+    }
+
+    if ($request->filled('name')) {
+        $query->where('name', 'like', '%' . $request->name . '%');
+    }
+
+    if ($request->filled('dateStart') && $request->filled('dateEnd')) {
+        // Convertir les dates en objets DateTime pour assurer une comparaison correcte
+        $dateStart = DateTime::createFromFormat('Y-m-d', $request->dateStart);
+        $dateEnd = DateTime::createFromFormat('Y-m-d', $request->dateEnd);
+
+        // Filtrer les carrousels qui n'ont pas de réservations qui chevauchent les dates spécifiées
+        $query->whereDoesntHave('reservations', function ($q) use ($dateStart, $dateEnd) {
+            $q->where(function ($q) use ($dateStart, $dateEnd) {
+                $q->where('debut_date', '<=', $dateEnd->format('Y-m-d'))
+                    ->where('fin_date', '>=', $dateStart->format('Y-m-d'));
+            });
+        });
+    }
+
+    // Paginer les résultats avec 4 carrousels par page
+    $carousels = $query->paginate(4);
+
+    // Charger toutes les catégories pour les options de filtrage
+    $categories = Category::all();
+
+    // Retourner la vue avec les données paginées et les catégories
+    return view('carousels', compact('carousels', 'categories'));
+}
+    
     /**
      * Affiche les détails d'un carrousel approuvé avec sa catégorie associée.
      *

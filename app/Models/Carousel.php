@@ -48,4 +48,9 @@ class Carousel extends Model
     {
         return $this->hasMany(Quote::class);
     }
+    public function reservations()
+    {
+        return $this->hasMany(Calendar::class, 'carousel_id');
+    }
+
 }

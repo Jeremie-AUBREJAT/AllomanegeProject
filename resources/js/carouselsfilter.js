@@ -183,3 +183,66 @@ function serializeDate(date) {
     const day = String(date.getDate()).padStart(2, '0'); // padStart pour avoir '01' au lieu de '1'
     return `${year}-${month}-${day}`;
 }
+
+
+
+
+//fonction reset filter du
+document.addEventListener('DOMContentLoaded', () => {
+    const resetButton = document.getElementById('reset-filters');
+
+    // Écouteur d'événement pour réinitialiser les filtres
+    resetButton.addEventListener('click', () => {
+        // Appeler la fonction pour récupérer tous les manèges sans filtres
+        resetFiltersAndFetchAllCarousels();
+    });
+
+    // Fonction pour effectuer la requête AJAX et récupérer tous les manèges
+    function resetFiltersAndFetchAllCarousels() {
+        // Construire l'URL pour récupérer tous les manèges sans filtres
+        const url = `/manèges`;
+
+        // Requête AJAX pour récupérer tous les manèges
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                // Créer un document temporaire pour parser la réponse HTML
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+
+                // Extraire les sections nécessaires
+                const carouselsHTML = doc.querySelector('#carousel-grid').innerHTML;
+                const paginationHTML = doc.querySelector('.pagination').innerHTML;
+
+                // Vérifiez que les éléments nécessaires sont présents dans la réponse
+                if (carouselsHTML && paginationHTML) {
+                    // Mettre à jour la section des manèges avec les nouvelles données
+                    document.getElementById('carousel-grid').innerHTML = carouselsHTML;
+                    document.querySelector('.pagination').innerHTML = paginationHTML;
+
+                    // Réinitialiser les gestionnaires d'événements des carrousels si nécessaire
+                    initializeCarouselEventHandlers();
+
+                    // Mettre à jour l'URL dans l'historique du navigateur sans les filtres
+                    history.pushState({}, '', url);
+                } else {
+                    console.error('Erreur: Les éléments nécessaires n\'ont pas été trouvés dans la réponse.');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des manèges:', error);
+            });
+    }
+
+    function initializeCarouselEventHandlers() {
+        // Réappliquez tous les gestionnaires d'événements nécessaires pour les carrousels
+    }
+
+    // Écouteur d'événement pour le retour en arrière du navigateur
+    window.addEventListener('popstate', (event) => {
+        // Si l'utilisateur revient à la page des manèges sans filtres, récupérer tous les manèges
+        if (window.location.pathname === '/manèges') {
+            resetFiltersAndFetchAllCarousels();
+        }
+    });
+});

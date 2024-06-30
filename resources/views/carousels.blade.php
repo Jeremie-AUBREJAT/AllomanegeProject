@@ -21,7 +21,7 @@
                     <p class="text-white">MANÈGES</p>
                 </div>
             </div>
-
+           
         </div>
     </section>
     <section class="py-8 mt-16">
@@ -29,12 +29,15 @@
 
             <div class="flex flex-wrap justify-start gap-4 mb-16">
                 <div class="filter ml-8 mb-4 lg:mb-0 lg:mr-8">
+                <button id="reset-filters">Supprimer les filtres</button>
+                </div>
+                <div class="filter ml-8 mb-4 lg:mb-0 lg:mr-8">
                     <label for="price" class="mr-2 text-xl text-custom-blue-header font-semibold">Prix :</label>
                     <select id="price" class="border p- rounded pr-8">
                         <option value="" disabled selected hidden>Trier par prix</option>
-                        <option value="allcarousels">Tout les manèges</option>
                         <option value="lowToHigh">Du moins cher au plus cher</option>
                         <option value="highToLow">Du plus cher au moins cher</option>
+                        
                     </select>
                 </div>
                
@@ -55,10 +58,11 @@
                         class="w-40 lg:w-auto">
                     <output for="location" id="locationValue" class="ml-2">0 km</output>
                 </div>
+               
             </div>
             
             <section class="container mx-auto px-4 py-8 mt-16">
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div id="carousel-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                     @foreach ($carousels as $carousel)
                         <div class="carousel bg-white rounded-lg shadow-md p-4 mb-8" data-latitude="{{$carousel->latitude}}" data-longitude="{{$carousel->longitude}}">
                             @foreach ($carousel->reservations as $reservation)
@@ -95,8 +99,8 @@
                 </div>
                 
                 <!-- Pagination -->
-                <div class="mt-8 flex justify-center pagination-hidden">
-                    {{ $carousels->links() }}
+                <div class="mt-8 flex justify-center pagination-hidden pagination">
+                    {{ $carousels->appends(request()->except('page'))->links() }}
                 </div>
             </section>
         </div>

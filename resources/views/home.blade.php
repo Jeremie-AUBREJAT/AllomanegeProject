@@ -5,7 +5,7 @@
     <body>
         <section class="Formulaire flex flex-wrap bg-custom-blue z-0">
             <!-- Container formulaire recherche -->
-            <div class="w-full md:w-1/2">
+            <form id="search-form" class="w-full md:w-1/2">
                 <div class="container1 mx-auto md:p-8 bg-custom-orange">
                     <div class="flex justify-center mb-8">
                         <img src="/images/logo.png" alt="Logo" class="h-16 mt-8">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="mb-4">
                             <label class="block text-black text-xl font-semibold mb-2" for="prix">Prix: </label>
-                            <input class="slider" id="prix" type="range" min="0" max="15000"
+                            <input class="slider" id="prix" type="range" min="0" max="30000"
                                 step="10">
                             <p class="text-black mt-2" id="prix-value">0 €</p>
                         </div>
@@ -56,7 +56,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </form>
 
             <!-- Container 2 Détails -->
             <div class="w-full h-full md:w-1/2 my-auto bg-custom-blue">
