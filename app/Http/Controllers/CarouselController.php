@@ -92,7 +92,7 @@ class CarouselController extends Controller
     }
 
     // Paginer les résultats avec 4 carrousels par page
-    $carousels = $query->paginate(4);
+    $carousels = $query->paginate();
 
     // Charger toutes les catégories pour les options de filtrage
     $categories = Category::all();

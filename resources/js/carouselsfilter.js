@@ -1,11 +1,15 @@
+
 document.addEventListener('DOMContentLoaded', function () {
     // Variables pour les éléments DOM
     const priceFilter = document.getElementById('price');
-    const categoryFilter = document.getElementById('category-filter');
+    const categoryFilter = document.getElementById('category-filter2');
     const locationInput = document.getElementById('location');
     const locationValue = document.getElementById('locationValue');
     const carouselContainer = document.querySelector('.grid');
     const carousels = Array.from(carouselContainer.children);
+    const carouselsPerPage = 4; // Nombre de carousels par page
+    let currentPage = 1;
+    let filteredCarousels = carousels;
 
     // Mettre à jour la valeur de l'input range lorsqu'il est chargé
     locationValue.innerText = locationInput.value + " km";
@@ -17,6 +21,91 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Nouvel écouteur d'événement pour détecter le changement de valeur du slider
     locationInput.addEventListener('change', getPosition);
+
+    // Fonction pour afficher les carousels pour une page donnée
+    function displayCarouselsForPage(page) {
+        const startIndex = (page - 1) * carouselsPerPage;
+        const endIndex = page * carouselsPerPage;
+        const visibleCarousels = filteredCarousels.slice(startIndex, endIndex);
+
+        carouselContainer.innerHTML = '';
+        visibleCarousels.forEach(carousel => carouselContainer.appendChild(carousel));
+    }
+
+    // Fonction pour créer les boutons de pagination
+    function createPaginationButtons(totalCarousels) {
+        const paginationContainer = document.querySelector('.pagination');
+        paginationContainer.innerHTML = '';
+
+        const totalPages = Math.ceil(totalCarousels / carouselsPerPage);
+
+        // Bouton flèche gauche
+        const prevButton = document.createElement('button');
+        prevButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+        `;
+        prevButton.className = 'flex items-center justify-center w-10 h-10 p-2 rounded-md bg-custom-blue-header ml-2';
+        prevButton.addEventListener('click', function () {
+            if (currentPage > 1) {
+                currentPage--;
+                displayCarouselsForPage(currentPage);
+                updatePaginationButtons();
+            }
+        });
+        paginationContainer.appendChild(prevButton);
+
+        // Boutons numéros de page
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.innerText = i.toString();
+            pageButton.className = 'flex items-center justify-center w-10 h-10 p-2 rounded-md bg-custom-blue-header ml-2';
+            if (i === currentPage) {
+                pageButton.classList.add('text-gray-500', 'text-white','font-bold','text-xl'); // Classe pour le bouton de la page active
+                pageButton.disabled = true;
+            } else {
+                pageButton.classList.add('text-gray-500','font-bold','text-xl'); // Couleur de texte gris-400 pour les autres boutons de page
+            }
+            pageButton.addEventListener('click', function () {
+                currentPage = i;
+                displayCarouselsForPage(currentPage);
+                updatePaginationButtons();
+            });
+            paginationContainer.appendChild(pageButton);
+        }
+
+        // Bouton flèche droite
+        const nextButton = document.createElement('button');
+        nextButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+        `;
+        nextButton.className = 'flex items-center justify-center w-10 h-10 p-2 rounded-md bg-custom-blue-header ml-2';
+        nextButton.addEventListener('click', function () {
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayCarouselsForPage(currentPage);
+                updatePaginationButtons();
+            }
+        });
+        paginationContainer.appendChild(nextButton);
+    }
+
+    // Fonction pour mettre à jour les boutons de pagination après changement de page
+    function updatePaginationButtons() {
+        const paginationButtons = document.querySelectorAll('.pagination button');
+        paginationButtons.forEach(button => {
+            if (parseInt(button.innerText) === currentPage) {
+                button.classList.add('bg-gray-300', 'text-white');
+                button.disabled = true;
+            } else {
+                button.classList.remove('bg-gray-300', 'text-white');
+                button.disabled = false;
+            }
+        });
+    }
 
     // Fonction pour filtrer par prix
     function filterByPrice() {
@@ -92,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fonction pour calculer la distance entre deux points GPS
     function calculateDistance(lat1, lon1, lat2, lon2) {
-        const R = 6371;
+        const R = 6371; // Rayon de la Terre en km
         const dLat = deg2rad(lat2 - lat1);
         const dLon = deg2rad(lon1 - lon2);
         const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
@@ -107,142 +196,89 @@ document.addEventListener('DOMContentLoaded', function () {
         return deg * (Math.PI / 180);
     }
 
-    // Ajouter des écouteurs d'événements sur les filtres
-    priceFilter.addEventListener('change', filterByPrice);
-    categoryFilter.addEventListener('change', filterByCategory);
+    // Fonction pour appliquer tous les filtres et mettre à jour la pagination
+    function applyFilters() {
+        filterByPrice();
+        filterByCategory();
+        getPosition();
+        
+        // Filtrer les carousels visibles
+        filteredCarousels = carousels.filter(carousel => carousel.style.display !== 'none');
+        
+        const totalVisibleCarousels = filteredCarousels.length;
+        createPaginationButtons(totalVisibleCarousels);
+        displayCarouselsForPage(currentPage); // Afficher la première page après le filtrage
+        updatePaginationButtons(); // Mettre à jour les boutons de pagination
+    }
+
+    // Ajouter les écouteurs d'événements sur les filtres
+    priceFilter.addEventListener('change', applyFilters);
+    categoryFilter.addEventListener('change', applyFilters);
+    locationInput.addEventListener('change', applyFilters);
+
+    // Appliquer les filtres au chargement de la page
+    applyFilters();
 });
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const maxPrice = parseFloat(urlParams.get('maxPrice')) || Infinity;
-    const selectedCategory = urlParams.get('category');
-    const nameFromURL = urlParams.get('name');
-    const dateStartFromURL = urlParams.get('dateStart'); // Récupérer la date de début depuis l'URL
-    const dateEndFromURL = urlParams.get('dateEnd'); // Récupérer la date de fin depuis l'URL
-
-    // console.log('Réservation récupérée - Date de début :', dateStartFromURL);
-    // console.log('Réservation récupérée - Date de fin :', dateEndFromURL);
-
-    filterCarousels(maxPrice, selectedCategory, nameFromURL, dateStartFromURL, dateEndFromURL);
-});
-
-function filterCarousels(maxPrice, selectedCategory, nameFromURL, dateStartFromURL, dateEndFromURL) {
-    const carouselContainer = document.querySelector('.grid');
-    const carousels = Array.from(carouselContainer.children);
-
-    // Convertir les dates de l'URL en objets Date
-    const dateStartFromURLObj = new Date(dateStartFromURL);
-    const dateEndFromURLObj = new Date(dateEndFromURL);
-
-    carousels.forEach(carousel => {
-        // Filtrer par prix
-        const price = parseFloat(carousel.querySelector('[name="price"]').textContent.replace('€', '').trim());
-        const priceFilter = price <= maxPrice || maxPrice === Infinity;
-
-        // Filtrer par catégorie
-        const categoryFilter = selectedCategory ? carousel.querySelector('[name="category"]').textContent.trim() === selectedCategory || selectedCategory === 'allcategories' : true;
-
-        // Filtrer par nom
-        const nameFilter = nameFromURL ? serializeString(carousel.querySelector('[name="name"]').textContent).includes(serializeString(nameFromURL)) : true;
-
-        // Récupérer les réservations du carousel
-        const reservations = carousel.querySelectorAll('.carousel-reservation');
-        let notReservedInRange = true;
-
-        reservations.forEach(reservation => {
-            const dateStartCarousel = new Date(reservation.dataset.dateStart);
-           
-
-            const dateEndCarousel = new Date(reservation.dataset.dateEnd);
-
-            // console.log('Dates de réservation du carousel :');
-            // console.log('Date de début :', serializeDate(dateStartCarousel));
-            // console.log('Date de fin :', serializeDate(dateEndCarousel));
-
-            if ((dateStartFromURLObj < dateStartCarousel && dateEndFromURLObj > dateStartCarousel) || (dateStartFromURLObj < dateEndCarousel && dateEndFromURLObj > dateEndCarousel)) {
-                notReservedInRange = false;
-            }
-        });
-// console.log(notReservedInRange);
-        // Afficher ou masquer le carousel en fonction des filtres
-        carousel.style.display = priceFilter && categoryFilter && nameFilter && notReservedInRange ? 'block' : 'none';
-    });
-}
-
-// Fonction pour sérialiser une chaîne de caractères (majuscules, sans accents, sans espaces)
-function serializeString(str) {
-    return str.trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '');
-}
-
-// Fonction pour sérialiser une date en 'YYYY-MM-DD'
-function serializeDate(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mois de 0 à 11, donc +1 et padStart pour avoir '01' au lieu de '1'
-    const day = String(date.getDate()).padStart(2, '0'); // padStart pour avoir '01' au lieu de '1'
-    return `${year}-${month}-${day}`;
-}
 
 
 
 
 //fonction reset filter du
-document.addEventListener('DOMContentLoaded', () => {
-    const resetButton = document.getElementById('reset-filters');
+// document.addEventListener('DOMContentLoaded', () => {
+//     const resetButton = document.getElementById('reset-filters');
 
-    // Écouteur d'événement pour réinitialiser les filtres
-    resetButton.addEventListener('click', () => {
-        // Appeler la fonction pour récupérer tous les manèges sans filtres
-        resetFiltersAndFetchAllCarousels();
-    });
+//     // Écouteur d'événement pour réinitialiser les filtres
+//     resetButton.addEventListener('click', () => {
+//         // Appeler la fonction pour récupérer tous les manèges sans filtres
+//         resetFiltersAndFetchAllCarousels();
+//     });
 
-    // Fonction pour effectuer la requête AJAX et récupérer tous les manèges
-    function resetFiltersAndFetchAllCarousels() {
-        // Construire l'URL pour récupérer tous les manèges sans filtres
-        const url = `/manèges`;
+//     // Fonction pour effectuer la requête AJAX et récupérer tous les manèges
+//     function resetFiltersAndFetchAllCarousels() {
+//         // Construire l'URL pour récupérer tous les manèges sans filtres
+//         const url = `/manèges`;
 
-        // Requête AJAX pour récupérer tous les manèges
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                // Créer un document temporaire pour parser la réponse HTML
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(data, 'text/html');
+//         // Requête AJAX pour récupérer tous les manèges
+//         fetch(url)
+//             .then(response => response.text())
+//             .then(data => {
+//                 // Créer un document temporaire pour parser la réponse HTML
+//                 const parser = new DOMParser();
+//                 const doc = parser.parseFromString(data, 'text/html');
 
-                // Extraire les sections nécessaires
-                const carouselsHTML = doc.querySelector('#carousel-grid').innerHTML;
-                const paginationHTML = doc.querySelector('.pagination').innerHTML;
+//                 // Extraire les sections nécessaires
+//                 const carouselsHTML = doc.querySelector('#carousel-grid').innerHTML;
+//                 const paginationHTML = doc.querySelector('.pagination').innerHTML;
 
-                // Vérifiez que les éléments nécessaires sont présents dans la réponse
-                if (carouselsHTML && paginationHTML) {
-                    // Mettre à jour la section des manèges avec les nouvelles données
-                    document.getElementById('carousel-grid').innerHTML = carouselsHTML;
-                    document.querySelector('.pagination').innerHTML = paginationHTML;
+//                 // Vérifiez que les éléments nécessaires sont présents dans la réponse
+//                 if (carouselsHTML && paginationHTML) {
+//                     // Mettre à jour la section des manèges avec les nouvelles données
+//                     document.getElementById('carousel-grid').innerHTML = carouselsHTML;
+//                     document.querySelector('.pagination').innerHTML = paginationHTML;
 
-                    // Réinitialiser les gestionnaires d'événements des carrousels si nécessaire
-                    initializeCarouselEventHandlers();
+//                     // Réinitialiser les gestionnaires d'événements des carrousels si nécessaire
+//                     initializeCarouselEventHandlers();
 
-                    // Mettre à jour l'URL dans l'historique du navigateur sans les filtres
-                    history.pushState({}, '', url);
-                } else {
-                    console.error('Erreur: Les éléments nécessaires n\'ont pas été trouvés dans la réponse.');
-                }
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération des manèges:', error);
-            });
-    }
+//                     // Mettre à jour l'URL dans l'historique du navigateur sans les filtres
+//                     history.pushState({}, '', url);
+//                 } else {
+//                     console.error('Erreur: Les éléments nécessaires n\'ont pas été trouvés dans la réponse.');
+//                 }
+//             })
+//             .catch(error => {
+//                 console.error('Erreur lors de la récupération des manèges:', error);
+//             });
+//     }
 
-    function initializeCarouselEventHandlers() {
-        // Réappliquez tous les gestionnaires d'événements nécessaires pour les carrousels
-    }
+//     function initializeCarouselEventHandlers() {
+//         // Réappliquez tous les gestionnaires d'événements nécessaires pour les carrousels
+//     }
 
-    // Écouteur d'événement pour le retour en arrière du navigateur
-    window.addEventListener('popstate', (event) => {
-        // Si l'utilisateur revient à la page des manèges sans filtres, récupérer tous les manèges
-        if (window.location.pathname === '/manèges') {
-            resetFiltersAndFetchAllCarousels();
-        }
-    });
-});
+//     // Écouteur d'événement pour le retour en arrière du navigateur
+//     window.addEventListener('popstate', (event) => {
+//         // Si l'utilisateur revient à la page des manèges sans filtres, récupérer tous les manèges
+//         if (window.location.pathname === '/manèges') {
+//             resetFiltersAndFetchAllCarousels();
+//         }
+//     });
+// });

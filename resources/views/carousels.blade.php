@@ -28,9 +28,7 @@
         <div class="container mx-auto px-4">
 
             <div class="flex flex-wrap justify-start gap-4 mb-16">
-                <div class="filter ml-8 mb-4 lg:mb-0 lg:mr-8">
-                <button id="reset-filters">Supprimer les filtres</button>
-                </div>
+                
                 <div class="filter ml-8 mb-4 lg:mb-0 lg:mr-8">
                     <label for="price" class="mr-2 text-xl text-custom-blue-header font-semibold">Prix :</label>
                     <select id="price" class="border p- rounded pr-8">
@@ -43,8 +41,8 @@
                
                 <div class="filter mb-4 lg:mb-0 lg:mr-8">
                     <label for="category" class="mr-2 text-xl text-custom-blue-header font-semibold">Catégorie :</label>
-                    <select id="category-filter" class="border p-2 rounded pr-8">
-                        <option value="" disabled selected hidden>Trier par catégorie</option>
+                    <select id="category-filter2" class="border p-2 rounded pr-8">
+                        {{-- <option value="" disabled selected hidden>Trier par catégorie</option> --}}
                         <option value="allcategories" class="category-option">Toutes les catégories</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->name }}" class="category-option">{{ $category->name }}</option>
@@ -54,11 +52,14 @@
                 <div class="filter flex items-center">
                     <label for="location" class="mr-2 text-xl text-custom-blue-header font-semibold">Position géographique
                         :</label>
-                    <input type="range" id="location" name="location" min="0" max="800" step="1"
+                    <input type="range" id="location" name="location" min="0" max="800" step="1" value="2000"
                         class="w-40 lg:w-auto">
                     <output for="location" id="locationValue" class="ml-2">0 km</output>
                 </div>
-               
+                <div class="filter ml-8 mb-4 lg:mb-0 lg:mr-8">
+                    <a href="/manèges" class="border p-2 rounded-md bg-custom-blue-header text-white font font-semibold">Supprimer les filtres</a>
+                    
+                </div>
             </div>
             
             <section class="container mx-auto px-4 py-8 mt-16">
